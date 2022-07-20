@@ -14,6 +14,9 @@ import {
 
 // == Composant
 function Header() {
+  const args = {
+    size: '4vh',
+  };
   return (
     <Box component="header" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '2vh' }}>
       <Fab variant="extended" color="primary" aria-label="add" sx={{ margin: 'auto' }}>
@@ -23,17 +26,17 @@ function Header() {
       <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '1vh' }}>
         <Tooltip title="Choix véhicule">
           <IconButton>
-            <BiCar size="4vh" />
+            <BiCar size={args.size} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Choix véhicule">
           <IconButton>
-            <BiMap size="4vh" />
+            <BiMap size={args.size} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Choix véhicule">
           <IconButton>
-            <BiBookmark size="4vh" />
+            <BiBookmark size={args.size} />
           </IconButton>
         </Tooltip>
       </Box>
