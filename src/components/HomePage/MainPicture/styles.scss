@@ -1,0 +1,27 @@
+.content-picture{
+    background-image: url(src/assets/images/eco-roads.jpg);
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    height: 40vh;
+    width: 100%;
+}
+
+.rounded {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+.picture-desc{
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        bottom: 0;
+        left: 0;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-align: center;
+    }
