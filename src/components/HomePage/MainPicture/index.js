@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 function MainPicture() {
   return (
     <Box component="main" sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '2vh' }}>
-    <figure class="content-picture">
-        <figcaption class="picture-desc">Sortez des sentiers battus <br /> avec Eco-Roads</figcaption>
+    <figure className="content-picture">
+        <figcaption className="picture-desc">Découvrez votre région en toute sérénité <br></br>au volant de votre voiture électrique</figcaption>
     </figure>
     </Box>
   );
