@@ -3,16 +3,14 @@ import './styles.scss';
 
 // == Component
 import Header from 'src/components/Header';
-import CarouselComponent from 'src/components/Carousel';
-import MainPicture from 'src/components/HomePage/MainPicture';
+import Main from 'src/components/HomePage/Main';
 
 // == Composant
 function HomePage() {
   return (
     <>
       <Header />
-      <MainPicture />
-      <CarouselComponent />
+      <Main />
     </>
   );
 }

@@ -26,3 +26,10 @@
     line-height: 1.35;
     font-family: 'Roboto', sans-serif;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2vh;
+}
