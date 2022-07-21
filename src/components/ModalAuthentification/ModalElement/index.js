@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { openCloseConnectionModal } from 'src/actions/authentification';
+
 
 // == Composant
 function ModalElement({ children, dispatchCall, modalElement }) {
