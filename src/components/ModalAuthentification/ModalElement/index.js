@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { openCloseConnectionModal } from 'src/actions/authentification';
+
 
 // == Composant
 function ModalElement({ children, dispatchCall, modalElement }) {
@@ -30,7 +30,7 @@ function ModalElement({ children, dispatchCall, modalElement }) {
       >
         <Paper
           sx={{
-            width: '100%', height: '30vh', borderRadius: '10%', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0 0', gap: '2vh',
+            width: '100%', height: 'fit-content', borderRadius: '10%', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh',
           }}
         >
           {children}

@@ -1,6 +1,6 @@
 // == Import
 import { useSelector, useDispatch } from 'react-redux';
-import { makePasswordVisibleOrNot } from 'src/actions/authentification';
+import { makePasswordVisibleOrNot, changeInputValue } from 'src/actions/authentification';
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 
@@ -18,16 +18,20 @@ import './styles.scss';
 // == Composant
 function InputPassword({ modalElement }) {
   const dispatch = useDispatch();
-  const { isHiddenPassword } = useSelector((state) => state.auth[modalElement]);
+  const {
+    isHiddenPassword,
+    passwordValue,
+  } = useSelector((state) => state.auth[modalElement]);
+  const inputElement = 'passwordValue';
 
   return (
-    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+    <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password">Mot de passe</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         type={isHiddenPassword ? 'text' : 'password'}
-        // value={values.password}
-        // onChange={handleChange('password')}
+        value={passwordValue}
+        onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
         endAdornment={(
           <InputAdornment position="end">
             <IconButton
