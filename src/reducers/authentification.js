@@ -1,7 +1,11 @@
 import { OPEN_CLOSE_CONNECTION_MODAL } from 'src/actions/authentification';
+import { OPEN_CLOSE_ACCOUNT_CREATION_MODAL } from 'src/actions/authentification';
 
 export const initialState = {
   connectionModal: {
+    isOpen: false,
+  },
+  accountCreationModal: {
     isOpen: false,
   },
 };
@@ -14,6 +18,14 @@ const reducer = (state = initialState, action = {}) => {
         connectionModal: {
           ...state.connectionModal,
           isOpen: !state.connectionModal.isOpen,
+        },
+      };
+      case OPEN_CLOSE_ACCOUNT_CREATION_MODAL:
+      return {
+        ...state,
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          isOpen: !state.accountCreationModal.isOpen,
         },
       };
     default:
