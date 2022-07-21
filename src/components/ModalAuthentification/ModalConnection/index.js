@@ -19,7 +19,13 @@ function ModalConnection() {
       <h1 className="modal-title">Se connecter</h1>
       <TextField id="email-input" label="Email" variant="outlined" />
       <TextField id="password-input" label="Password" variant="outlined" />
-      {/* <p className="modal-proposition">Vous n'avez pas de compte, créez-en un !</p> */}
+      <p className="modal-proposition">Vous n'avez pas de compte, <span
+        className="modal-proposition-link"
+        //onClick={() => }
+      >
+        créez-en un !
+      </span>
+      </p>
     </ModalElement>
   );
 }
