@@ -8,6 +8,7 @@ import {
 import { openCloseConnectionModal } from 'src/actions/authentification';
 
 import ModalElement from '../ModalElement';
+import InputPassword from '../InputPassword';
 
 // == Composant
 function ModalConnection() {
@@ -17,8 +18,11 @@ function ModalConnection() {
       modalElement="connectionModal"
     >
       <h1 className="modal-title">Se connecter</h1>
-      <TextField id="email-input" label="Email" variant="outlined" />
-      <TextField id="password-input" label="Password" variant="outlined" />
+      <TextField type="email" id="email-input" label="Email" variant="outlined" />
+      {/* <TextField id="password-input" label="Password" variant="outlined" /> */}
+      <InputPassword
+        modalElement="connectionModal"
+      />
       {/* <p className="modal-proposition">Vous n'avez pas de compte, créez-en un !</p> */}
     </ModalElement>
   );
