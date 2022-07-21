@@ -5,13 +5,22 @@ import {
   TextField,
 } from '@mui/material';
 
-import { openCloseConnectionModal } from 'src/actions/authentification';
-
+// == Component
+import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAccountCreation';
 import ModalElement from '../ModalElement';
+
+import { openCloseConnectionModal } from 'src/actions/authentification';
+import { openCloseAccountCreationModal } from 'src/actions/authentification';
+
+import { useSelector, useDispatch } from 'react-redux';
+
 
 // == Composant
 function ModalConnection() {
+  const dispatch = useDispatch();
+
   return (
+    <>
     <ModalElement
       dispatchCall={openCloseConnectionModal}
       modalElement="connectionModal"
@@ -21,12 +30,17 @@ function ModalConnection() {
       <TextField id="password-input" label="Password" variant="outlined" />
       <p className="modal-proposition">Vous n'avez pas de compte, <span
         className="modal-proposition-link"
-        //onClick={() => }
+        style={{ cursor:"pointer" }}
+        href={null}
+        onClick={() => dispatch(openCloseAccountCreationModal())}
       >
         créez-en un !
       </span>
       </p>
     </ModalElement>
+    <ModalAccountCreation />
+    </>
+    
   );
 }
 
