@@ -1,4 +1,4 @@
-import { OPEN_CLOSE_CONNECTION_MODAL, MAKE_PASSWORD_VISIBLE_OR_NOT, CHANGE_INPUT_VALUE } from 'src/actions/authentification';
+import { OPEN_CLOSE_CONNECTION_MODAL, MAKE_PASSWORD_VISIBLE_OR_NOT, CHANGE_INPUT_VALUE, OPEN_CLOSE_ACCOUNT_CREATION_MODAL } from 'src/actions/authentification';
 
 export const initialState = {
   connectionModal: {
@@ -6,6 +6,9 @@ export const initialState = {
     isHiddenPassword: false,
     emailValue: '',
     passwordValue: '',
+  },
+  accountCreationModal: {
+    isOpen: false,
   },
 };
 
@@ -33,6 +36,16 @@ const reducer = (state = initialState, action = {}) => {
         [action.modalElement]: {
           ...state[action.modalElement],
           [action.inputElement]: action.inputValue,
+      case OPEN_CLOSE_ACCOUNT_CREATION_MODAL:
+      return {
+        ...state,
+        connectionModal: {
+          ...state.connectionModal,
+          isOpen: false,
+        },
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          isOpen: !state.accountCreationModal.isOpen,
         },
       };
     default:

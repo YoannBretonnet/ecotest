@@ -6,9 +6,10 @@ import {
   TextField,
 } from '@mui/material';
 
+import { openCloseConnectionModal, changeInputValue, openCloseAccountCreationModal } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
-import { openCloseConnectionModal, changeInputValue } from 'src/actions/authentification';
 
+// ==Component
 import ModalElement from '../ModalElement';
 import InputPassword from '../InputPassword';
 
@@ -21,6 +22,7 @@ function ModalConnection() {
     emailValue,
   } = useSelector((state) => state.auth[modalElement]);
   return (
+    <>
     <ModalElement
       dispatchCall={openCloseConnectionModal}
       modalElement={modalElement}
@@ -40,12 +42,13 @@ function ModalConnection() {
       />
       <p className="modal-proposition">Vous n'avez pas de compte, <span
         className="modal-proposition-link"
-        // onClick={() => }
+        // onClick={(() => dispatch(openCloseAccountCreationModal()) => }
       >
         créez-en&nbsp;un&nbsp;!
       </span>
       </p>
     </ModalElement>
+    </>
   );
 }
 

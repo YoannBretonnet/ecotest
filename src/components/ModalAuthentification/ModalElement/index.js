@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 function ModalElement({ children, dispatchCall, modalElement }) {
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state) => state.auth[modalElement]);
+  console.log(modalElement)
   return (
     <Modal
       open={isOpen}
