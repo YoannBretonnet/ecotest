@@ -23,6 +23,10 @@ const reducer = (state = initialState, action = {}) => {
       case OPEN_CLOSE_ACCOUNT_CREATION_MODAL:
       return {
         ...state,
+        connectionModal: {
+          ...state.connectionModal,
+          isOpen: false,
+        },
         accountCreationModal: {
           ...state.accountCreationModal,
           isOpen: !state.accountCreationModal.isOpen,
