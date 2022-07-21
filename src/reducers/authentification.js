@@ -9,6 +9,10 @@ export const initialState = {
   },
   accountCreationModal: {
     isOpen: false,
+    isHiddenPassword: false,
+    userNameValue: '',
+    emailValue: '',
+    passwordValue: '',
   },
 };
 
