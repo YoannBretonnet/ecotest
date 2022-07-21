@@ -1,15 +1,21 @@
-.carousel-content, .carousel-title {
+.carousel-content, .carousel-step, .carousel-title {
   font-size: 3vh;
   text-align: center;
+  font-family: 'Roboto';
 }
 
-.carousel-title {
+.carousel-step {
   margin: 18% 5% 0;
   font-weight: bold;
-  justify-self: center;
 }
 
 .carousel-content {
   margin: 5% 5% 0;
+  color: #757575;
+}
+
+.carousel-title {
+  font-weight: bold;
+  margin-bottom: 2vh;
 }
 

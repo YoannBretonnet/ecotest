@@ -36,7 +36,10 @@ function CarouselComponent() {
     squareSize: '30vh',
   };
   return (
-    <Box component="section" sx={{ margin: '2vh auto 0 auto', width: args.squareSize, height: args.squareSize }}>
+    <Box component="section" sx={{ margin: '2vh auto 0 auto', width: 'fit-content', height: 'fit-content' }}>
+      <h2 className='carousel-title'>
+        Comment ça marche ?
+      </h2>
       <Carousel
         navButtonsAlwaysVisible
         cycleNavigation
@@ -67,7 +70,7 @@ function CarouselComponent() {
               }}
             >
               <Icon iconSelector={item.icon} />
-              <h2 className="carousel-title">{item.step}</h2>
+              <h3 className="carousel-step">{item.step}</h3>
               <p className="carousel-content">{item.description}</p>
             </Paper>
           ))

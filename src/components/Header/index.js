@@ -19,7 +19,7 @@ function Header() {
   };
   return (
     <Box component="header" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '2vh' }}>
-      <Fab variant="extended" color="primary" aria-label="add" sx={{ margin: 'auto' }}>
+      <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }}>
         Véhicule | Localisation | Intérets
         <BiSearch size="3.1vh" />
       </Fab>
