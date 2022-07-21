@@ -17,10 +17,7 @@ export const changeInputValue = (inputValue, inputElement, modalElement) => ({
   inputValue,
   inputElement,
   modalElement,
-<<<<<<< HEAD
 });
-=======
->>>>>>> 91f82755ac63dfd16ff3bca8f821e5be9678c1d5
 
 export const openCloseAccountCreationModal = () => ({
   type: OPEN_CLOSE_ACCOUNT_CREATION_MODAL,
