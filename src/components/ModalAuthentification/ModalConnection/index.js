@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-tag-location */
 // == Style
 import './styles.scss';
@@ -27,18 +28,20 @@ function ModalConnection() {
       modalElement={modalElement}
     >
       <h1 className="modal-title">Se connecter</h1>
-      <TextField
-        type="email"
-        id="email-input"
-        label="Email"
-        variant="outlined"
-        sx={{ width: '80%' }}
-        value={emailValue}
-        onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
-      />
-      <InputPassword
-        modalElement={modalElement}
-      />
+      <form className="modal-form-connection">
+        <TextField
+          type="email"
+          id="email-input"
+          label="Email"
+          variant="outlined"
+          sx={{ width: '100%' }}
+          value={emailValue}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
+        />
+        <InputPassword
+          modalElement={modalElement}
+        />
+      </form>
       <p className="modal-proposition">Vous n'avez pas de compte, <span
         className="modal-proposition-link"
         onClick={(() => dispatch(openCloseAccountCreationModal()))}
