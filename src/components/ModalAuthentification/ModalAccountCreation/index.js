@@ -44,7 +44,7 @@ function ModalAccountCreation() {
         variant="outlined"
         sx={{ width: '100%' }}
           value={userNameValue}
-          onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement, modalElement))}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement , modalElement))}
         />
         <TextField
           type="email"
