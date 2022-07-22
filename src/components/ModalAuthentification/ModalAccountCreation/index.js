@@ -5,7 +5,7 @@ import {
   TextField,
 } from '@mui/material';
 
-import { openCloseAccountCreationModal } from 'src/actions/authentification';
+import { openCloseAccountCreationModal, changeInputValue } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ModalElement from '../ModalElement';
@@ -15,7 +15,8 @@ import InputPassword from '../InputPassword';
 function ModalAccountCreation() {
   const dispatch = useDispatch();
   const modalElement = 'accountCreationModal';
-  const inputElement = 'emailValue';
+  const inputEmailElement = 'emailValue';
+  const inputUserNameElement = 'userNameValue';
   const {
     userNameValue, emailValue, passwordValue,
   } = useSelector((state) => state.auth[modalElement]);
@@ -39,7 +40,7 @@ function ModalAccountCreation() {
         variant="outlined"
         sx={{ width: '80%' }}
           value={userNameValue}
-          onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement, modalElement))}
         />
         <TextField
           type="email"
@@ -48,7 +49,7 @@ function ModalAccountCreation() {
           variant="outlined"
           sx={{ width: '80%' }}
           value={emailValue}
-          onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputEmailElement, modalElement))}
         />
         <InputPassword
             modalElement={modalElement}
