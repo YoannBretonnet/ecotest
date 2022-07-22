@@ -4,7 +4,6 @@ import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
-import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
 
 import {
   BiSearch,
