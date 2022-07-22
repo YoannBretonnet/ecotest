@@ -13,7 +13,7 @@ import {
 import { openCloseAccountCreationModal, changeInputValue } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ModalElement from '../ModalElement';
+import ModalElement from 'src/components/ModalElement';
 import InputPassword from '../InputPassword';
 
 // == Composant
@@ -27,6 +27,7 @@ function ModalAccountCreation() {
   } = useSelector((state) => state.auth[modalElement]);
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    console.log("coucou")
   };
 
   return (

@@ -14,7 +14,7 @@ import { openCloseConnectionModal, changeInputValue, openCloseAccountCreationMod
 import { useSelector, useDispatch } from 'react-redux';
 
 // ==Component
-import ModalElement from '../ModalElement';
+import ModalElement from 'src/components/ModalElement';
 import InputPassword from '../InputPassword';
 
 // == Composant
