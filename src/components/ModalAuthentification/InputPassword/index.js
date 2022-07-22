@@ -25,7 +25,7 @@ function InputPassword({ modalElement }) {
   const inputElement = 'passwordValue';
 
   return (
-    <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
+    <FormControl sx={{ width: '100%' }} variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password">Mot de passe</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"

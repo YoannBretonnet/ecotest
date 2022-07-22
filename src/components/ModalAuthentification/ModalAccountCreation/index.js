@@ -5,6 +5,10 @@ import {
   TextField,
 } from '@mui/material';
 
+import {
+  BiChevronRight,
+} from 'react-icons/bi';
+
 import { openCloseAccountCreationModal, changeInputValue } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -38,7 +42,7 @@ function ModalAccountCreation() {
         id="userName-input" 
         label="Nom Utilisateur" 
         variant="outlined"
-        sx={{ width: '80%' }}
+        sx={{ width: '100%' }}
           value={userNameValue}
           onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement, modalElement))}
         />
@@ -47,7 +51,7 @@ function ModalAccountCreation() {
           id="email-input"
           label="Email"
           variant="outlined"
-          sx={{ width: '80%' }}
+          sx={{ width: '100%' }}
           value={emailValue}
           onChange={(event) => dispatch(changeInputValue(event.target.value, inputEmailElement, modalElement))}
         />
@@ -56,7 +60,7 @@ function ModalAccountCreation() {
           />
           <button type="submit"
             className="login-form-button">
-            Enregistrez-vous
+            {<BiChevronRight size="8vh" />}
           </button>
       </form>
     </ModalElement>
