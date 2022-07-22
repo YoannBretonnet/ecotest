@@ -25,6 +25,7 @@ function ModalAccountCreation() {
       modalElement="accountCreationModal"
     >
       <h1 className="modal-title">Créez votre compte</h1>
+      <form className={classes.container} onSubmit={handleSubmit} >
       <TextField 
       id="userName-input" 
       label="Nom Utilisateur" 
