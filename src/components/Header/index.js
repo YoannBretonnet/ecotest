@@ -4,6 +4,10 @@ import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { openCloseCarModal } from 'src/actions/mapSettings';
 
 import {
   BiSearch,
@@ -11,9 +15,12 @@ import {
   BiMap,
   BiBookmark,
 } from 'react-icons/bi';
+import styles from './IconSlider.module.scss';
 
 // == Composant
 function Header() {
+  const dispatch = useDispatch();
+  const { isOpen: isCarOpen } = useSelector((state) => state.mapSettings.carSettingsModal);
   const args = {
     size: '4vh',
   };
@@ -32,7 +39,10 @@ function Header() {
         </Fab>
         <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '1vh' }}>
           <Tooltip title="Choix véhicule">
-            <IconButton>
+            <IconButton
+              className={isCarOpen ? styles.icon : ''}
+              onClick={(() => dispatch(openCloseCarModal()))}
+            >
               <BiCar size={args.size} />
             </IconButton>
           </Tooltip>
@@ -48,6 +58,9 @@ function Header() {
           </Tooltip>
         </Box>
       </Box>
+      <ModalCarSettings
+        reducerRoute={reducerRoute}
+      />
     </>
   );
 }
