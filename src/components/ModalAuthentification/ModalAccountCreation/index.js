@@ -17,35 +17,47 @@ function ModalAccountCreation() {
   const modalElement = 'accountCreationModal';
   const inputElement = 'emailValue';
   const {
-    userNameValue, emailValue,
+    userNameValue, emailValue, passwordValue,
   } = useSelector((state) => state.auth[modalElement]);
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
     <ModalElement
       dispatchCall={openCloseAccountCreationModal}
-      modalElement="accountCreationModal"
+      modalElement={modalElement}
     >
       <h1 className="modal-title">Créez votre compte</h1>
-      <form className={classes.container} onSubmit={handleSubmit} >
-      <TextField 
-      id="userName-input" 
-      label="Nom Utilisateur" 
-      variant="outlined"
-      sx={{ width: '80%' }}
-        value={userNameValue}
-        onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
-       />
-       <TextField
-        type="email"
-        id="email-input"
-        label="Email"
+      <form 
+       onSubmit={
+          handleSubmit
+        }>
+        <TextField 
+        id="userName-input" 
+        label="Nom Utilisateur" 
         variant="outlined"
         sx={{ width: '80%' }}
-        value={emailValue}
-        onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
-      />
-    <InputPassword
-        modalElement={modalElement}
-      />
+          value={userNameValue}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
+        />
+        <TextField
+          type="email"
+          id="email-input"
+          label="Email"
+          variant="outlined"
+          sx={{ width: '80%' }}
+          value={emailValue}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputElement, modalElement))}
+        />
+        <InputPassword
+            modalElement={modalElement}
+          />
+          <button type="submit"
+            className="login-form-button">
+            Enregistrez-vous
+          </button>
+      </form>
     </ModalElement>
   );
 }
