@@ -1,9 +1,7 @@
-import { OPEN_CLOSE_CAR_MODAL } from 'src/actions/mapSettings';
+import { } from 'src/actions/mapSettings';
 
 export const initialState = {
-  carSettingsModal: {
-    isOpen: false,
-  },
+
 };
 
 const reducer = (state = initialState, action = {}) => {
