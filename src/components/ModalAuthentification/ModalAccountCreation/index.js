@@ -3,6 +3,7 @@ import './styles.scss';
 
 import {
   TextField,
+  IconButton,
 } from '@mui/material';
 
 import {
@@ -34,17 +35,19 @@ function ModalAccountCreation() {
       modalElement={modalElement}
     >
       <h1 className="modal-title">Créez votre compte</h1>
-      <form 
-       onSubmit={
+      <form
+        className="modal-form-coreation-account"
+        onSubmit={
           handleSubmit
-        }>
-        <TextField 
-        id="userName-input" 
-        label="Nom Utilisateur" 
-        variant="outlined"
-        sx={{ width: '100%' }}
+        }
+      >
+        <TextField
+          id="userName-input"
+          label="Nom Utilisateur"
+          variant="outlined"
+          sx={{ width: '100%' }}
           value={userNameValue}
-          onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement , modalElement))}
+          onChange={(event) => dispatch(changeInputValue(event.target.value, inputUserNameElement, modalElement))}
         />
         <TextField
           type="email"
@@ -56,12 +59,11 @@ function ModalAccountCreation() {
           onChange={(event) => dispatch(changeInputValue(event.target.value, inputEmailElement, modalElement))}
         />
         <InputPassword
-            modalElement={modalElement}
-          />
-          <button type="submit"
-            className="login-form-button">
-            {<BiChevronRight size="8vh" />}
-          </button>
+          modalElement={modalElement}
+        />
+        <IconButton sx={{ color: 'black' }} type="submit">
+          <BiChevronRight size="8vh" />
+        </IconButton>
       </form>
     </ModalElement>
   );

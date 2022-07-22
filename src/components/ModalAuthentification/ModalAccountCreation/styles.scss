@@ -11,16 +11,9 @@
   font-size: 2vh;
 }
 
-form {
+.modal-form-coreation-account {
+  width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 80%;
   gap: 2vh;
-}
-
-button {
-  background-color: white;
-  width: 20%;
-  border: none;
 }
