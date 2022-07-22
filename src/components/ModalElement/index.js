@@ -9,9 +9,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 // == Composant
-function ModalElement({ children, dispatchCall, modalElement }) {
+function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
   const dispatch = useDispatch();
-  const { isOpen } = useSelector((state) => state.auth[modalElement]);
+  const { isOpen } = useSelector((state) => state[reducerRoute][modalElement]);
   return (
     <Modal
       open={isOpen}
