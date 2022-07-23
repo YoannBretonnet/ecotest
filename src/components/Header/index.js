@@ -5,15 +5,23 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
+import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { openCloseLocalisationModal } from 'src/actions/mapSettings';
+
 import {
   BiSearch,
   BiCar,
   BiMap,
   BiBookmark,
 } from 'react-icons/bi';
+import styles from './IconSlider.module.scss';
 
 // == Composant
 function Header() {
+  const dispatch = useDispatch();
+  const { isOpen: isLocalisationOpen } = useSelector((state) => state.mapSettings.localisationSettingsModal);
   const args = {
     size: '4vh',
   };
@@ -37,7 +45,10 @@ function Header() {
             </IconButton>
           </Tooltip>
           <Tooltip title="Choix véhicule">
-            <IconButton>
+            <IconButton
+              className={isLocalisationOpen ? styles.icon : ''}
+              onClick={(() => dispatch(openCloseLocalisationModal()))}
+            >
               <BiMap size={args.size} />
             </IconButton>
           </Tooltip>
@@ -48,6 +59,9 @@ function Header() {
           </Tooltip>
         </Box>
       </Box>
+      <ModalLocalisationSettings
+        reducerRoute={reducerRoute}
+      />
     </>
   );
 }
