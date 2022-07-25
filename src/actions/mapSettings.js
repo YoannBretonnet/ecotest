@@ -1,6 +1,7 @@
 export const OPEN_CLOSE_LOCALISATION_MODAL = 'OPEN_CLOSE_LOCALISATION_MODAL';
 export const UPDATE_LIST_OF_LOCALISATION = 'UPDATE_LIST_OF_LOCALISATION';
 export const UPDATE_LIST_OF_LOCALISATION_SUCCESS = 'UPDATE_LIST_OF_LOCALISATION_SUCCESS';
+export const UPDATE_LIST_OF_LOCALISATION_FAIL = 'UPDATE_LIST_OF_LOCALISATION_FAIL';
 export const CHANGE_MAP_SETTING_AUTOCOMPLETE_VALUE = 'CHANGE_MAP_SETTING_AUTOCOMPLETE_VALUE';
 export const CHANGE_MAP_SETTING_INPUT_VALUE = 'CHANGE_MAP_SETTING_INPUT_VALUE';
 export const UPDATE_LIST_OF_LOCALISATION_ABORT = 'UPDATE_LIST_OF_LOCALISATION_ABORT';
@@ -26,6 +27,13 @@ export const updateListOfLocalisation = (inputValue, inputElement, loadingElemen
 
 export const updateListOfLocalisationSuccess = (data, propositionElement, loadingElement) => ({
   type: UPDATE_LIST_OF_LOCALISATION_SUCCESS,
+  data,
+  propositionElement,
+  loadingElement,
+});
+
+export const updateListOfLocalisationFail = (data, propositionElement, loadingElement) => ({
+  type: UPDATE_LIST_OF_LOCALISATION_FAIL,
   data,
   propositionElement,
   loadingElement,

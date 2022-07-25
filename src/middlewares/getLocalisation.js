@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   UPDATE_LIST_OF_LOCALISATION,
   updateListOfLocalisationSuccess,
+  updateListOfLocalisationFail,
   updateListOfLocalisationAbort,
 } from 'src/actions/mapSettings';
 
@@ -20,8 +21,8 @@ const getLocalisation = (store) => (next) => (action) => {
           .then((response) => {
             store.dispatch(updateListOfLocalisationSuccess(response.data, action.propositionElement, action.loadingElement));
           })
-          .catch((error) => {
-            console.log(error);
+          .catch((_error) => {
+            store.dispatch(updateListOfLocalisationFail(action.loadingElement));
           });
       }
       else {

@@ -5,6 +5,7 @@ import {
   UPDATE_LIST_OF_LOCALISATION_SUCCESS,
   CHANGE_MAP_SETTING_AUTOCOMPLETE_VALUE,
   UPDATE_LIST_OF_LOCALISATION_ABORT,
+  UPDATE_LIST_OF_LOCALISATION_FAIL,
 } from 'src/actions/mapSettings';
 
 export const initialState = {
@@ -68,6 +69,15 @@ const reducer = (state = initialState, action = {}) => {
           ...state.localisationSettingsModal,
           [action.loadingElement]: false,
           [action.propositionElement]: action.data.features,
+        },
+      };
+    case UPDATE_LIST_OF_LOCALISATION_FAIL:
+      return {
+        ...state,
+        localisationSettingsModal: {
+          ...state.localisationSettingsModal,
+          [action.loadingElement]: false,
+          [action.propositionElement]: [],
         },
       };
     case CHANGE_MAP_SETTING_AUTOCOMPLETE_VALUE:
