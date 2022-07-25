@@ -35,7 +35,7 @@ function ModalCarSettings({ reducerRoute }) {
       modalElement={modalElement}
       reducerRoute={reducerRoute}
     >
-      <h1 className="modal-title">Quel est votre véhicule ?</h1>
+      <h1 className="modal-title">Quel est votre véhicule&nbsp;?</h1>
       <form
         className="modal-form-connection"
         onSubmit={((event) => {
