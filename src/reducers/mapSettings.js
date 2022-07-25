@@ -7,6 +7,9 @@ import {
   CHANGE_MAP_SETTING_AUTOCOMPLETE_VALUE,
   UPDATE_LIST_OF_LOCALISATION_ABORT,
   UPDATE_LIST_OF_LOCALISATION_FAIL,
+  OPEN_CLOSE_INTEREST_POINT_MODAL,
+  SELECT_INTEREST_POINT_ADD,
+  SELECT_INTEREST_POINT_DELETE,
 } from 'src/actions/mapSettings';
 
 export const initialState = {
@@ -40,7 +43,11 @@ export const initialState = {
     },
     ArrivProposition: [],
   },
-};
+  interestPointModal: {
+    isOpen: false,
+    selected: [],
+  },
+}
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -60,6 +67,14 @@ const reducer = (state = initialState, action = {}) => {
           isOpen: !state.localisationSettingsModal.isOpen,
           DepartProposition: [],
           ArrivProposition: [],
+        },
+      };
+    case OPEN_CLOSE_INTEREST_POINT_MODAL:
+      return {
+        ...state,
+        interestPointModal: {
+          ...state.interestPointModal,
+          isOpen: !state.interestPointModal.isOpen,
         },
       };
     case CHANGE_MAP_SETTING_INPUT_VALUE:
@@ -128,6 +143,28 @@ const reducer = (state = initialState, action = {}) => {
         localisationSettingsModal: {
           ...state.localisationSettingsModal,
           [action.loadingElement]: false,
+        },
+      };
+    case SELECT_INTEREST_POINT_ADD:
+      return {
+        ...state,
+        interestPointModal: {
+          ...state.interestPointModal,
+          selected: [
+            ...state.interestPointModal.selected,
+            action.selectedOption,
+          ],
+        },
+      };
+    case SELECT_INTEREST_POINT_DELETE:
+      return {
+        ...state,
+        interestPointModal: {
+          ...state.interestPointModal,
+          selected: [
+            // eslint-disable-next-line max-len
+            ...state.interestPointModal.selected.filter((option) => option.id !== action.selectedOption.id),
+          ],
         },
       };
     default:
