@@ -1,4 +1,12 @@
-import { OPEN_CLOSE_CONNECTION_MODAL, MAKE_PASSWORD_VISIBLE_OR_NOT, CHANGE_INPUT_VALUE, OPEN_CLOSE_ACCOUNT_CREATION_MODAL } from 'src/actions/authentification';
+import {
+  OPEN_CLOSE_CONNECTION_MODAL,
+  MAKE_PASSWORD_VISIBLE_OR_NOT,
+  CHANGE_INPUT_VALUE,
+  OPEN_CLOSE_ACCOUNT_CREATION_MODAL,
+  CONNECT_USER,
+  CONNECT_USER_FAIL,
+  CONNECT_USER_SUCCESS,
+} from 'src/actions/authentification';
 
 export const initialState = {
   connectionModal: {
@@ -6,6 +14,10 @@ export const initialState = {
     isHiddenPassword: false,
     emailValue: '',
     passwordValue: '',
+    error: {
+      isError: false,
+      message: undefined,
+    },
   },
   accountCreationModal: {
     isOpen: false,
@@ -13,6 +25,10 @@ export const initialState = {
     userNameValue: '',
     emailValue: '',
     passwordValue: '',
+    error: {
+      isError: false,
+      message: undefined,
+    },
   },
 };
 
@@ -52,6 +68,37 @@ const reducer = (state = initialState, action = {}) => {
         accountCreationModal: {
           ...state.accountCreationModal,
           isOpen: !state.accountCreationModal.isOpen,
+        },
+      };
+    case CONNECT_USER:
+      return {
+        ...state,
+        connectionModal: {
+          ...state.connectionModal,
+          emailValue: '',
+          passwordValue: '',
+        },
+      };
+    case CONNECT_USER_FAIL:
+      return {
+        ...state,
+        connectionModal: {
+          ...state.connectionModal,
+          error: {
+            isError: true,
+            message: action.message,
+          },
+        },
+      };
+    case CONNECT_USER_SUCCESS:
+      return {
+        ...state,
+        connectionModal: {
+          ...state.connectionModal,
+          error: {
+            isError: false,
+            message: '',
+          },
         },
       };
     default:
