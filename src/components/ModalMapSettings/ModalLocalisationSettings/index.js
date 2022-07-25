@@ -35,13 +35,14 @@ function ModalLocalisationSettings({ reducerRoute }) {
   const depart = {
     proposition: 'DepartProposition',
     inputElement: 'DepartSelected',
-    loanding: 'isDepartLoading',
+    loading: 'isDepartLoading',
   };
   const arriv = {
     proposition: 'ArrivProposition',
     inputElement: 'ArrivSelected',
-    loanding: 'isArrivLoading',
+    loading: 'isArrivLoading',
   };
+  console.log(isDepartLoading);
   return (
     <ModalElement
       dispatchCall={openCloseLocalisationModal}
