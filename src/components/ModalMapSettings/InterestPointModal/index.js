@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 // == Import
-// import { useSelector, useDispatch } from 'react-redux';
-// import {  } from 'src/store/action';
+import PropTypes from 'prop-types';
 import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import data from 'src/assets/data/interestPoint.json';
 import { useSelector, useDispatch } from 'react-redux';
@@ -101,6 +101,10 @@ function InterestPointModal({ reducerRoute }) {
     </ModalElement>
   );
 }
+
+InterestPointModal.propTypes = {
+  reducerRoute: PropTypes.string.isRequired,
+};
 
 // == Export
 export default InterestPointModal;

@@ -1,8 +1,13 @@
 /* eslint-disable max-len */
 // == Import
-// import { useSelector, useDispatch } from 'react-redux';
-// import {  } from 'src/store/action';
-import { openCloseLocalisationModal, changeMapSettingAutocompleteValue, updateListOfLocalisation, openCloseInterestPointModal, openCloseCarModal } from 'src/actions/mapSettings';
+import PropTypes from 'prop-types';
+import {
+  openCloseLocalisationModal,
+  changeMapSettingAutocompleteValue,
+  updateListOfLocalisation,
+  openCloseInterestPointModal,
+  openCloseCarModal,
+} from 'src/actions/mapSettings';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -139,6 +144,10 @@ function ModalLocalisationSettings({ reducerRoute }) {
     </ModalElement>
   );
 }
+
+ModalLocalisationSettings.propTypes = {
+  reducerRoute: PropTypes.string.isRequired,
+};
 
 // == Export
 export default ModalLocalisationSettings;

@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 // == Import
-// import { useSelector, useDispatch } from 'react-redux';
-// import {  } from 'src/store/action';
+import PropTypes from 'prop-types';
 import { openCloseCarModal, changeMapSettingInputValue, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import data from 'src/assets/data/car.json';
 import { useSelector, useDispatch } from 'react-redux';
@@ -83,6 +83,10 @@ function ModalCarSettings({ reducerRoute }) {
     </ModalElement>
   );
 }
+
+ModalCarSettings.propTypes = {
+  reducerRoute: PropTypes.string.isRequired,
+};
 
 // == Export
 export default ModalCarSettings;
