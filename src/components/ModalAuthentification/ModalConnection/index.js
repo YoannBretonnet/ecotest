@@ -10,7 +10,7 @@ import {
 
 import { BiChevronRight } from 'react-icons/bi';
 
-import { openCloseConnectionModal, changeInputValue, openCloseAccountCreationModal } from 'src/actions/authentification';
+import { openCloseConnectionModal, changeInputValue, openCloseAccountCreationModal, connectUser } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
 // ==Component
@@ -36,7 +36,7 @@ function ModalConnection({ reducerRoute }) {
         className="modal-form-connection"
         onSubmit={((event) => {
           event.preventDefault();
-          console.log('coucou');
+          dispatch(connectUser());
         })}
       >
         <TextField
