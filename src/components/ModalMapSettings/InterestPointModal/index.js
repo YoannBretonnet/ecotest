@@ -16,9 +16,10 @@ import {
   FormControlLabel,
   Checkbox,
   IconButton,
+  Box,
 } from '@mui/material';
 
-import { BiChevronRight } from 'react-icons/bi';
+import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 
 // ==Component
 import ModalElement from 'src/components/ModalElement';
@@ -76,9 +77,23 @@ function InterestPointModal({ reducerRoute }) {
             <FormHelperText>Veuillez retirer des points d'intérets</FormHelperText>
           )}
         </FormControl>
-        <IconButton sx={{ color: 'black' }} type="submit">
-          <BiChevronRight size="8vh" />
-        </IconButton>
+        <Box
+          component="nav"
+          sx={{
+            display: 'flex', justifyContent: 'center',
+          }}
+        >
+          <IconButton
+            sx={{ color: 'black' }}
+            type="button"
+            // onClick={}
+          >
+            <BiChevronLeft size="8vh" />
+          </IconButton>
+          <IconButton sx={{ color: 'black' }} type="submit">
+            <BiChevronRight size="8vh" />
+          </IconButton>
+        </Box>
       </form>
     </ModalElement>
   );
