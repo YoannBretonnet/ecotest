@@ -17,7 +17,7 @@ import ModalElement from 'src/components/ModalElement';
 import InputPassword from '../InputPassword';
 
 // == Composant
-function ModalAccountCreation() {
+function ModalAccountCreation({ reducerRoute }) {
   const dispatch = useDispatch();
   const modalElement = 'accountCreationModal';
   const inputEmailElement = 'emailValue';
@@ -34,6 +34,7 @@ function ModalAccountCreation() {
     <ModalElement
       dispatchCall={openCloseAccountCreationModal}
       modalElement={modalElement}
+      reducerRoute={reducerRoute}
     >
       <h1 className="modal-title">Créez votre compte</h1>
       <form

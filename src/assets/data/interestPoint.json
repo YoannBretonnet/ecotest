@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Panoramas",
+    "id": 1
+  },
+  {
+    "name": "Culture",
+    "id": 2
+  },
+  {
+    "name": "Gastronomie",
+    "id": 3
+  },
+  {
+    "name": "Nature",
+    "id": 4
+  },
+  {
+    "name": "Sport",
+    "id": 5
+  },
+  {
+    "name": "Parcs",
+    "id": 6
+  }
+]

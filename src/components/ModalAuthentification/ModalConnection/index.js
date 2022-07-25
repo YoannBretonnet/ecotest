@@ -18,7 +18,7 @@ import ModalElement from 'src/components/ModalElement';
 import InputPassword from '../InputPassword';
 
 // == Composant
-function ModalConnection() {
+function ModalConnection({ reducerRoute }) {
   const dispatch = useDispatch();
   const modalElement = 'connectionModal';
   const inputElement = 'emailValue';
@@ -29,6 +29,7 @@ function ModalConnection() {
     <ModalElement
       dispatchCall={openCloseConnectionModal}
       modalElement={modalElement}
+      reducerRoute={reducerRoute}
     >
       <h1 className="modal-title">Se connecter</h1>
       <form

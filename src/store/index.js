@@ -2,13 +2,15 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 import reducer from 'src/reducers';
 
-import index from 'src/middlewares/index';
+import getLocalisation from 'src/middlewares/getLocalisation';
+import getSelectedInterestPoint from 'src/middlewares/getSelectedInterestPoint';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
   applyMiddleware(
-    index,
+    getLocalisation,
+    getSelectedInterestPoint,
   ),
 );
 

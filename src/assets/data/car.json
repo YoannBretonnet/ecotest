@@ -1,0 +1,136 @@
+{
+  "brands": [
+    {
+      "name": "Renault"
+    },
+    {
+      "name": "Peugeot"
+    },
+    {
+      "name": "Hyundai"
+    },
+    {
+      "name": "Audi"
+    },
+    {
+      "name": "Tesla"
+    },
+    {
+      "name": "Volkswagen"
+    }
+  ],
+  "car": [
+    {
+      "model": "Zoé",
+      "network": "Ionity",
+      "plug": "ccs",
+      "images": "renault-zoe.png",
+      "brand": "Renault"
+    },
+    {
+      "model": "Twingo",
+      "network": "Ionity",
+      "plug": "ccs",
+      "images": "renault-twingo.png",
+      "brand": "Renault"
+    },
+    {
+      "model": "Mégane",
+      "network": "Ionity",
+      "plug": "ccs",
+      "images": "renault-megane.png",
+      "brand": "Renault"
+    },
+    {
+      "model": "e-208",
+      "network": "Ionity",
+      "plug": "type 2",
+      "images": "peugeot-e-208.png",
+      "brand": "Peugeot"
+    },
+    {
+      "model": "e-2008",
+      "network": "Ionity",
+      "plug": "type 2",
+      "images": "peugeot-e-2008.png",
+      "brand": "Peugeot"
+    },
+    {
+      "model": "Kona",
+      "network": "Totalenergies",
+      "plug": "type 2",
+      "images": "hyundai-kona.png",
+      "brand": "Hyundai"
+    },
+    {
+      "model": "Ioniq",
+      "network": "Totalenergies",
+      "plug": "type 2",
+      "images": "hyundai-ioniq.png",
+      "brand": "Hyundai"
+    },
+    {
+      "model": "e-tron S",
+      "network": "E-tron",
+      "plug": "type 2",
+      "images": null,
+      "brand": "Audi"
+    },
+    {
+      "model": "e-tron GT quattro",
+      "network": "E-tron",
+      "plug": "ccs",
+      "images": null,
+      "brand": "Audi"
+    },
+    {
+      "model": "Q4 e-tron",
+      "network": "E-tron",
+      "plug": "type 2",
+      "images": null,
+      "brand": "Audi"
+    },
+    {
+      "model": "Model S",
+      "network": "Superchargeur",
+      "plug": "ccs",
+      "images": "tesl-model-s.png",
+      "brand": "Tesla"
+    },
+    {
+      "model": "Model X",
+      "network": "Superchargeur",
+      "plug": "ccs",
+      "images": null,
+      "brand": "Tesla"
+    },
+    {
+      "model": "Model Y",
+      "network": "Superchargeur",
+      "plug": "ccs",
+      "images": "volkswagen-id3.png",
+      "brand": "Tesla"
+    },
+    {
+      "model": "ID.3",
+      "network": "Ionity",
+      "plug": "type 2",
+      "images": null,
+      "brand": "Volkswagen"
+    },
+    {
+      "model": "ID.4",
+      "network": "Ionity",
+      "plug": "type 2",
+      "images": null,
+      "brand": "Volkswagen"
+    },
+    {
+      "model": "ID.Buzz",
+      "network": "Ionity",
+      "plug": "type 2",
+      "images": null,
+      "brand": "Volkswagen"
+    }
+  ]
+}

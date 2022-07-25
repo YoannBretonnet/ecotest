@@ -9,12 +9,17 @@ import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAcco
 
 // == Composant
 function HomePage() {
+  const reducerRoute = 'auth';
   return (
     <>
       <Header />
       <Main />
-      <ModalConnection />
-      <ModalAccountCreation />
+      <ModalConnection
+        reducerRoute={reducerRoute}
+      />
+      <ModalAccountCreation
+        reducerRoute={reducerRoute}
+      />
     </>
   );
 }

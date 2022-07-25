@@ -9,9 +9,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 // == Composant
-function ModalElement({ children, dispatchCall, modalElement }) {
+function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
   const dispatch = useDispatch();
-  const { isOpen } = useSelector((state) => state.auth[modalElement]);
+  const { isOpen } = useSelector((state) => state[reducerRoute][modalElement]);
   return (
     <Modal
       open={isOpen}
@@ -30,7 +30,7 @@ function ModalElement({ children, dispatchCall, modalElement }) {
       >
         <Paper
           sx={{
-            width: '100%', height: 'fit-content', borderRadius: '10%', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh',
+            width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh',
           }}
         >
           {children}
