@@ -65,6 +65,7 @@ function ModalLocalisationSettings({ reducerRoute }) {
           disableClearable
           id="modal-form-departure"
           options={DepartProposition}
+          isOptionEqualToValue={(option, value) => option.properties.id === value.properties.id}
           loading={isDepartLoading}
           getOptionLabel={(option) => option.properties.label}
           sx={{ width: '100%' }}

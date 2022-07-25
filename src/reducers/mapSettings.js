@@ -14,6 +14,10 @@ export const initialState = {
     isDepartLoading: false,
     DepartSelected: {
       label: '',
+      streetNumber: undefined,
+      adress: undefined,
+      zipcode: undefined,
+      city: undefined,
       Lat: undefined,
       Long: undefined,
     },
@@ -21,6 +25,10 @@ export const initialState = {
     isArrivLoading: false,
     ArrivSelected: {
       label: '',
+      streetNumber: undefined,
+      adress: undefined,
+      zipcode: undefined,
+      city: undefined,
       Lat: undefined,
       Long: undefined,
     },
@@ -57,6 +65,10 @@ const reducer = (state = initialState, action = {}) => {
           [action.inputElement]: {
             ...state.localisationSettingsModal[action.inputElement],
             label: action.inputValue,
+            streetNumber: undefined,
+            adress: undefined,
+            zipcode: undefined,
+            city: undefined,
             Lat: undefined,
             Long: undefined,
           },
@@ -87,6 +99,10 @@ const reducer = (state = initialState, action = {}) => {
           ...state[action.modalElement],
           [action.inputElement]: {
             label: action.properties.label,
+            streetNumber: action.properties.housenumber,
+            adress: action.properties.street,
+            zipcode: action.properties.postcode,
+            city: action.properties.city,
             Lat: action.geometry.coordinates[1],
             Long: action.geometry.coordinates[0],
           },
