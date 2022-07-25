@@ -4,6 +4,10 @@ import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { openCloseInterestPointModal } from 'src/actions/mapSettings';
 
 import {
   BiSearch,
@@ -11,9 +15,12 @@ import {
   BiMap,
   BiBookmark,
 } from 'react-icons/bi';
+import styles from './IconSlider.module.scss';
 
 // == Composant
 function Header() {
+  const dispatch = useDispatch();
+  const { isOpen: isInterestPointOpen } = useSelector((state) => state.mapSettings.interestPointModal);
   const args = {
     size: '4vh',
   };
@@ -41,13 +48,19 @@ function Header() {
               <BiMap size={args.size} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Choix véhicule">
-            <IconButton>
+          <Tooltip title="Point d'intérets">
+            <IconButton
+              className={isInterestPointOpen ? styles.icon : ''}
+              onClick={(() => dispatch(openCloseInterestPointModal()))}
+            >
               <BiBookmark size={args.size} />
             </IconButton>
           </Tooltip>
         </Box>
       </Box>
+      <InterestPointModal
+        reducerRoute={reducerRoute}
+      />
     </>
   );
 }
