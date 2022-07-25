@@ -2,7 +2,7 @@
 // == Import
 // import { useSelector, useDispatch } from 'react-redux';
 // import {  } from 'src/store/action';
-import { openCloseLocalisationModal, changeMapSettingAutocompleteValue, updateListOfLocalisation } from 'src/actions/mapSettings';
+import { openCloseLocalisationModal, changeMapSettingAutocompleteValue, updateListOfLocalisation, openCloseInterestPointModal, openCloseCarModal } from 'src/actions/mapSettings';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -54,7 +54,8 @@ function ModalLocalisationSettings({ reducerRoute }) {
         className="modal-form-localisation"
         onSubmit={((event) => {
           event.preventDefault();
-          console.log('coucou');
+          dispatch(openCloseLocalisationModal());
+          dispatch(openCloseInterestPointModal());
         })}
       >
         <Autocomplete
@@ -123,7 +124,10 @@ function ModalLocalisationSettings({ reducerRoute }) {
           <IconButton
             sx={{ color: 'black' }}
             type="button"
-            // onClick={}
+            onClick={() => {
+              dispatch(openCloseLocalisationModal());
+              dispatch(openCloseCarModal());
+            }}
           >
             <BiChevronLeft size="8vh" />
           </IconButton>

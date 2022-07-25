@@ -1,7 +1,7 @@
 // == Import
 // import { useSelector, useDispatch } from 'react-redux';
 // import {  } from 'src/store/action';
-import { openCloseCarModal, changeMapSettingInputValue } from 'src/actions/mapSettings';
+import { openCloseCarModal, changeMapSettingInputValue, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import data from 'src/assets/data/car.json';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -40,7 +40,8 @@ function ModalCarSettings({ reducerRoute }) {
         className="modal-form-connection"
         onSubmit={((event) => {
           event.preventDefault();
-          console.log('coucou');
+          dispatch(openCloseCarModal());
+          dispatch(openCloseLocalisationModal());
         })}
       >
         <TextField

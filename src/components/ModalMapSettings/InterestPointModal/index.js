@@ -1,7 +1,7 @@
 // == Import
 // import { useSelector, useDispatch } from 'react-redux';
 // import {  } from 'src/store/action';
-import { openCloseInterestPointModal, selectInterestPoint } from 'src/actions/mapSettings';
+import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import data from 'src/assets/data/interestPoint.json';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -42,7 +42,7 @@ function InterestPointModal({ reducerRoute }) {
         className="modal-form-connection"
         onSubmit={((event) => {
           event.preventDefault();
-          console.log('coucou');
+          dispatch(openCloseInterestPointModal());
         })}
       >
         <FormControl
@@ -86,7 +86,10 @@ function InterestPointModal({ reducerRoute }) {
           <IconButton
             sx={{ color: 'black' }}
             type="button"
-            // onClick={}
+            onClick={() => {
+              dispatch(openCloseInterestPointModal());
+              dispatch(openCloseLocalisationModal());
+            }}
           >
             <BiChevronLeft size="8vh" />
           </IconButton>

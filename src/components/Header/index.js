@@ -38,7 +38,7 @@ function Header() {
           display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '2vh',
         }}
       >
-        <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }}>
+        <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }} onClick={(() => dispatch(openCloseCarModal()))}>
           Véhicule | Localisation | Intérets
           <BiSearch size="3.1vh" />
         </Fab>
