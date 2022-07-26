@@ -80,7 +80,7 @@ function ModalConnection({ reducerRoute }) {
               <BiChevronRight size="8vh" />
             </IconButton>
           ) : (
-            <CircularProgress size="8vh" />
+            <CircularProgress sx={{ color: '#6cc573', alignSelf: 'center' }} size="6vh" />
           )
         }
       </form>
