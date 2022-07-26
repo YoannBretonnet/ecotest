@@ -6,6 +6,7 @@ export const CONNECT_USER = 'CONNECT_USER';
 export const CONNECT_USER_FAIL = 'CONNECT_USER_FAIL';
 export const CONNECT_USER_SUCCESS = 'CONNECT_USER_SUCCESS';
 export const GET_PROFIL_SUCCESS = 'GET_PROFIL_SUCCESS';
+export const GET_PROFIL_FAIL = 'GET_PROFIL_FAIL';
 
 export const openCloseConnectionModal = () => ({
   type: OPEN_CLOSE_CONNECTION_MODAL,
@@ -43,4 +44,8 @@ export const connectUserSuccess = () => ({
 export const getProfilSuccess = (data) => ({
   type: GET_PROFIL_SUCCESS,
   data,
+});
+
+export const getProfilFail = () => ({
+  type: GET_PROFIL_FAIL,
 });

@@ -7,6 +7,8 @@ import {
   connectUserSuccess,
   CONNECT_USER_SUCCESS,
   getProfilSuccess,
+  getProfilFail,
+  GET_PROFIL_FAIL,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -26,7 +28,7 @@ const connectUser = (store) => (next) => (action) => {
         },
       };
       axios(configConnect)
-        .then((_response) => {
+        .then(() => {
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
@@ -38,7 +40,7 @@ const connectUser = (store) => (next) => (action) => {
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
-        // withCredentials: true,
+        withCredentials: true,
       };
       axios(configProfile)
         .then((response) => {
@@ -46,10 +48,30 @@ const connectUser = (store) => (next) => (action) => {
           store.dispatch(getProfilSuccess(response.data));
         })
         .catch((error) => {
+          switch (error.response.status) {
+            case 401:
+              store.dispatch(getProfilFail());
+              break;
+            default:
+              break;
+          }
+        });
+      next(action);
+      break;
+    case GET_PROFIL_FAIL:
+      const configRefreshToken = {
+        method: 'get',
+        url: 'https://eco-roads.herokuapp.com/api/v1/refresh_token',
+        // withCredentials: true,
+      };
+      axios(configRefreshToken)
+        .then(() => {
+          console.log('refresh token received');
+          store.dispatch(connectUserSuccess());
+        })
+        .catch((error) => {
           console.log(error);
-          // store.dispatch(getProfilFail());
-          // if error token acces null
-          // rioute refress token
+          console.log('refresh token failed');
         });
       next(action);
       break;
