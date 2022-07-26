@@ -6,6 +6,7 @@ import {
   CONNECT_USER,
   CONNECT_USER_FAIL,
   CONNECT_USER_SUCCESS,
+  GET_PROFIL_SUCCESS,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -30,6 +31,13 @@ export const initialState = {
       isError: false,
       message: undefined,
     },
+  },
+  userAccount: {
+    userName: undefined,
+    email: undefined,
+    id: undefined,
+    carId: undefined,
+    locationId: undefined,
   },
 };
 
@@ -103,6 +111,17 @@ const reducer = (state = initialState, action = {}) => {
             message: '',
           },
           isLoading: false,
+        },
+      };
+    case GET_PROFIL_SUCCESS:
+      return {
+        ...state,
+        userAccount: {
+          userName: action.data.username,
+          email: action.data.email,
+          id: action.data.id,
+          carId: action.data.car_id,
+          locationId: action.data.location_id,
         },
       };
     default:

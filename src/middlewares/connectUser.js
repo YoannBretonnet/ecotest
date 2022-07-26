@@ -6,6 +6,7 @@ import {
   connectUserFail,
   connectUserSuccess,
   CONNECT_USER_SUCCESS,
+  getProfilSuccess,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -25,7 +26,7 @@ const connectUser = (store) => (next) => (action) => {
         },
       };
       axios(configConnect)
-        .then((response) => {
+        .then((_response) => {
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
@@ -42,10 +43,13 @@ const connectUser = (store) => (next) => (action) => {
       axios(configProfile)
         .then((response) => {
           console.log(response.data);
-          // store.dispatch(getProfil());
+          store.dispatch(getProfilSuccess(response.data));
         })
         .catch((error) => {
           console.log(error);
+          // store.dispatch(getProfilFail());
+          // if error token acces null
+          // rioute refress token
         });
       next(action);
       break;
