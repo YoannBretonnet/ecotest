@@ -9,8 +9,15 @@ import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
 import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
 import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
 
+import { useEffect } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { openCloseCarModal, openCloseLocalisationModal, openCloseInterestPointModal } from 'src/actions/mapSettings';
+import {
+  openCloseCarModal,
+  openCloseLocalisationModal,
+  openCloseInterestPointModal,
+  getVehiclesData,
+} from 'src/actions/mapSettings';
 
 import {
   BiSearch,
@@ -30,6 +37,9 @@ function Header() {
     size: '4vh',
   };
   const reducerRoute = 'mapSettings';
+  useEffect(() => {
+    dispatch(getVehiclesData());
+  }, []);
   return (
     <>
       <Box
