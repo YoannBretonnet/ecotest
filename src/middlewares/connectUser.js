@@ -12,6 +12,7 @@ import {
   openCloseConnectionModal,
   REGISTER_USER,
   registerUserFail,
+  registerUserSuccess,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -98,6 +99,7 @@ const connectUser = (store) => (next) => (action) => {
       axios(configRegister)
         .then((response) => {
           console.log('register received', response);
+          store.dispatch(registerUserSuccess());
         })
         .catch((error) => {
           console.log('register failed', error);

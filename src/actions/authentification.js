@@ -9,6 +9,7 @@ export const GET_PROFIL_SUCCESS = 'GET_PROFIL_SUCCESS';
 export const GET_PROFIL_FAIL = 'GET_PROFIL_FAIL';
 export const REGISTER_USER = 'REGISTER_USER';
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 
 export const openCloseConnectionModal = () => ({
   type: OPEN_CLOSE_CONNECTION_MODAL,
@@ -59,4 +60,8 @@ export const registerUser = () => ({
 export const registerUserFail = (message) => ({
   type: REGISTER_USER_FAIL,
   message,
+});
+
+export const registerUserSuccess = () => ({
+  type: REGISTER_USER_SUCCESS,
 });

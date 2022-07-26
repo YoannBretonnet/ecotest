@@ -9,6 +9,7 @@ import {
   GET_PROFIL_SUCCESS,
   REGISTER_USER,
   REGISTER_USER_FAIL,
+  REGISTER_USER_SUCCESS,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -141,11 +142,27 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         accountCreationModal: {
           ...state.accountCreationModal,
+          userNameValue: '',
           emailValue: '',
           passwordValue: '',
           error: {
             isError: true,
             message: action.message,
+          },
+          isLoading: false,
+        },
+      };
+    case REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          userNameValue: '',
+          emailValue: '',
+          passwordValue: '',
+          error: {
+            isError: false,
+            message: '',
           },
           isLoading: false,
         },
