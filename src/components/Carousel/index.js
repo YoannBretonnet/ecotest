@@ -33,7 +33,7 @@ function CarouselComponent() {
     },
   ];
   const args = {
-    squareSize: '30vh',
+    squareSize: '25vh',
   };
   return (
     <Box component="section" sx={{ margin: '2vh auto 0 auto', width: 'fit-content', height: 'fit-content' }}>
@@ -48,7 +48,7 @@ function CarouselComponent() {
         animation="slide"
         autoPlay={false}
         indicators={false}
-        sx={{ width: args.squareSize, height: args.squareSize }}
+        sx={{ width: args.squareSize, height: args.squareSize, margin: 'auto' }}
         NextIcon={<BiChevronRight size="8vh" />}
         PrevIcon={<BiChevronLeft size="8vh" />}
         navButtonsProps={{
