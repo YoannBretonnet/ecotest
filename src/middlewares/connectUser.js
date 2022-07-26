@@ -15,6 +15,7 @@ const connectUser = (store) => (next) => (action) => {
       const configConnect = {
         method: 'post',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         },
