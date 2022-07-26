@@ -62,7 +62,7 @@ const connectUser = (store) => (next) => (action) => {
       const configRefreshToken = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/refresh_token',
-        withCredentials: true,
+        // withCredentials: true,
       };
       axios(configRefreshToken)
         .then(() => {
