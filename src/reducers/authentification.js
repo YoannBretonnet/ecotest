@@ -34,6 +34,7 @@ export const initialState = {
       isError: false,
       message: undefined,
     },
+    isRegisteredAlert: false,
   },
   userAccount: {
     userName: undefined,
@@ -91,6 +92,10 @@ const reducer = (state = initialState, action = {}) => {
           emailValue: '',
           passwordValue: '',
           isLoading: true,
+        },
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          isRegisteredAlert: false,
         },
       };
     case CONNECT_USER_FAIL:
@@ -165,6 +170,7 @@ const reducer = (state = initialState, action = {}) => {
             message: '',
           },
           isLoading: false,
+          isRegisteredAlert: true,
         },
       };
     default:

@@ -13,6 +13,7 @@ import {
   REGISTER_USER,
   registerUserFail,
   registerUserSuccess,
+  openCloseAccountCreationModal,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -100,6 +101,8 @@ const connectUser = (store) => (next) => (action) => {
         .then((response) => {
           console.log('register received', response);
           store.dispatch(registerUserSuccess());
+          store.dispatch(openCloseAccountCreationModal());
+          store.dispatch(openCloseConnectionModal());
         })
         .catch((error) => {
           console.log('register failed', error);

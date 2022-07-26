@@ -11,9 +11,10 @@ import {
   IconButton,
   FormHelperText,
   CircularProgress,
+  Alert,
 } from '@mui/material';
 
-import { BiChevronRight } from 'react-icons/bi';
+import { BiChevronRight, BiCheck } from 'react-icons/bi';
 
 import {
   openCloseConnectionModal, changeInputValue, openCloseAccountCreationModal, connectUser,
@@ -34,6 +35,7 @@ function ModalConnection({ reducerRoute }) {
     isLoading,
     error,
   } = useSelector((state) => state.auth[modalElement]);
+  const { isRegisteredAlert } = useSelector((state) => state.auth.accountCreationModal);
   return (
     <ModalElement
       dispatchCall={openCloseConnectionModal}
@@ -84,6 +86,13 @@ function ModalConnection({ reducerRoute }) {
           )
         }
       </form>
+      {
+        isRegisteredAlert && (
+        <Alert icon={<BiCheck />} severity="success" sx={{ position: 'absolute', top: '105%' }}>
+          Création de compte effectuée&nbsp;!
+        </Alert>
+        )
+      }
     </ModalElement>
   );
 }

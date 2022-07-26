@@ -30,7 +30,7 @@ function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
       >
         <Paper
           sx={{
-            width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh',
+            width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh', position: 'relative',
           }}
         >
           {children}
