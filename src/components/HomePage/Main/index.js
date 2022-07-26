@@ -1,6 +1,6 @@
 // == Style
 import './styles.scss';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 
 import CarouselComponent from 'src/components/Carousel';
 
@@ -9,11 +9,13 @@ import { openCloseConnectionModal } from 'src/actions/authentification';
 
 import {
   BiUser,
+  BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
 // == Composant
 function Main() {
   const dispatch = useDispatch();
+  const isConnected = useSelector((state) => state.auth.isConnected);
   const args = {
     size: '6vh',
   };
@@ -28,12 +30,32 @@ function Main() {
         </p>
       </Box>
       <CarouselComponent />
-      <Box component="section" sx={{ position: 'fixed', right: '1vw', top: '92vh', width: 'fit-content' }}>
-        <IconButton
-          onClick={() => dispatch(openCloseConnectionModal())}
-        >
-          <BiUser size={args.size} />
-        </IconButton>
+      <Box
+        component="section"
+        sx={{
+          position: 'fixed', right: '1vw', top: '92vh', width: 'fit-content',
+        }}
+      >
+        {
+        !isConnected ? (
+          <IconButton
+            onClick={() => dispatch(openCloseConnectionModal())}
+          >
+            <BiUser size={args.size} />
+          </IconButton>
+        ) : (
+          <Tooltip title="Settings">
+            <IconButton
+              // onClick={}
+              // aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              // aria-expanded={open ? 'true' : undefined}
+            >
+              <BiDotsVerticalRounded size={args.size} />
+            </IconButton>
+          </Tooltip>
+        )
+      }
       </Box>
     </Box>
   );

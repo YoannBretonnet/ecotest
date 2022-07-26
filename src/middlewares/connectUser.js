@@ -9,6 +9,7 @@ import {
   getProfilSuccess,
   getProfilFail,
   GET_PROFIL_FAIL,
+  openCloseConnectionModal,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -46,6 +47,7 @@ const connectUser = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(getProfilSuccess(response.data));
+          store.dispatch(openCloseConnectionModal());
         })
         .catch((error) => {
           switch (error.response.status) {
