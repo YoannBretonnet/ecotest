@@ -40,7 +40,7 @@ const connectUser = (store) => (next) => (action) => {
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
-        // withCredentials: true,
+        withCredentials: true,
       };
       axios(configProfile)
         .then((response) => {
@@ -62,16 +62,16 @@ const connectUser = (store) => (next) => (action) => {
       const configRefreshToken = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/refresh_token',
-        // withCredentials: true,
+        withCredentials: true,
       };
       axios(configRefreshToken)
         .then(() => {
-          console.log('refresh token received');
+          console.log('access token received');
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
           console.log(error);
-          console.log('refresh token failed');
+          console.log('access token failed');
         });
       next(action);
       break;

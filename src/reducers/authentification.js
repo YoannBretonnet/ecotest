@@ -39,6 +39,7 @@ export const initialState = {
     carId: undefined,
     locationId: undefined,
   },
+  isConnected: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -123,6 +124,7 @@ const reducer = (state = initialState, action = {}) => {
           carId: action.data.car_id,
           locationId: action.data.location_id,
         },
+        isConnected: true,
       };
     default:
       return state;
