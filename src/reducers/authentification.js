@@ -133,8 +133,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         accountCreationModal: {
           ...state.accountCreationModal,
-          emailValue: '',
-          passwordValue: '',
           isLoading: true,
         },
       };
@@ -143,6 +141,8 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         accountCreationModal: {
           ...state.accountCreationModal,
+          emailValue: '',
+          passwordValue: '',
           error: {
             isError: true,
             message: action.message,
