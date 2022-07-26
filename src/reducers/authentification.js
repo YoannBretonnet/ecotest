@@ -18,6 +18,7 @@ export const initialState = {
       isError: false,
       message: undefined,
     },
+    isLoading: false,
   },
   accountCreationModal: {
     isOpen: false,
@@ -78,6 +79,7 @@ const reducer = (state = initialState, action = {}) => {
           emailValue: '',
           passwordValue: '',
         },
+        isLoading: true,
       };
     case CONNECT_USER_FAIL:
       return {
@@ -88,6 +90,7 @@ const reducer = (state = initialState, action = {}) => {
             isError: true,
             message: action.message,
           },
+          isLoading: false,
         },
       };
     case CONNECT_USER_SUCCESS:
@@ -99,6 +102,7 @@ const reducer = (state = initialState, action = {}) => {
             isError: false,
             message: '',
           },
+          isLoading: false,
         },
       };
     default:

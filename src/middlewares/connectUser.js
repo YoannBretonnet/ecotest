@@ -26,7 +26,6 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configConnect)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {

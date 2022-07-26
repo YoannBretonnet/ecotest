@@ -10,6 +10,7 @@ import {
   TextField,
   IconButton,
   FormHelperText,
+  CircularProgress,
 } from '@mui/material';
 
 import { BiChevronRight } from 'react-icons/bi';
@@ -30,6 +31,7 @@ function ModalConnection({ reducerRoute }) {
   const inputElement = 'emailValue';
   const {
     emailValue,
+    isLoading,
     error,
   } = useSelector((state) => state.auth[modalElement]);
   return (
@@ -72,9 +74,15 @@ function ModalConnection({ reducerRoute }) {
           error={error.isError}
         >{error.message}</FormHelperText>
         )}
-        <IconButton sx={{ color: 'black' }} type="submit">
-          <BiChevronRight size="8vh" />
-        </IconButton>
+        {
+          !isLoading ? (
+            <IconButton sx={{ color: 'black' }} type="submit">
+              <BiChevronRight size="8vh" />
+            </IconButton>
+          ) : (
+            <CircularProgress size="8vh" />
+          )
+        }
       </form>
     </ModalElement>
   );
