@@ -10,6 +10,9 @@ import {
   OPEN_CLOSE_INTEREST_POINT_MODAL,
   SELECT_INTEREST_POINT_ADD,
   SELECT_INTEREST_POINT_DELETE,
+  GET_VEHICLES_DATA,
+  GET_VEHICLES_DATA_SUCCESS,
+  GET_VEHICLES_DATA_FAIL,
 } from 'src/actions/mapSettings';
 
 export const initialState = {
@@ -47,7 +50,16 @@ export const initialState = {
     isOpen: false,
     selected: [],
   },
-}
+  vehiclesData: {
+    brands: [],
+    cars: [],
+    isLoading: false,
+    error: {
+      isError: false,
+      message: undefined,
+    },
+  },
+};
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -165,6 +177,36 @@ const reducer = (state = initialState, action = {}) => {
             // eslint-disable-next-line max-len
             ...state.interestPointModal.selected.filter((option) => option.id !== action.selectedOption.id),
           ],
+        },
+      };
+    case GET_VEHICLES_DATA:
+      return {
+        ...state,
+        vehiclesData: {
+          ...state.vehiclesData,
+          isLoading: true,
+        },
+      };
+    case GET_VEHICLES_DATA_SUCCESS:
+      return {
+        ...state,
+        vehiclesData: {
+          ...state.vehiclesData,
+          brands: action.brands,
+          cars: action.cars,
+          isLoading: false,
+        },
+      };
+    case GET_VEHICLES_DATA_FAIL:
+      return {
+        ...state,
+        vehiclesData: {
+          ...state.vehiclesData,
+          isLoading: false,
+          error: {
+            isError: true,
+            message: action.message,
+          },
         },
       };
     default:

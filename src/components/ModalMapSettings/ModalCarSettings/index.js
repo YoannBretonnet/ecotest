@@ -11,6 +11,7 @@ import './styles.scss';
 import {
   TextField,
   IconButton,
+  FormHelperText,
 } from '@mui/material';
 
 import { BiChevronRight } from 'react-icons/bi';
@@ -26,6 +27,7 @@ function getFilteredCar(cars, brandInput) {
 function ModalCarSettings({ reducerRoute }) {
   const dispatch = useDispatch();
   const { brandsValue, carValue } = useSelector((state) => state.mapSettings.carSettingsModal);
+  const { isError, message } = useSelector((state) => state.mapSettings.vehiclesData.error);
   const modalElement = 'carSettingsModal';
   const inputBrandElement = 'brandsValue';
   const inputCarElement = 'carValue';
@@ -76,6 +78,12 @@ function ModalCarSettings({ reducerRoute }) {
             </option>
           ))}
         </TextField>
+        {isError && (
+        <FormHelperText
+          error={isError}
+        >{message}
+        </FormHelperText>
+        )}
         <IconButton sx={{ color: 'black' }} type="submit">
           <BiChevronRight size="8vh" />
         </IconButton>
