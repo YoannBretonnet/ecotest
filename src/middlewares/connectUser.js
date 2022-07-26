@@ -32,9 +32,9 @@ const connectUser = (store) => (next) => (action) => {
         .catch((error) => {
           store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
         });
-        next(action);
+      next(action);
       break;
-      case CONNECT_USER_SUCCESS:
+    case CONNECT_USER_SUCCESS:
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
@@ -43,12 +43,12 @@ const connectUser = (store) => (next) => (action) => {
       axios(configProfile)
         .then((response) => {
           console.log(response.data);
-          //store.dispatch(getProfil());
+          // store.dispatch(getProfil());
         })
         .catch((error) => {
           console.log(error);
         });
-        next(action);
+      next(action);
       break;
     default:
       return next(action);
