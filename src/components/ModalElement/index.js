@@ -1,3 +1,8 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-closing-tag-location */
+// == Import
+import PropTypes from 'prop-types';
+
 // == Style
 import './styles.scss';
 
@@ -6,7 +11,6 @@ import {
 } from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
-
 
 // == Composant
 function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
@@ -39,6 +43,13 @@ function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
     </Modal>
   );
 }
+
+ModalElement.propTypes = {
+  children: PropTypes.array.isRequired,
+  dispatchCall: PropTypes.func.isRequired,
+  modalElement: PropTypes.string.isRequired,
+  reducerRoute: PropTypes.string.isRequired,
+};
 
 // == Export
 export default ModalElement;

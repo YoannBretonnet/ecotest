@@ -1,3 +1,8 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-closing-tag-location */
+// == Import
+import PropTypes from 'prop-types';
+
 // == Import
 import { useSelector, useDispatch } from 'react-redux';
 import { makePasswordVisibleOrNot, changeInputValue } from 'src/actions/authentification';
@@ -48,6 +53,10 @@ function InputPassword({ modalElement }) {
     </FormControl>
   );
 }
+
+InputPassword.propTypes = {
+  modalElement: PropTypes.string.isRequired,
+};
 
 // == Export
 export default InputPassword;

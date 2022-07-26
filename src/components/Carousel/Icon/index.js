@@ -1,3 +1,9 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-closing-tag-location */
+// == Import
+import PropTypes from 'prop-types';
+
+
 // == Style
 import './styles.scss';
 
@@ -30,6 +36,10 @@ function Icon({ iconSelector }) {
     );
   }
 }
+
+Icon.propTypes = {
+  iconSelector: PropTypes.string.isRequired,
+};
 
 // == Export
 export default Icon;
