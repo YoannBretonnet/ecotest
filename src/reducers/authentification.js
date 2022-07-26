@@ -78,8 +78,8 @@ const reducer = (state = initialState, action = {}) => {
           ...state.connectionModal,
           emailValue: '',
           passwordValue: '',
+          isLoading: true,
         },
-        isLoading: true,
       };
     case CONNECT_USER_FAIL:
       return {
