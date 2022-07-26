@@ -38,7 +38,7 @@ const connectUser = (store) => (next) => (action) => {
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
-        withCredentials: true,
+        // withCredentials: true,
       };
       axios(configProfile)
         .then((response) => {
