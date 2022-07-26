@@ -19,6 +19,7 @@ function MenuIsConnnected({ inputMenu, setinputMenu }) {
   const { isOpen } = useSelector((state) => state.usability.menu);
   const args = {
     size: 6,
+    littleSize: 3,
   };
   // const [inputMenu, setinputMenu] = useState(null);
   const handleClose = () => {
@@ -65,11 +66,11 @@ function MenuIsConnnected({ inputMenu, setinputMenu }) {
       transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem>
-        <BiCog /> Profil
+      <MenuItem sx={{ gap: '1vh' }}>
+        <BiCog size={`${args.littleSize}vh`} /> Profil
       </MenuItem>
-      <MenuItem>
-        <BiExit /> Se déconnecter
+      <MenuItem sx={{ gap: '1vh' }}>
+        <BiExit size={`${args.littleSize}vh`} /> Se déconnecter
       </MenuItem>
     </Menu>
   );
