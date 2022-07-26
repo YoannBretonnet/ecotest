@@ -1,16 +1,27 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-closing-tag-location */
+// == Import
+import PropTypes from 'prop-types';
+
 // == Style
 import './styles.scss';
 
 import {
   TextField,
   IconButton,
+  FormHelperText,
+  CircularProgress,
 } from '@mui/material';
 
 import {
   BiChevronRight,
 } from 'react-icons/bi';
 
-import { openCloseAccountCreationModal, changeInputValue } from 'src/actions/authentification';
+import {
+  openCloseAccountCreationModal,
+  changeInputValue,
+  registerUser,
+} from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ModalElement from 'src/components/ModalElement';
@@ -23,11 +34,14 @@ function ModalAccountCreation({ reducerRoute }) {
   const inputEmailElement = 'emailValue';
   const inputUserNameElement = 'userNameValue';
   const {
-    userNameValue, emailValue, passwordValue,
+    userNameValue,
+    emailValue,
+    error,
+    isLoading,
   } = useSelector((state) => state.auth[modalElement]);
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("coucou")
+    dispatch(registerUser());
   };
 
   return (
@@ -63,13 +77,28 @@ function ModalAccountCreation({ reducerRoute }) {
         <InputPassword
           modalElement={modalElement}
         />
-        <IconButton sx={{ color: 'black' }} type="submit">
-          <BiChevronRight size="8vh" />
-        </IconButton>
+        {error.isError && (
+        <FormHelperText
+          error={error.isError}
+        >{error.message}</FormHelperText>
+        )}
+        {
+          !isLoading ? (
+            <IconButton sx={{ color: 'black' }} type="submit">
+              <BiChevronRight size="8vh" />
+            </IconButton>
+          ) : (
+            <CircularProgress sx={{ color: '#6cc573', alignSelf: 'center' }} size="6vh" />
+          )
+        }
       </form>
     </ModalElement>
   );
 }
+
+ModalAccountCreation.propTypes = {
+  reducerRoute: PropTypes.string.isRequired,
+};
 
 // == Export
 export default ModalAccountCreation;

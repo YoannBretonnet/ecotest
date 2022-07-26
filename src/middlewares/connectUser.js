@@ -10,6 +10,8 @@ import {
   getProfilFail,
   GET_PROFIL_FAIL,
   openCloseConnectionModal,
+  REGISTER_USER,
+  registerUserFail,
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
@@ -76,6 +78,31 @@ const connectUser = (store) => (next) => (action) => {
           console.log('access token failed');
         });
       next(action);
+      break;
+    case REGISTER_USER:
+      next(action);
+      const stateRegister = store.getState();
+      const configRegister = {
+        method: 'post',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/register',
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          username: stateRegister.auth.accountCreationModal.userNameValue,
+          email: stateRegister.auth.accountCreationModal.emailValue,
+          password: stateRegister.auth.accountCreationModal.passwordValue,
+        },
+      };
+      axios(configRegister)
+        .then((response) => {
+          console.log('register received', response);
+        })
+        .catch((error) => {
+          console.log('register failed', error);
+          store.dispatch(registerUserFail(Object.values(error.response.data)[0]));
+        });
       break;
     default:
       return next(action);

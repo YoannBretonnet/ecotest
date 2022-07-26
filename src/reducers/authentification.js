@@ -7,6 +7,8 @@ import {
   CONNECT_USER_FAIL,
   CONNECT_USER_SUCCESS,
   GET_PROFIL_SUCCESS,
+  REGISTER_USER,
+  REGISTER_USER_FAIL,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -125,6 +127,28 @@ const reducer = (state = initialState, action = {}) => {
           locationId: action.data.location_id,
         },
         isConnected: true,
+      };
+    case REGISTER_USER:
+      return {
+        ...state,
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          emailValue: '',
+          passwordValue: '',
+          isLoading: true,
+        },
+      };
+    case REGISTER_USER_FAIL:
+      return {
+        ...state,
+        accountCreationModal: {
+          ...state.accountCreationModal,
+          error: {
+            isError: true,
+            message: action.message,
+          },
+          isLoading: false,
+        },
       };
     default:
       return state;
