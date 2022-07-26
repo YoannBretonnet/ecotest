@@ -1,23 +1,37 @@
+import { useState } from 'react';
+
 // == Style
 import './styles.scss';
-import { Box, IconButton, Tooltip } from '@mui/material';
-
-import CarouselComponent from 'src/components/Carousel';
+import {
+  Box,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { openCloseConnectionModal } from 'src/actions/authentification';
+import { openCloseMenu } from 'src/actions/usability';
 
 import {
   BiUser,
   BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
+import CarouselComponent from 'src/components/Carousel';
+import MenuIsConnnected from './MenuIsConnnected';
+
 // == Composant
 function Main() {
   const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
+  const { isOpen } = useSelector((state) => state.usability.menu);
   const args = {
-    size: '6vh',
+    size: 6,
+  };
+  const [inputMenu, setinputMenu] = useState(null);
+  const handleClick = (event) => {
+    dispatch(openCloseMenu(true));
+    setinputMenu(event.currentTarget);
   };
   return (
     <Box component="main">
@@ -33,7 +47,7 @@ function Main() {
       <Box
         component="section"
         sx={{
-          position: 'fixed', right: '1vw', top: '92vh', width: 'fit-content',
+          position: 'fixed', right: '0', bottom: '0', width: 'fit-content',
         }}
       >
         {
@@ -41,19 +55,24 @@ function Main() {
           <IconButton
             onClick={() => dispatch(openCloseConnectionModal())}
           >
-            <BiUser size={args.size} />
+            <BiUser size={`${args.size}vh`} />
           </IconButton>
         ) : (
-          <Tooltip title="Settings">
-            <IconButton
-              // onClick={}
-              // aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup="true"
-              // aria-expanded={open ? 'true' : undefined}
-            >
-              <BiDotsVerticalRounded size={args.size} />
-            </IconButton>
-          </Tooltip>
+          <>
+            <Tooltip title="Settings">
+              <IconButton
+                onClick={handleClick}
+                aria-controls={isOpen ? 'account-menu' : undefined}
+                aria-haspopup="true"
+              >
+                <BiDotsVerticalRounded size={`${args.size}vh`} />
+              </IconButton>
+            </Tooltip>
+            <MenuIsConnnected
+              inputMenu={inputMenu}
+              setinputMenu={setinputMenu}
+            />
+          </>
         )
       }
       </Box>
