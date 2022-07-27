@@ -43,6 +43,7 @@ const connectUser = (store) => (next) => (action) => {
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
+      console.log(localStorage.getItem('accestToken'));
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
