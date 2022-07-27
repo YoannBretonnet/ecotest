@@ -2,7 +2,6 @@
 // == Import
 import PropTypes from 'prop-types';
 import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
-import dataJson from 'src/assets/data/interestPoint.json';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -30,7 +29,6 @@ function InterestPointModal({ reducerRoute }) {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.mapSettings.interestPointModal.selected);
   const { error, list } = useSelector((state) => state.mapSettings.categoriesData);
-  console.log(list);
   const isError = selected.length > 3;
   const modalElement = 'interestPointModal';
   return (
@@ -55,7 +53,7 @@ function InterestPointModal({ reducerRoute }) {
         >
           <FormLabel component="legend">3 Max</FormLabel>
           <FormGroup>
-            {dataJson.map((option) => (
+            {list.map((option) => (
               <FormControlLabel
                 key={option.id}
                 sx={{ color: 'black' }}
@@ -79,6 +77,12 @@ function InterestPointModal({ reducerRoute }) {
             <FormHelperText>Veuillez retirer des points d'intérets</FormHelperText>
           )}
         </FormControl>
+        {error.isError && (
+        <FormHelperText
+          error={error.isError}
+        >{error.message}
+        </FormHelperText>
+        )}
         <Box
           component="nav"
           sx={{
