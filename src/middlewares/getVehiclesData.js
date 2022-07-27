@@ -17,7 +17,6 @@ const getVehiclesData = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(getVehiclesDataSuccess(response.data.brands, response.data.cars));
         })
         .catch((error) => {
