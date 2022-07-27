@@ -34,7 +34,8 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configConnect)
         .then((response) => {
-          localStorage.setItem('accestToken', response.data.accesToken);
+          console.log(response.data.accessToken);
+          localStorage.setItem('accessToken', response.data.accessToken);
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
@@ -43,7 +44,7 @@ const connectUser = (store) => (next) => (action) => {
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
-      console.log(localStorage.getItem('accestToken'));
+      console.log(localStorage.getItem('accessToken'));
       const configProfile = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
@@ -68,7 +69,7 @@ const connectUser = (store) => (next) => (action) => {
       next(action);
       break;
     case GET_PROFIL_FAIL:
-      localStorage.removeItem('accestToken');
+      localStorage.removeItem('accessToken');
       const configRefreshToken = {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/refresh_token',
@@ -77,7 +78,7 @@ const connectUser = (store) => (next) => (action) => {
       axios(configRefreshToken)
         .then((response) => {
           console.log('access token received');
-          localStorage.setItem('accestToken', response.data.accesToken);
+          localStorage.setItem('accessToken', response.data.accesToken);
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
