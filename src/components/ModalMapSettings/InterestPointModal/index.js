@@ -2,7 +2,7 @@
 // == Import
 import PropTypes from 'prop-types';
 import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
-import data from 'src/assets/data/interestPoint.json';
+import dataJson from 'src/assets/data/interestPoint.json';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -53,7 +53,7 @@ function InterestPointModal({ reducerRoute }) {
         >
           <FormLabel component="legend">3 Max</FormLabel>
           <FormGroup>
-            {data.map((option) => (
+            {dataJson.map((option) => (
               <FormControlLabel
                 key={option.id}
                 sx={{ color: 'black' }}
