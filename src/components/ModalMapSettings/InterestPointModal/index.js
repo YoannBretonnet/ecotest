@@ -29,6 +29,8 @@ const isTrue = (selected, option) => selected.includes(option);
 function InterestPointModal({ reducerRoute }) {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.mapSettings.interestPointModal.selected);
+  const { error, list } = useSelector((state) => state.mapSettings.categoriesData);
+  console.log(list);
   const isError = selected.length > 3;
   const modalElement = 'interestPointModal';
   return (

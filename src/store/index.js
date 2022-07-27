@@ -6,6 +6,7 @@ import getLocalisation from 'src/middlewares/getLocalisation';
 import getSelectedInterestPoint from 'src/middlewares/getSelectedInterestPoint';
 import connectUser from 'src/middlewares/connectUser';
 import getVehiclesData from 'src/middlewares/getVehiclesData';
+import getCategoriesData from 'src/middlewares/getCategoriesData';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,6 +16,7 @@ const enhancers = composeEnhancers(
     getSelectedInterestPoint,
     connectUser,
     getVehiclesData,
+    getCategoriesData,
   ),
 );
 

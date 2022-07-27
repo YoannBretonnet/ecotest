@@ -15,6 +15,8 @@ export const GET_VEHICLES_DATA = 'GET_VEHICLES_DATA';
 export const GET_VEHICLES_DATA_SUCCESS = 'GET_VEHICLES_DATA_SUCCESS';
 export const GET_VEHICLES_DATA_FAIL = 'GET_VEHICLES_DATA_FAIL';
 export const GET_CATEGORIES_DATA = 'GET_CATEGORIES_DATA';
+export const GET_CATEGORIES_DATA_SUCCESS = 'GET_CATEGORIES_DATA_SUCCESS';
+export const GET_CATEGORIES_DATA_FAIL = 'GET_CATEGORIES_DATA_FAIL';
 
 export const openCloseLocalisationModal = () => ({
   type: OPEN_CLOSE_LOCALISATION_MODAL,
@@ -103,4 +105,14 @@ export const getVehiclesDataFail = (message) => ({
 
 export const getCategoriesData = () => ({
   type: GET_CATEGORIES_DATA,
+});
+
+export const getCategoriesDataSuccess = (list) => ({
+  type: GET_CATEGORIES_DATA_SUCCESS,
+  list,
+});
+
+export const getCategoriesDataFail = (message) => ({
+  type: GET_CATEGORIES_DATA_FAIL,
+  message,
 });

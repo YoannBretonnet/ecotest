@@ -13,6 +13,9 @@ import {
   GET_VEHICLES_DATA,
   GET_VEHICLES_DATA_SUCCESS,
   GET_VEHICLES_DATA_FAIL,
+  GET_CATEGORIES_DATA,
+  GET_CATEGORIES_DATA_SUCCESS,
+  GET_CATEGORIES_DATA_FAIL,
 } from 'src/actions/mapSettings';
 
 export const initialState = {
@@ -53,6 +56,14 @@ export const initialState = {
   vehiclesData: {
     brands: [],
     cars: [],
+    isLoading: false,
+    error: {
+      isError: false,
+      message: undefined,
+    },
+  },
+  categoriesData: {
+    list: [],
     isLoading: false,
     error: {
       isError: false,
@@ -202,6 +213,35 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         vehiclesData: {
           ...state.vehiclesData,
+          isLoading: false,
+          error: {
+            isError: true,
+            message: action.message,
+          },
+        },
+      };
+    case GET_CATEGORIES_DATA:
+      return {
+        ...state,
+        categoriesData: {
+          ...state.categoriesData,
+          isLoading: true,
+        },
+      };
+    case GET_CATEGORIES_DATA_SUCCESS:
+      return {
+        ...state,
+        categoriesData: {
+          ...state.categoriesData,
+          cars: action.list,
+          isLoading: false,
+        },
+      };
+    case GET_CATEGORIES_DATA_FAIL:
+      return {
+        ...state,
+        categoriesData: {
+          ...state.categoriesData,
           isLoading: false,
           error: {
             isError: true,
