@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Noway";
+    src: url(src/assets/fonts/noway-regular.ttf);
+  }
+
 .map-container {
     height: 400px;;
     }
@@ -6,11 +11,12 @@
     background-color: #6cc573;
     color: #fff;
     padding: 6px 12px;
-    font-family: monospace;
+    font-family: 'Noway';
+    font-size: small;
     z-index: 1;
     position: absolute;
     bottom: 90px;
-    left: 0;
+    left: 50px;
     margin: 12px;
     border-radius: 4px;
     }

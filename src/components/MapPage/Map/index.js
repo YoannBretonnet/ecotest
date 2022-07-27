@@ -72,7 +72,7 @@ export default function Map() {
   return (
     <div>
       <div className="sidebar">
-       {zoom} Bornes de recharge | {zoom} Points d'intéret | {zoom} km
+       {zoom} Bornes de recharge | {zoom} Points d'intéret
       </div>
       <div ref={mapContainer} className="map-container" />
     </div>
