@@ -49,7 +49,7 @@ const connectUser = (store) => (next) => (action) => {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
         withCredentials: true,
-        headers: { Authorization: `Bearer ${localStorage.getItem('accestToken')}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
       };
       axios(configProfile)
         .then((response) => {
