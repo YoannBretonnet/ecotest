@@ -2,7 +2,6 @@
 // == Import
 import PropTypes from 'prop-types';
 import { openCloseCarModal, changeMapSettingInputValue, openCloseLocalisationModal } from 'src/actions/mapSettings';
-import data from 'src/assets/data/car.json';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -19,15 +18,19 @@ import { BiChevronRight } from 'react-icons/bi';
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
-function getFilteredCar(cars, brandInput) {
-  return cars.filter((option) => option.brand === brandInput);
+function getFilteredCars(cars, brandInput) {
+  return cars.filter((option) => option.brand_id === parseInt(brandInput, 10));
+}
+
+function getFirstFilteredCars(cars, brandInput) {
+  return cars.filter((option) => option.brand_id === parseInt(brandInput, 10))[0].id;
 }
 
 // == Composant
 function ModalCarSettings({ reducerRoute }) {
   const dispatch = useDispatch();
   const { brandsValue, carValue } = useSelector((state) => state.mapSettings.carSettingsModal);
-  const { isError, message } = useSelector((state) => state.mapSettings.vehiclesData.error);
+  const { error, brands, cars } = useSelector((state) => state.mapSettings.vehiclesData);
   const modalElement = 'carSettingsModal';
   const inputBrandElement = 'brandsValue';
   const inputCarElement = 'carValue';
@@ -51,13 +54,16 @@ function ModalCarSettings({ reducerRoute }) {
           select
           label="Marque"
           value={brandsValue}
-          onChange={(event) => dispatch(changeMapSettingInputValue(event.target.value, inputBrandElement, modalElement))}
+          onChange={(event) => {
+            dispatch(changeMapSettingInputValue(event.target.value, inputBrandElement, modalElement));
+            dispatch(changeMapSettingInputValue(getFirstFilteredCars(cars, event.target.value), inputCarElement, modalElement));
+          }}
           SelectProps={{
             native: true,
           }}
         >
-          {data.brands.map((option) => (
-            <option key={option.name} value={option.name}>
+          {brands.map((option) => (
+            <option key={option.id} value={option.id}>
               {option.name}
             </option>
           ))}
@@ -72,16 +78,16 @@ function ModalCarSettings({ reducerRoute }) {
             native: true,
           }}
         >
-          {getFilteredCar(data.car, brandsValue).map((option) => (
-            <option key={option.model} value={option.model}>
+          {getFilteredCars(cars, brandsValue).map((option) => (
+            <option key={option.id} value={option.id}>
               {option.model}
             </option>
           ))}
         </TextField>
-        {isError && (
+        {error.isError && (
         <FormHelperText
-          error={isError}
-        >{message}
+          error={error.isError}
+        >{error.message}
         </FormHelperText>
         )}
         <IconButton sx={{ color: 'black' }} type="submit">

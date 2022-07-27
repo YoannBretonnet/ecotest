@@ -18,8 +18,8 @@ import {
 export const initialState = {
   carSettingsModal: {
     isOpen: false,
-    brandsValue: 'Hyundai',
-    carValue: 'Twingo',
+    brandsValue: 5,
+    carValue: 27,
   },
   localisationSettingsModal: {
     isOpen: false,
