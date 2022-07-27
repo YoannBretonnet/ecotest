@@ -2,7 +2,6 @@
 // == Import
 import PropTypes from 'prop-types';
 import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
-import dataJson from 'src/assets/data/interestPoint.json';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
