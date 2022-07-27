@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import './styles.scss';
 
@@ -7,9 +8,13 @@ mapboxgl.accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM
 export default function Map() {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-122.486052);
-  const [lat, setLat] = useState(37.830348);
-  const [zoom, setZoom] = useState(15);
+  const departureLongitude = useSelector((state) => state.mapData.departureLongitude);
+  const departureLatitude = useSelector((state) => state.mapData.departureLatitude);
+  const arrivalLongitude = useSelector((state) => state.mapData.arrivalLongitude);
+  const arrivalLatitude = useSelector((state) => state.mapData.arrivalLatitude);
+  const lng = (departureLongitude + arrivalLongitude)/2;
+  const lat = (departureLatitude+ arrivalLatitude)/2;
+  const zoom = 6;
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -28,27 +33,13 @@ export default function Map() {
         'geometry': {
         'type': 'LineString',
         'coordinates': [
-        [-122.483696, 37.833818],
-        [-122.483482, 37.833174],
-        [-122.483396, 37.8327],
-        [-122.483568, 37.832056],
-        [-122.48404, 37.831141],
-        [-122.48404, 37.830497],
-        [-122.483482, 37.82992],
-        [-122.483568, 37.829548],
-        [-122.48507, 37.829446],
-        [-122.4861, 37.828802],
-        [-122.486958, 37.82931],
-        [-122.487001, 37.830802],
-        [-122.487516, 37.831683],
-        [-122.488031, 37.832158],
-        [-122.488889, 37.832971],
-        [-122.489876, 37.832632],
-        [-122.490434, 37.832937],
-        [-122.49125, 37.832429],
-        [-122.491636, 37.832564],
-        [-122.492237, 37.833378],
-        [-122.493782, 37.833683]
+        [-1.54027, 47.21129],
+        [-1.50, 47.32],
+        [-1.55, 47.45],
+        [-1.575, 47.62],
+        [-1.9, 47.88],
+        [-1.596, 48.21129],
+        [-2.00719, 48.63575]
         ]
         }
         }
@@ -62,7 +53,7 @@ export default function Map() {
         'line-cap': 'round'
         },
         'paint': {
-        'line-color': '#888',
+        'line-color': '#01a683',
         'line-width': 8
         }
         });
@@ -81,7 +72,7 @@ export default function Map() {
   return (
     <div>
       <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+       {zoom} Bornes de recharge | {zoom} Points d'intéret | {zoom} km
       </div>
       <div ref={mapContainer} className="map-container" />
     </div>
