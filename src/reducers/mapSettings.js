@@ -233,7 +233,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         categoriesData: {
           ...state.categoriesData,
-          cars: action.list,
+          list: action.list,
           isLoading: false,
         },
       };
