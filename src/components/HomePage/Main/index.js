@@ -18,7 +18,7 @@ import {
 } from 'react-icons/bi';
 
 import CarouselComponent from 'src/components/Carousel';
-import MenuIsConnnected from './MenuIsConnnected';
+import MenuIsConnnected from 'src/components/MenuIsConnnected';
 
 // == Composant
 function Main() {
