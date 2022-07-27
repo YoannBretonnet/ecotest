@@ -1,6 +1,5 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
 
 import {
   CONNECT_USER,
@@ -18,7 +17,6 @@ import {
 } from 'src/actions/authentification';
 
 const connectUser = (store) => (next) => (action) => {
-  const [cookiesAccess, setCookieAccess, removeCookieAccess] = useCookies();
   switch (action.type) {
     case CONNECT_USER:
       const state = store.getState();
@@ -36,9 +34,7 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configConnect)
         .then((response) => {
-          setCookieAccess('accestToken', response.data.accesToken, {
-            maxAge: 100,
-          });
+          localStorage.setItem('accestToken', response.data.accesToken);
           store.dispatch(connectUserSuccess());
         })
         .catch((error) => {
@@ -51,7 +47,7 @@ const connectUser = (store) => (next) => (action) => {
         method: 'get',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
         withCredentials: true,
-        headers: { Authorization: `Bearer ${cookiesAccess}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem('accestToken')}` },
       };
       axios(configProfile)
         .then((response) => {
