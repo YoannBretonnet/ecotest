@@ -5,6 +5,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 // import styles and icons
 import './styles.scss';
 
+
 // import data
 import interestPointsData from '../data/interestPointsData.json';
 
@@ -89,11 +90,19 @@ export default function Map() {
       // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
       map.current.on('click', 'interestPoints', (e) => {
         const coordinates = e.features[0].geometry.coordinates.slice();
+        const image = e.features[0].properties.image;
+        const title = e.features[0].properties.title;
         const description = e.features[0].properties.description;
          
         new mapboxgl.Popup()
         .setLngLat(coordinates)
-        .setHTML(description)
+        .setHTML(
+          `<div>
+              <img src="${image}" />
+              <h3>${title}</h3>
+              <p>${description}</p>
+          </div>`
+          )
         .addTo(map.current);
         });
          

@@ -6,8 +6,9 @@
           {
           "type": "Feature",
           "properties": {
+            "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
             "title": "Musée Agri-Rétro",
-            "description": "<strong>Musée Agri-Rétro</strong><p>Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.</p>",
+            "description": "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.",
             "icon": "museum-15"
             },
           "geometry": {
@@ -21,7 +22,9 @@
           {
             "type": "Feature",
             "properties": {
-              "description": "<strong>Etang de la Vayrie</strong><p>Endroit sympathique et calme pour une promenade.</p>",
+              "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
+              "title" : "Etang de la Vayrie",
+              "description": "Endroit sympathique et calme pour une promenade.",
               "icon": "park-15"
               },
             "geometry": {
