@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import './styles.scss';
+import data from './data.json';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM2hlMG41cXFwIn0.K1s56VTf9EAsagytjhRKSw';
 
@@ -20,7 +21,10 @@ export default function Map() {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/mapbox/light-v10',
+      paint: {
+        "background-color": "#6cc573"
+      },
       center: [lng, lat],
       zoom: zoom
     });
@@ -44,6 +48,7 @@ export default function Map() {
         }
         }
         });
+        
         map.current.addLayer({
         'id': 'route',
         'type': 'line',
@@ -58,6 +63,70 @@ export default function Map() {
         }
         });
     });
+
+    map.current.on('load', () => {
+      // Add an image to use as a custom marker
+      map.current.loadImage(
+      'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+      (error, image) => {
+      if (error) throw error;
+      map.current.addImage('custom-marker', image);
+      // Add a GeoJSON source with 2 points
+      map.current.addSource('points', {
+      'type': 'geojson',
+      'data': {
+      'type': 'FeatureCollection',
+      'features': [
+      {
+      // feature for Mapbox DC
+      'type': 'Feature',
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [
+        -1.90609, 48.22144
+      ]
+      },
+      'properties': {
+      'title': 'Musée Agri-Rétro'
+      }
+      },
+      {
+        // feature for Mapbox DC
+        'type': 'Feature',
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [
+          -1.65609, 47.72144
+        ]
+        },
+        'properties': {
+        'title': 'Etang de la Vayrie'
+        }
+        }
+      ]
+      }
+      });
+       
+      // Add a symbol layer
+      map.current.addLayer({
+      'id': 'points',
+      'type': 'symbol',
+      'source': 'points',
+      'layout': {
+      'icon-image': 'custom-marker',
+      // get the title name from the source's "title" property
+      'text-field': ['get', 'title'],
+      'text-font': [
+      'Open Sans Semibold',
+      'Arial Unicode MS Bold'
+      ],
+      'text-offset': [0, 1.25],
+      'text-anchor': 'top'
+      }
+      });
+      }
+      );
+      });
   });
 
   useEffect(() => {
