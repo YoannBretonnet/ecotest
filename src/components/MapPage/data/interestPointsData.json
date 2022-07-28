@@ -1,0 +1,37 @@
+{
+    "type": "geojson",
+      "data": {
+      "type": "FeatureCollection",
+      "features": [
+          {
+          "type": "Feature",
+          "properties": {
+            "title": "Musée Agri-Rétro",
+            "description": "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique",
+            "icon": "music-15"
+            },
+          "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -1.90609, 48.22144
+          ]
+          }
+          },
+
+          {
+            "type": "Feature",
+            "properties": {
+              "title": "Etang de la Vayrie",
+              "description": "Bel étang pour les pêcheurs et des bancs tout autour où on peut regarder les canards",
+              "icon": "bicycle-15"
+              },
+            "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -1.65609, 47.72144
+            ]
+            }
+            }
+          ]
+      }
+  }
