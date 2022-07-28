@@ -34,7 +34,7 @@ function Main() {
     setinputMenu(event.currentTarget);
   };
   return (
-    <Box component="main">
+    <Box component="main" id="main-HomePage">
       <Box component="section" sx={{ margin: '32vh 1.5vh 0' }}>
         <h1 className="main-title">
           E-co Roads
