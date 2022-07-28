@@ -7,13 +7,13 @@
           "type": "Feature",
           "properties": {
             "title": "Musée Agri-Rétro",
-            "description": "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique",
-            "icon": "music-15"
+            "description": "<strong>Musée Agri-Rétro</strong><p>Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.</p>",
+            "icon": "museum-15"
             },
           "geometry": {
           "type": "Point",
           "coordinates": [
-            -1.90609, 48.22144
+            -1.85609, 48.32144
           ]
           }
           },
@@ -21,14 +21,13 @@
           {
             "type": "Feature",
             "properties": {
-              "title": "Etang de la Vayrie",
-              "description": "Bel étang pour les pêcheurs et des bancs tout autour où on peut regarder les canards",
-              "icon": "bicycle-15"
+              "description": "<strong>Etang de la Vayrie</strong><p>Endroit sympathique et calme pour une promenade.</p>",
+              "icon": "park-15"
               },
             "geometry": {
             "type": "Point",
             "coordinates": [
-              -1.65609, 47.72144
+              -1.52609, 47.72144
             ]
             }
             }

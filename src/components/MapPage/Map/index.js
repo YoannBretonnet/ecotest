@@ -4,7 +4,6 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 
 // import styles and icons
 import './styles.scss';
-import icon from "src/assets/images/icon-jumelle.png";
 
 // import data
 import interestPointsData from '../data/interestPointsData.json';
@@ -63,7 +62,7 @@ export default function Map() {
         'line-cap': 'round'
         },
         'paint': {
-        'line-color': '#01a683',
+        'line-color': '#6cc573',
         'line-width': 8
         }
         });
@@ -71,41 +70,26 @@ export default function Map() {
 
     // On ajoute les points d'intérêt
     map.current.on('load', () => {
-      // On charge une image
-      map.current.loadImage(
-      icon,
-      (error, image) => {
-      if (error) throw error;
-      // On ajoute l'image au style en lui donnant un nom d'icone
-      map.current.addImage('custom-marker', image);
-      // On ajoute la source contenant la feature qui utilisera l'icone
-      map.current.addSource('interestPoints', 
-      interestPointsData
+          map.current.addSource('interestPoints', 
+          interestPointsData
+          );
+
+          map.current.addLayer({
+          'id': 'interestPoints',
+          'type': 'symbol',
+          'source': 'interestPoints',
+          'layout': {
+            'icon-image': '{icon}',
+            'icon-allow-overlap': true
+            }
+          });
+       }
       );
-       
-      // Add a symbol layer
-      map.current.addLayer({
-      'id': 'interestPoints',
-      'type': 'symbol',
-      'source': 'interestPoints',
-      'layout': {
-        'icon-image': '{icon}',
-        'icon-allow-overlap': true
-      }
-      });
-      }
-      );
-      });
 
       // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
       map.current.on('click', 'interestPoints', (e) => {
         const coordinates = e.features[0].geometry.coordinates.slice();
         const description = e.features[0].properties.description;
-         
-      //  // On s'assure que le zoom est suffisamment out pour voir toues les points d'intérêt
-      //   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      //   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      //   }
          
         new mapboxgl.Popup()
         .setLngLat(coordinates)
