@@ -72,40 +72,9 @@ export default function Map() {
       if (error) throw error;
       map.current.addImage('custom-marker', image);
       // Add a GeoJSON source with 2 points
-      map.current.addSource('points', {
-      'type': 'geojson',
-      'data': {
-      'type': 'FeatureCollection',
-      'features': [
-      {
-      // feature for Mapbox DC
-      'type': 'Feature',
-      'geometry': {
-      'type': 'Point',
-      'coordinates': [
-        -1.90609, 48.22144
-      ]
-      },
-      'properties': {
-      'title': 'Musée Agri-Rétro'
-      }
-      },
-      {
-        // feature for Mapbox DC
-        'type': 'Feature',
-        'geometry': {
-        'type': 'Point',
-        'coordinates': [
-          -1.65609, 47.72144
-        ]
-        },
-        'properties': {
-        'title': 'Etang de la Vayrie'
-        }
-        }
-      ]
-      }
-      });
+      map.current.addSource('points', 
+      data
+      );
        
       // Add a symbol layer
       map.current.addLayer({
@@ -129,19 +98,11 @@ export default function Map() {
       });
   });
 
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-    });
-  });
-
   return (
     <div>
       <div className="sidebar">
-       {zoom} Bornes de recharge | {zoom} Points d'intéret
+       <div className="details>7 Bornes de recharge | 4 Points d'intéret</div>
+       <div className="sauvegarde>Pour sauvegarder votre trajet, <u>connectez-vous!</u></div>
       </div>
       <div ref={mapContainer} className="map-container" />
     </div>
