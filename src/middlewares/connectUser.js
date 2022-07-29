@@ -64,14 +64,15 @@ const connectUser = (store) => (next) => (action) => {
       //   ).catch((error) => {
       //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
       //   });
+
+      const httpHeaders = new Headers();
+      httpHeaders.append('Content-Type', 'application/json');
+
       fetch('https://eco-roads.herokuapp.com/api/v1/user/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
+        headers: httpHeaders,
         body: JSON.stringify({
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
