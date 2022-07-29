@@ -34,7 +34,6 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configConnect)
         .then((response) => {
-          console.log(response.data.accessToken);
           localStorage.setItem('accessToken', response.data.accessToken);
           store.dispatch(connectUserSuccess());
         })

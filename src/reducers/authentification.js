@@ -10,6 +10,8 @@ import {
   REGISTER_USER,
   REGISTER_USER_FAIL,
   REGISTER_USER_SUCCESS,
+  OPEN_CLOSE_ACCOUNT_UPDATE_MODAL,
+  OPEN_CLOSE_ACCOUNT_UPDATE_ALERT,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -36,14 +38,34 @@ export const initialState = {
     },
     isRegisteredAlert: false,
   },
-  userAccount: {
+  accountUpdateModal: {
+    isOpen: false,
+    isHiddenPassword: false,
+    userNameValue: '',
+    emailValue: '',
+    passwordValue: '',
+    error: {
+      isError: false,
+      message: undefined,
+    },
+    isUpdatedAlert: false,
+  },
+  accountDeleteAlert: {
+    error: {
+      isError: false,
+      message: undefined,
+    },
+    isDeleteAlert: false,
+  },
+  initialUserAccount: {
     userName: undefined,
     email: undefined,
     id: undefined,
-    carId: undefined,
-    locationId: undefined,
+    car: undefined,
+    location: undefined,
+    categories: [],
   },
-  isConnected: false,
+  isConnected: true,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -125,12 +147,15 @@ const reducer = (state = initialState, action = {}) => {
     case GET_PROFIL_SUCCESS:
       return {
         ...state,
-        userAccount: {
+        initialUserAccount: {
           userName: action.data.username,
           email: action.data.email,
           id: action.data.id,
-          carId: action.data.car_id,
-          locationId: action.data.location_id,
+          car: action.data.car,
+          location: action.data.location,
+          categories: [
+            ...action.data.categories,
+          ],
         },
         isConnected: true,
       };
@@ -171,6 +196,22 @@ const reducer = (state = initialState, action = {}) => {
           },
           isLoading: false,
           isRegisteredAlert: true,
+        },
+      };
+    case OPEN_CLOSE_ACCOUNT_UPDATE_MODAL:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          isOpen: !state.accountUpdateModal.isOpen,
+        },
+      };
+    case OPEN_CLOSE_ACCOUNT_UPDATE_ALERT:
+      return {
+        ...state,
+        accountDeleteAlert: {
+          ...state.accountDeleteAlert,
+          isDeleteAlert: !state.accountDeleteAlert.isDeleteAlert,
         },
       };
     default:
