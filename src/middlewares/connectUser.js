@@ -16,16 +16,16 @@ import {
   openCloseAccountCreationModal,
 } from 'src/actions/authentification';
 
+axios.defaults.withCredentials = true;
 const connectUser = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_USER:
       const state = store.getState();
-      axios.defaults.withCredentials = true
       const configConnect = {
         method: 'post',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
-        withCredentials: true,
-        credentials: 'include',
+        // withCredentials: true,
+        // credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
