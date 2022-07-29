@@ -151,8 +151,8 @@ const reducer = (state = initialState, action = {}) => {
           ...state[action.modalElement],
           [action.inputElement]: {
             label: action.properties.label,
-            streetNumber: action.properties.housenumber,
-            adress: action.properties.street,
+            street_number: parseInt(action.properties.housenumber, 10),
+            address: action.properties.street,
             zipcode: action.properties.postcode,
             city: action.properties.city,
             Lat: action.geometry.coordinates[1],

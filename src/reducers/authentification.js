@@ -65,6 +65,36 @@ export const initialState = {
     location: undefined,
     categories: [],
   },
+  // initialUserAccount: {
+  //   userName: 'Luffy.DMonkey',
+  //   email: 'luffy@gmail.com',
+  //   id: '9bb0c279-c5fb-402d-a167-0f2fb43f9eec',
+  //   car: {
+  //     brand_id: 4,
+  //     name: 'Audi',
+  //     car_id: 24,
+  //     model: 'e-tron S',
+  //     image: 'Audi_E-tron_S_remove.png',
+  //   },
+  //   location: {
+  //     address: 'boulevard arlong',
+  //     street_number: 6,
+  //     zipcode: 63360,
+  //     city: 'Grand Line',
+  //     lat: 100,
+  //     lon: 1,
+  //   },
+  //   categories: [
+  //     {
+  //       category: 'Panoramas',
+  //       id: 1,
+  //     },
+  //     {
+  //       category: 'Culture',
+  //       id: 2,
+  //     },
+  //   ],
+  // },
   isConnected: false,
 };
 
