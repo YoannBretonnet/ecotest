@@ -11,15 +11,22 @@ import {
   IconButton,
   FormHelperText,
   CircularProgress,
+  Alert,
+  Box,
+  Button,
 } from '@mui/material';
 
 import {
   BiChevronRight,
+  BiError,
+  BiCheck,
+  BiUndo,
 } from 'react-icons/bi';
 
 import {
   openCloseAccountUpdateModal,
   changeInputValue,
+  openCloseAcountUpdateAlert,
   // updateUser,
 } from 'src/actions/authentification';
 
@@ -40,12 +47,14 @@ function ModalAccountUpdate({ reducerRoute }) {
     error,
     isLoading,
   } = useSelector((state) => state.auth[modalElement]);
+  const {
+    isDeleteAlert,
+  } = useSelector((state) => state.auth.accountDeleteAlert);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     // dispatch(updateUser());
   };
-
   return (
     <ModalElement
       dispatchCall={openCloseAccountUpdateModal}
@@ -79,6 +88,13 @@ function ModalAccountUpdate({ reducerRoute }) {
         <InputPassword
           modalElement={modalElement}
         />
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => dispatch(openCloseAcountUpdateAlert())}
+        >
+          Supprimer votre&nbsp;compte&nbsp;?
+        </Button>
         {error.isError && (
         <FormHelperText
           error={error.isError}
@@ -94,6 +110,37 @@ function ModalAccountUpdate({ reducerRoute }) {
           )
         }
       </form>
+      {
+        isDeleteAlert && (
+        <Alert
+          icon={<BiError />}
+          severity="warning"
+          sx={{
+            position: 'absolute', top: '105%', display: 'flex', flexDirection: 'row', alignItems: 'center',
+          }}
+        >
+          <Box
+            component="div"
+            sx={{
+              display: 'flex', flexDirection: 'row', alignItems: 'center',
+            }}
+          >
+            <p>
+              Êtes vous sur ?
+            </p>
+            <IconButton sx={{ color: '#4caf50' }}>
+              <BiCheck />
+            </IconButton>
+            <IconButton
+              sx={{ color: '#ef5350' }}
+              onClick={() => dispatch(openCloseAcountUpdateAlert())}
+            >
+              <BiUndo />
+            </IconButton>
+          </Box>
+        </Alert>
+        )
+      }
     </ModalElement>
   );
 }
