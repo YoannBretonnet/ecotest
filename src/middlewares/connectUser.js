@@ -49,10 +49,10 @@ const connectUser = (store) => (next) => (action) => {
         method: 'POST',
         mode: 'cors',
         headers: httpHeaders,
-        body: {
+        body: JSON.stringify({
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
-        },
+        }),
       };
 
       fetch('https://eco-roads.herokuapp.com/api/v1/user/login', fetchOptions)
