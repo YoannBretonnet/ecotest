@@ -54,30 +54,7 @@ export const initialState = {
     selected: [],
   },
   vehiclesData: {
-    brands: [{
-      "id": 1,
-      "name": "Renault"
-  },
-  {
-      "id": 2,
-      "name": "Peugeot"
-  },
-  {
-      "id": 3,
-      "name": "Hyundai"
-  },
-  {
-      "id": 4,
-      "name": "Audi"
-  },
-  {
-      "id": 5,
-      "name": "Tesla"
-  },
-  {
-      "id": 6,
-      "name": "Volkswagen"
-  }],
+    brands: [],
     cars: [],
     isLoading: false,
     error: {
