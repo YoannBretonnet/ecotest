@@ -114,7 +114,7 @@ function ModalAccountUpdate({ reducerRoute }) {
         isDeleteAlert && (
         <Alert
           icon={<BiError />}
-          severity="warning"
+          severity="error"
           sx={{
             position: 'absolute', top: '105%', display: 'flex', flexDirection: 'row', alignItems: 'center',
           }}
