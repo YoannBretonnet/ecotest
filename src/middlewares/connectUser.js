@@ -43,7 +43,16 @@ const connectUser = (store) => (next) => (action) => {
       //   });
       // const httpHeaders = new Headers();
       // httpHeaders.append('Content-Type', 'application/json');
-      
+
+      const handleError = (response) => {
+        if (!response.ok) {
+          throw Error(response.json());
+        }
+        else {
+          return response.json();
+        }
+      };
+
       fetch('https://eco-roads.herokuapp.com/api/v1/user/login', {
         method: 'POST',
         mode: 'cors',
@@ -53,12 +62,7 @@ const connectUser = (store) => (next) => (action) => {
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
         }),
-      }).then((response) => {
-        if (!response.ok) {
-          throw Error(response.json());
-        }
-        return response.json();
-      })
+      }).then(handleError)
         .then((data) => {
           console.log(data);
           localStorage.setItem('accessToken', data.accessToken);
@@ -66,7 +70,7 @@ const connectUser = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error);
-          //store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+          // store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
         });
       next(action);
       break;
