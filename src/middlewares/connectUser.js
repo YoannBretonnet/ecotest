@@ -75,7 +75,11 @@ const connectUser = (store) => (next) => (action) => {
           password: state.auth.connectionModal.passwordValue,
         }),
       }).then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem('accessToken', data.accessToken);
+          store.dispatch(connectUserSuccess());
+        });
       // .catch((error) => {
       //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
       // });
