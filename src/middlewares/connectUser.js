@@ -76,7 +76,7 @@ const connectUser = (store) => (next) => (action) => {
         }),
       }).then(
         (response) => {
-          console.log(response);
+          console.log(response.json());
           // localStorage.setItem('accessToken', response.data.accessToken);
           // store.dispatch(connectUserSuccess());
         },
