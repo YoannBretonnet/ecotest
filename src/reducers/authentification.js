@@ -148,6 +148,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         initialUserAccount: {
+          ...state.initialUserAccount,
           userName: action.data.username,
           email: action.data.email,
           id: action.data.id,
@@ -156,6 +157,11 @@ const reducer = (state = initialState, action = {}) => {
           categories: [
             ...action.data.categories,
           ],
+        },
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          userNameValue: action.data.username,
+          emailValue: action.data.email,
         },
         isConnected: true,
       };
