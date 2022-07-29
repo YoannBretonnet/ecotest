@@ -10,6 +10,7 @@ import {
   REGISTER_USER,
   REGISTER_USER_FAIL,
   REGISTER_USER_SUCCESS,
+  OPEN_CLOSE_ACCOUNT_UPDATE_MODAL,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -36,14 +37,26 @@ export const initialState = {
     },
     isRegisteredAlert: false,
   },
-  userAccount: {
+  accountUpdateModal: {
+    isOpen: false,
+    isHiddenPassword: false,
+    userNameValue: '',
+    emailValue: '',
+    passwordValue: '',
+    error: {
+      isError: false,
+      message: undefined,
+    },
+    isUpdatedAlert: false,
+  },
+  initialUserAccount: {
     userName: undefined,
     email: undefined,
     id: undefined,
     carId: undefined,
     locationId: undefined,
   },
-  isConnected: false,
+  isConnected: true,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -171,6 +184,14 @@ const reducer = (state = initialState, action = {}) => {
           },
           isLoading: false,
           isRegisteredAlert: true,
+        },
+      };
+    case OPEN_CLOSE_ACCOUNT_UPDATE_MODAL:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          isOpen: !state.accountUpdateModal.isOpen,
         },
       };
     default:

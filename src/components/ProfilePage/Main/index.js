@@ -2,6 +2,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 // import {  } from 'src/store/action';
 
+import {
+  openCloseAccountUpdateModal,
+} from 'src/actions/authentification';
+
+import {
+  openCloseCarModal,
+} from 'src/actions/mapSettings';
+
 // == Style
 import {
   Box, Tooltip, IconButton, Chip, Button,
@@ -37,6 +45,7 @@ function Main() {
         <Tooltip title="Paramètre de sécurité">
           <IconButton
             sx={{ position: 'relative', bottom: '-1vh' }}
+            onClick={() => dispatch(openCloseAccountUpdateModal())}
           >
             <BiEdit size="3vh" />
           </IconButton>
@@ -72,6 +81,7 @@ function Main() {
                 width: 'fit-content', margin: 'auto', backgroundColor: '#6cc573',
               },
             }}
+            onClick={() => dispatch(openCloseCarModal())}
           >
             Modifier mes informations de trajet
           </Button>
