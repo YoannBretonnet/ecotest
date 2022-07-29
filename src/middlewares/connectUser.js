@@ -20,27 +20,27 @@ const connectUser = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_USER:
       const state = store.getState();
-      const configConnect = {
-        method: 'post',
-        url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
-        // withCredentials: true,
-        // credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {
-          email: state.auth.connectionModal.emailValue,
-          password: state.auth.connectionModal.passwordValue,
-        },
-      };
-      axios(configConnect)
-        .then((response) => {
-          localStorage.setItem('accessToken', response.data.accessToken);
-          store.dispatch(connectUserSuccess());
-        })
-        .catch((error) => {
-          store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-        });
+      // const configConnect = {
+      //   method: 'post',
+      //   url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
+      //   withCredentials: true,
+      //   credentials: 'include',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   data: {
+      //     email: state.auth.connectionModal.emailValue,
+      //     password: state.auth.connectionModal.passwordValue,
+      //   },
+      // };
+      // axios(configConnect)
+      //   .then((response) => {
+      //     localStorage.setItem('accessToken', response.data.accessToken);
+      //     store.dispatch(connectUserSuccess());
+      //   })
+      //   .catch((error) => {
+      //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+      //   });
       // const httpHeaders = new Headers();
       // httpHeaders.append('Content-Type', 'application/json');
 
@@ -64,26 +64,26 @@ const connectUser = (store) => (next) => (action) => {
       //   ).catch((error) => {
       //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
       //   });
-      // fetch('https://httpbin.org/post', {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   credentials: "include"
-      //   headers: {
-      //     Accept: 'application/json, text/plain, */*',
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     email: state.auth.connectionModal.emailValue,
-      //     password: state.auth.connectionModal.passwordValue,
-      //   }),
-      // }).then(
-      //   (response) => {
-      //     localStorage.setItem('accessToken', response.data.accessToken);
-      //     store.dispatch(connectUserSuccess());
-      //   },
-      // ).catch((error) => {
-      //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-      // });
+      fetch('https://httpbin.org/post', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: state.auth.connectionModal.emailValue,
+          password: state.auth.connectionModal.passwordValue,
+        }),
+      }).then(
+        (response) => {
+          localStorage.setItem('accessToken', response.data.accessToken);
+          store.dispatch(connectUserSuccess());
+        },
+      ).catch((error) => {
+        store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+      });
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
