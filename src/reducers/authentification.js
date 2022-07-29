@@ -65,7 +65,7 @@ export const initialState = {
     location: undefined,
     categories: [],
   },
-  isConnected: true,
+  isConnected: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
