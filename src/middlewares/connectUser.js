@@ -20,50 +20,50 @@ const connectUser = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_USER:
       const state = store.getState();
-      // const configConnect = {
-      //   method: 'post',
-      //   url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
-      //   withCredentials: true,
-      //   credentials: 'include',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   data: {
-      //     email: state.auth.connectionModal.emailValue,
-      //     password: state.auth.connectionModal.passwordValue,
-      //   },
-      // };
-      // axios(configConnect)
-      //   .then((response) => {
-      //     localStorage.setItem('accessToken', response.data.accessToken);
-      //     store.dispatch(connectUserSuccess());
-      //   })
-      //   .catch((error) => {
-      //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-      //   });
-      const httpHeaders = new Headers();
-      httpHeaders.append('Content-Type', 'application/json');
-
-      // On consomme l'API pour ajouter en DB
-      const fetchOptions = {
-        method: 'POST',
-        mode: 'cors',
-        headers: httpHeaders,
-        body: JSON.stringify({
+      const configConnect = {
+        method: 'post',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/login',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
-        }),
+        },
       };
-
-      fetch('https://eco-roads.herokuapp.com/api/v1/user/login', fetchOptions)
-        .then(
-          (response) => {
-            localStorage.setItem('accessToken', response.data.accessToken);
-            store.dispatch(connectUserSuccess());
-          },
-        ).catch((error) => {
+      axios(configConnect)
+        .then((response) => {
+          localStorage.setItem('accessToken', response.data.accessToken);
+          store.dispatch(connectUserSuccess());
+        })
+        .catch((error) => {
           store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
         });
+      // const httpHeaders = new Headers();
+      // httpHeaders.append('Content-Type', 'application/json');
+
+      // // On consomme l'API pour ajouter en DB
+      // const fetchOptions = {
+      //   method: 'POST',
+      //   mode: 'cors',
+      //   headers: httpHeaders,
+      //   body: JSON.stringify({
+      //     email: state.auth.connectionModal.emailValue,
+      //     password: state.auth.connectionModal.passwordValue,
+      //   }),
+      // };
+
+      // fetch('https://eco-roads.herokuapp.com/api/v1/user/login', fetchOptions)
+      //   .then(
+      //     (response) => {
+      //       localStorage.setItem('accessToken', response.data.accessToken);
+      //       store.dispatch(connectUserSuccess());
+      //     },
+      //   ).catch((error) => {
+      //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+      //   });
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
