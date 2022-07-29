@@ -65,26 +65,25 @@ const connectUser = (store) => (next) => (action) => {
       //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
       //   });
 
-      const httpHeaders = new Headers();
-      httpHeaders.append('Content-Type', 'application/json');
-
       fetch('https://eco-roads.herokuapp.com/api/v1/user/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        headers: httpHeaders,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
         }),
       }).then(
         (response) => {
-          localStorage.setItem('accessToken', response.data.accessToken);
-          store.dispatch(connectUserSuccess());
+          console.log(response);
+          // localStorage.setItem('accessToken', response.data.accessToken);
+          // store.dispatch(connectUserSuccess());
         },
-      ).catch((error) => {
-        store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-      });
+      );
+        // .catch((error) => {
+        //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+        // });
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
