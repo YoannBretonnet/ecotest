@@ -74,16 +74,11 @@ const connectUser = (store) => (next) => (action) => {
           email: state.auth.connectionModal.emailValue,
           password: state.auth.connectionModal.passwordValue,
         }),
-      }).then(
-        (response) => {
-          console.log(response.json());
-          // localStorage.setItem('accessToken', response.data.accessToken);
-          // store.dispatch(connectUserSuccess());
-        },
-      );
-        // .catch((error) => {
-        //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-        // });
+      }).then((response) => response.json())
+        .then((data) => console.log(data));
+      // .catch((error) => {
+      //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
+      // });
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
