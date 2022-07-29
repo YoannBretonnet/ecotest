@@ -64,7 +64,7 @@ const connectUser = (store) => (next) => (action) => {
       //   ).catch((error) => {
       //     store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
       //   });
-      fetch('https://httpbin.org/post', {
+      fetch('https://eco-roads.herokuapp.com/api/v1/user/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
