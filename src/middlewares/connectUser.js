@@ -67,6 +67,7 @@ const connectUser = (store) => (next) => (action) => {
       // fetch('https://httpbin.org/post', {
       //   method: 'POST',
       //   mode: 'cors',
+      //   credentials: "include"
       //   headers: {
       //     Accept: 'application/json, text/plain, */*',
       //     'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ const connectUser = (store) => (next) => (action) => {
       //   },
       // ).catch((error) => {
       //   store.dispatch(connectUserFail(Object.values(error.response.data)[0]));
-      });
+      // });
       next(action);
       break;
     case CONNECT_USER_SUCCESS:
