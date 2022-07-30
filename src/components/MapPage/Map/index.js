@@ -29,12 +29,12 @@ export default function Map() {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
-      center: [-122.662323, 45.523751], // starting position
-      zoom: 12
+      center: [-1.54027, 47.21129], // starting position
+      zoom: 9
     });
     
-    const start = [-122.672323, 45.523751];
-    const end = [-123.662323, 44.523751];
+    const start = [-1.54027, 47.21129];
+    const end = [-2.00719, 48.63575];
     const coords = [-122.662323, 45.523751, -123.662323, 44.523751 ];
 
     async function getRoute(end) {
@@ -116,7 +116,7 @@ export default function Map() {
           }
         },
         paint: {
-          'circle-radius': 10,
+          'circle-radius': 5,
           'circle-color': '#3887be'
         }
       });
