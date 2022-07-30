@@ -29,20 +29,23 @@ export default function Map() {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
-      center: [-1.54027, 47.21129], // starting position
-      zoom: 9
+      center: [lng, lat], // starting position
+      zoom: 6
     });
     
     const start = [-1.54027, 47.21129];
     const end = [-2.00719, 48.63575];
-    const coords = [-122.662323, 45.523751, -123.662323, 44.523751 ];
+    const coords = interestPointsData.data.features.map(feature => feature.geometry.coordinates);
+    const coordsString = JSON.stringify(coords);
+    const coordsReplace = coordsString.replaceAll("],[", ";").replace("[[","").replace("]]","");
+    console.log (coordsReplace);
 
     async function getRoute(end) {
       // make a directions request using cycling profile
       // an arbitrary start will always be the same
       // only the end or destination will change
       const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/driving/${start};${end}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+        `https://api.mapbox.com/directions/v5/mapbox/driving/${start};${coordsReplace};${end}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
         { method: 'GET' }
       );
       const json = await query.json();
@@ -71,14 +74,14 @@ export default function Map() {
           },
           layout: {
             'line-join': 'round',
-            'line-cap': 'round'
+            'line-cap': 'round',
           },
           paint: {
-            'line-color': '#3887be',
+            'line-color': '#b6db68',
             'line-width': 5,
             'line-opacity': 0.75
           }
-        });
+        }, 'point');
       }
     }
     
@@ -117,7 +120,7 @@ export default function Map() {
         },
         paint: {
           'circle-radius': 5,
-          'circle-color': '#3887be'
+          'circle-color': '#6cc573'
         }
       });
 
@@ -179,7 +182,7 @@ export default function Map() {
   return (
     <div>
       <div className="sidebar">
-       <div className="details">7 Bornes de recharge | 4 Points d'intéret</div>
+       <div className="details">{interestPointsData.data.features.length} Bornes de recharge | {interestPointsData.data.features.length} Points d'intéret</div>
        <div className="sauvegarde">Pour sauvegarder votre trajet, <u>connectez-vous!</u></div>
       </div>
       <div ref={mapContainer} className="map-container" />

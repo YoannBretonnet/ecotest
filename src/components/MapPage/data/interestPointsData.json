@@ -14,10 +14,25 @@
           "geometry": {
           "type": "Point",
           "coordinates": [
-            -1.85609, 48.32144
+            -1.55609, 47.32144
           ]
           }
           },
+          {
+            "type": "Feature",
+            "properties": {
+              "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
+              "title": "Musée Agri-Rétro",
+              "description": "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.",
+              "icon": "museum-15"
+              },
+            "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -1.7609, 47.8144
+            ]
+            }
+            },
 
           {
             "type": "Feature",
@@ -30,7 +45,7 @@
             "geometry": {
             "type": "Point",
             "coordinates": [
-              -1.52609, 47.72144
+              -1.78609, 47.97144
             ]
             }
             }
