@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import getRoute from './getRoute.js'
 
 // import styles and icons
 import './styles.scss';
-
 
 // import data
 import interestPointsData from '../data/interestPointsData.json';
@@ -22,52 +22,112 @@ export default function Map() {
   const lat = (departureLatitude+ arrivalLatitude)/2;
   const zoom = 6;
 
+
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée
     if (map.current) return; 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
-      center: [lng, lat],
-      zoom: zoom
-    });4
-
-    // On ajoute le tracé de la route
-    map.current.on('load', () => {
-        map.current.addSource('route', {
-        'type': 'geojson',
-        'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-        'type': 'LineString',
-        'coordinates': [
-        [-1.54027, 47.21129],
-        [-1.50, 47.32],
-        [-1.55, 47.45],
-        [-1.575, 47.62],
-        [-1.9, 47.88],
-        [-1.596, 48.21129],
-        [-2.00719, 48.63575]
-        ]
-        }
-        }
-        });
-        
-        map.current.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-        'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-        },
-        'paint': {
-        'line-color': '#6cc573',
-        'line-width': 8
-        }
-        });
+      center: [-122.662323, 45.523751], // starting position
+      zoom: 12
     });
+    
+    const start = [-122.672323, 45.523751];
+    const end = [-123.662323, 44.523751];
+    const coords = [-122.662323, 45.523751, -123.662323, 44.523751 ];
+
+    async function getRoute(end) {
+      // make a directions request using cycling profile
+      // an arbitrary start will always be the same
+      // only the end or destination will change
+      const query = await fetch(
+        `https://api.mapbox.com/directions/v5/mapbox/driving/${start};${end}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+        { method: 'GET' }
+      );
+      const json = await query.json();
+      const data = json.routes[0];
+      const route = data.geometry.coordinates;
+      const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
+        }
+      };
+      // if the route already exists on the map, we'll reset it using setData
+      if (map.current.getSource('route')) {
+        map.current.getSource('route').setData(geojson);
+      }
+      // otherwise, we'll make a new request
+      else {
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: geojson
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+    }
+    
+    map.current.on('load', () => {
+      // make an initial directions request that
+      // starts and ends at the same location
+      getRoute(end);
+    
+      // Add starting point to the map
+      map.current.addLayer({
+        id: 'point',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: start
+                }
+              },
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: end
+                }
+              },
+            ]
+          }
+        },
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#3887be'
+        }
+      });
+
+      
+    });
+
+
+
+
+
 
     // On ajoute les points d'intérêt
     map.current.on('load', () => {
