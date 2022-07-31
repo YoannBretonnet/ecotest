@@ -4,6 +4,7 @@ import './styles.scss';
 // == Component
 import Header from 'src/components/Header';
 import Map from './Map';
+import Sidebar from './Sidebar';
 import ModalConnection from 'src/components/ModalAuthentification/ModalConnection';
 import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAccountCreation';
 
@@ -18,6 +19,7 @@ function MapPage() {
     <>
       <Header />
       <Map />
+      <Sidebar />
       <ModalConnection
         reducerRoute={reducerRoute}
       />

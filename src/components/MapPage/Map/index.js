@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import getRoute from './getRoute'
 
@@ -21,7 +21,6 @@ export default function Map() {
   const arrivalLatitude = useSelector((state) => state.mapData.arrivalLatitude);
   const lng = (departureLongitude + arrivalLongitude) / 2;
   const lat = (departureLatitude + arrivalLatitude) / 2;
-  const zoom = 6;
 
 
   useEffect(() => {
@@ -35,8 +34,8 @@ export default function Map() {
     });
 
     // On récupère les points de départ et d'arrivée
-    const start = [-1.54027, 47.21129];
-    const end = [-2.00719, 48.63575];
+    const start = [departureLongitude, departureLatitude];
+    const end = [arrivalLongitude, arrivalLatitude];
 
     // On récupère les coordonnées des points d'intérêt
     const coords = interestPointsData.data.features.map(feature => feature.geometry.coordinates);
@@ -133,10 +132,6 @@ export default function Map() {
 
   return (
     <div>
-      <div className="sidebar">
-        <div className="details">{interestPointsData.data.features.length} Bornes de recharge | {interestPointsData.data.features.length} Points d'intéret</div>
-        <div className="sauvegarde">Pour sauvegarder votre trajet, <u>connectez-vous!</u></div>
-      </div>
       <div ref={mapContainer} className="map-container" />
     </div>
   );
