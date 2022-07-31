@@ -1,7 +1,5 @@
 async function getRoute(map, start, coordsReplace, end, accessToken) {
-  // make a directions request using cycling profile
-  // an arbitrary start will always be the same
-  // only the end or destination will change
+  // On fait une requête de trajet à mapBox avec l'option "driving"
   const query = await fetch(
     `https://api.mapbox.com/directions/v5/mapbox/driving/${start};${coordsReplace};${end}?steps=true&geometries=geojson&access_token=${accessToken}`,
     { method: 'GET' }
@@ -17,11 +15,11 @@ async function getRoute(map, start, coordsReplace, end, accessToken) {
       coordinates: route
     }
   };
-  // if the route already exists on the map, we'll reset it using setData
+  // Si un trajet existe déjà, on le reset
   if (map.current.getSource('route')) {
     map.current.getSource('route').setData(geojson);
   }
-  // otherwise, we'll make a new request
+  // Autrement, on en crée un nouveau
   else {
     map.current.addLayer({
       id: 'route',
