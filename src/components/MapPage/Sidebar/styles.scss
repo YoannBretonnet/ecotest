@@ -1,13 +1,31 @@
-.sidebar {
+@font-face {
+    font-family: "Roboto";
+    src: url(src/assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Noway";
+  src: url(src/assets/fonts/noway-regular.ttf);
+}
+
+.details {
+    color: #6cc573;
+    width: 70%;
+    margin: 0 auto 10px;
+    font-family: 'Roboto';
+    font-size: small;
+    border-radius: 4px;
+    text-align: center;
+    }
+
+.sauvegarde {
     background-color: #6cc573;
     color: #fff;
-    padding: 6px 12px;
-    font-family: 'Noway';
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: 'Roboto';
     font-size: small;
-    z-index: 1;
-    position: absolute;
-    bottom: 90px;
-    left: 50px;
-    margin: 12px;
     border-radius: 4px;
-    }
+    text-align: center;
+}
