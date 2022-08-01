@@ -1,6 +1,7 @@
 // == Style
 import './styles.scss';
 
+
 // == Component
 import Header from 'src/components/Header';
 import Map from './Map';
@@ -10,6 +11,7 @@ import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAcco
 import { useSelector } from 'react-redux';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 
 // == Composant
@@ -25,7 +27,7 @@ function MapPage() {
       {
         !isConnected ? (
       <Sidebar 
-        text = "Pour sauvegarder votre trajet, connectez-vous!"
+        text = "Pour sauvegarder votre trajet, connectez-vous"
       />
       ) : (
         <Sidebar 

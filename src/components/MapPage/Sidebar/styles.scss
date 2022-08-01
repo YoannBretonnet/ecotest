@@ -19,13 +19,12 @@
     }
 
 .sauvegarde {
-    background-color: #6cc573;
-    color: #fff;
-    width: 80%;
-    margin: 0 auto;
-    padding: 10px;
     font-family: 'Roboto';
-    font-size: small;
-    border-radius: 4px;
-    text-align: center;
+   
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
