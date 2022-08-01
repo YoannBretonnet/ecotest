@@ -9,6 +9,10 @@ import './styles.scss';
 // == Component
 import HomePage from 'src/components/HomePage';
 import MapPage from 'src/components/MapPage';
+import {
+  getVehiclesData,
+  getCategoriesData,
+} from 'src/actions/mapSettings';
 
 // == Composant
 function App() {
@@ -26,6 +30,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         )
       }
+      <Route path="/map" element={<MapPage />} />
     </Routes>
   );
 }
