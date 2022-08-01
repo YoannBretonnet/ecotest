@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-closing-tag-location */
 // == Import
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
 // == Style
 import './styles.scss';
@@ -27,7 +28,8 @@ import {
   openCloseAccountUpdateModal,
   changeInputValue,
   openCloseAcountUpdateAlert,
-  // updateUser,
+  deleteAccount,
+  updateUserSecurityParam,
 } from 'src/actions/authentification';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,6 +40,7 @@ import InputPassword from '../InputPassword';
 // == Composant
 function ModalAccountUpdate({ reducerRoute }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const modalElement = 'accountUpdateModal';
   const inputEmailElement = 'emailValue';
   const inputUserNameElement = 'userNameValue';
@@ -50,10 +53,13 @@ function ModalAccountUpdate({ reducerRoute }) {
   const {
     isDeleteAlert,
   } = useSelector((state) => state.auth.accountDeleteAlert);
+  const {
+    error: deleteError,
+  } = useSelector((state) => state.auth.accountDeleteAction);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // dispatch(updateUser());
+    dispatch(updateUserSecurityParam());
   };
   return (
     <ModalElement
@@ -100,6 +106,11 @@ function ModalAccountUpdate({ reducerRoute }) {
           error={error.isError}
         >{error.message}</FormHelperText>
         )}
+        {deleteError.isError && (
+        <FormHelperText
+          error={deleteError.isError}
+        >{deleteError.message}</FormHelperText>
+        )}
         {
           !isLoading ? (
             <IconButton sx={{ color: 'black' }} type="submit">
@@ -128,7 +139,13 @@ function ModalAccountUpdate({ reducerRoute }) {
             <p>
               Êtes vous sur ?
             </p>
-            <IconButton sx={{ color: '#4caf50' }}>
+            <IconButton
+              sx={{ color: '#4caf50' }}
+              onClick={() => {
+                dispatch(deleteAccount(navigate));
+                dispatch(openCloseAcountUpdateAlert());
+              }}
+            >
               <BiCheck />
             </IconButton>
             <IconButton

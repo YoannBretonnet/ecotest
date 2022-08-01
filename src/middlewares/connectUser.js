@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
 import axios from 'axios';
 import ky from 'ky';
@@ -15,7 +16,20 @@ import {
   registerUserFail,
   registerUserSuccess,
   openCloseAccountCreationModal,
+  DELETE_ACCOUNT,
+  DELETE_ACCOUNT_SUCCESS,
+  deleteAccountSuccess,
+  clearAuthSettings,
+  deleteAccountFail,
+  UPDATE_SECURITY_PARAM,
+  openCloseAccountUpdateModal,
+  UPDATE_USER_TRAVEL_PARAM,
 } from 'src/actions/authentification';
+
+import {
+  clearMapSettings,
+  openCloseInterestPointModal,
+} from 'src/actions/mapSettings';
 
 const connectUser = (store) => (next) => (action) => {
   switch (action.type) {
@@ -109,6 +123,81 @@ const connectUser = (store) => (next) => (action) => {
         .catch((error) => {
           console.log('register failed', error);
           store.dispatch(registerUserFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case DELETE_ACCOUNT:
+      next(action);
+      const configProfileDelete = {
+        method: 'delete',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+      };
+      axios(configProfileDelete)
+        .then(() => {
+          store.dispatch(deleteAccountSuccess(action.navigate));
+          store.dispatch(clearAuthSettings());
+          store.dispatch(clearMapSettings());
+        })
+        .catch((error) => {
+          store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case DELETE_ACCOUNT_SUCCESS:
+      next(action);
+      action.navigate('/');
+      break;
+    case UPDATE_SECURITY_PARAM:
+      next(action);
+      const stateUpdateSecurityParams = store.getState();
+      const configProfileSecurityUpdate = {
+        method: 'patch',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        data: {
+          username: stateUpdateSecurityParams.auth.accountUpdateModal.userNameValue,
+          email: stateUpdateSecurityParams.auth.accountUpdateModal.emailValue,
+          password: stateUpdateSecurityParams.auth.accountUpdateModal.passwordValue,
+        },
+      };
+      axios(configProfileSecurityUpdate)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(connectUserSuccess());
+          store.dispatch(openCloseAccountUpdateModal());
+        })
+        .catch((error) => {
+          console.log(error);
+          // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case UPDATE_USER_TRAVEL_PARAM:
+      next(action);
+      const stateUpdateTravelParams = store.getState();
+      console.log(stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected);
+      const configProfileTravelUpdate = {
+        method: 'patch',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        data: {
+          username: stateUpdateTravelParams.auth.initialUserAccount.userName,
+          email: stateUpdateTravelParams.auth.initialUserAccount.email,
+          location: stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected,
+          categories: stateUpdateTravelParams.mapSettings.interestPointModal.selected.map((option) => option.id),
+          car_id: stateUpdateTravelParams.mapSettings.carSettingsModal.carValue,
+        },
+      };
+      axios(configProfileTravelUpdate)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(connectUserSuccess());
+          store.dispatch(openCloseInterestPointModal());
+        })
+        .catch((error) => {
+          console.log(error);
+          // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
         });
       break;
     default:

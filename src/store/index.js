@@ -5,8 +5,8 @@ import reducer from 'src/reducers';
 import getLocalisation from 'src/middlewares/getLocalisation';
 import getSelectedInterestPoint from 'src/middlewares/getSelectedInterestPoint';
 import connectUser from 'src/middlewares/connectUser';
-import getVehiclesData from 'src/middlewares/getVehiclesData';
-import getCategoriesData from 'src/middlewares/getCategoriesData';
+import getVehiclesDataMiddleware from 'src/middlewares/getVehiclesDataMiddleware';
+import getCategoriesDataMiddleware from 'src/middlewares/getCategoriesDataMiddleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,8 +15,8 @@ const enhancers = composeEnhancers(
     getLocalisation,
     getSelectedInterestPoint,
     connectUser,
-    getVehiclesData,
-    getCategoriesData,
+    getVehiclesDataMiddleware,
+    getCategoriesDataMiddleware,
   ),
 );
 
