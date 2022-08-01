@@ -8,13 +8,14 @@
   src: url(src/assets/fonts/noway-regular.ttf);
 }
 
-main {
+#main-HomePage {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .main-title {
+  color: #6cc573;
   font-size: 4vh;
   font-weight: bold;
   font-family: 'Noway';
