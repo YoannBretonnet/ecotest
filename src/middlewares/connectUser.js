@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
 import axios from 'axios';
 import ky from 'ky';
@@ -20,10 +21,14 @@ import {
   deleteAccountSuccess,
   clearAuthSettings,
   deleteAccountFail,
+  UPDATE_SECURITY_PARAM,
+  openCloseAccountUpdateModal,
+  UPDATE_USER_TRAVEL_PARAM,
 } from 'src/actions/authentification';
 
 import {
   clearMapSettings,
+  openCloseInterestPointModal,
 } from 'src/actions/mapSettings';
 
 const connectUser = (store) => (next) => (action) => {
@@ -141,6 +146,59 @@ const connectUser = (store) => (next) => (action) => {
     case DELETE_ACCOUNT_SUCCESS:
       next(action);
       action.navigate('/');
+      break;
+    case UPDATE_SECURITY_PARAM:
+      next(action);
+      const stateUpdateSecurityParams = store.getState();
+      const configProfileSecurityUpdate = {
+        method: 'patch',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        data: {
+          username: stateUpdateSecurityParams.auth.accountUpdateModal.userNameValue,
+          email: stateUpdateSecurityParams.auth.accountUpdateModal.emailValue,
+          password: stateUpdateSecurityParams.auth.accountUpdateModal.passwordValue,
+        },
+      };
+      axios(configProfileSecurityUpdate)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(connectUserSuccess());
+          store.dispatch(openCloseAccountUpdateModal());
+        })
+        .catch((error) => {
+          console.log(error);
+          // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case UPDATE_USER_TRAVEL_PARAM:
+      next(action);
+      const stateUpdateTravelParams = store.getState();
+      console.log(stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected);
+      const configProfileTravelUpdate = {
+        method: 'patch',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        data: {
+          username: stateUpdateTravelParams.auth.initialUserAccount.userName,
+          email: stateUpdateTravelParams.auth.initialUserAccount.email,
+          location: stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected,
+          categories: stateUpdateTravelParams.mapSettings.interestPointModal.selected.map((option) => option.id),
+          car_id: stateUpdateTravelParams.mapSettings.carSettingsModal.carValue,
+        },
+      };
+      axios(configProfileTravelUpdate)
+        .then((response) => {
+          console.log(response);
+          store.dispatch(connectUserSuccess());
+          store.dispatch(openCloseInterestPointModal());
+        })
+        .catch((error) => {
+          console.log(error);
+          // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
       break;
     default:
       return next(action);

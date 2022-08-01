@@ -29,7 +29,7 @@ import {
   changeInputValue,
   openCloseAcountUpdateAlert,
   deleteAccount,
-  // updateUser,
+  updateUserSecurityParam,
 } from 'src/actions/authentification';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -59,7 +59,7 @@ function ModalAccountUpdate({ reducerRoute }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // dispatch(updateUser());
+    dispatch(updateUserSecurityParam());
   };
   return (
     <ModalElement

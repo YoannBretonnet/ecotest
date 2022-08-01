@@ -19,6 +19,7 @@ import {
   Autocomplete,
   CircularProgress,
   Box,
+  FormHelperText,
 } from '@mui/material';
 
 import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
@@ -59,8 +60,16 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
         className="modal-form-localisation"
         onSubmit={((event) => {
           event.preventDefault();
-          dispatch(openCloseLocalisationModal());
-          dispatch(openCloseInterestPointModal());
+          // dispatch(openCloseLocalisationModal());
+          // dispatch(openCloseInterestPointModal());
+          if (updatePage && DepartSelected.address) {
+            dispatch(openCloseLocalisationModal());
+            dispatch(openCloseInterestPointModal());
+          }
+          else if (!updatePage) {
+            dispatch(openCloseLocalisationModal());
+            dispatch(openCloseInterestPointModal());
+          }
         })}
       >
         <Autocomplete
@@ -124,6 +133,12 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
         />
           )
         }
+        {(updatePage && !DepartSelected.address) && (
+        <FormHelperText
+          error
+        >Veuillez selectionner une adresse !
+        </FormHelperText>
+        )}
         <Box
           component="nav"
           sx={{

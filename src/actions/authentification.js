@@ -16,6 +16,8 @@ export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
 export const CLEAR_AUTH_SETTINGS = 'CLEAR_AUTH_SETTINGS';
 export const DELETE_ACCOUNT_FAIL = 'DELETE_ACCOUNT_FAIL';
+export const UPDATE_SECURITY_PARAM = 'UPDATE_SECURITY_PARAM';
+export const UPDATE_USER_TRAVEL_PARAM = 'UPDATE_USER_TRAVEL_PARAM';
 
 export const openCloseConnectionModal = () => ({
   type: OPEN_CLOSE_CONNECTION_MODAL,
@@ -97,4 +99,12 @@ export const clearAuthSettings = () => ({
 export const deleteAccountFail = (message) => ({
   type: DELETE_ACCOUNT_FAIL,
   message,
+});
+
+export const updateUserSecurityParam = () => ({
+  type: UPDATE_SECURITY_PARAM,
+});
+
+export const updateUserTravelParam = () => ({
+  type: UPDATE_USER_TRAVEL_PARAM,
 });
