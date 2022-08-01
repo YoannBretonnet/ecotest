@@ -15,7 +15,16 @@ import {
   registerUserFail,
   registerUserSuccess,
   openCloseAccountCreationModal,
+  DELETE_ACCOUNT,
+  DELETE_ACCOUNT_SUCCESS,
+  deleteAccountSuccess,
+  clearAuthSettings,
+  deleteAccountFail,
 } from 'src/actions/authentification';
+
+import {
+  clearMapSettings,
+} from 'src/actions/mapSettings';
 
 const connectUser = (store) => (next) => (action) => {
   switch (action.type) {
@@ -110,6 +119,28 @@ const connectUser = (store) => (next) => (action) => {
           console.log('register failed', error);
           store.dispatch(registerUserFail(Object.values(error.response.data)[0]));
         });
+      break;
+    case DELETE_ACCOUNT:
+      next(action);
+      const configProfileDelete = {
+        method: 'delete',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+      };
+      axios(configProfileDelete)
+        .then(() => {
+          store.dispatch(deleteAccountSuccess(action.navigate));
+          store.dispatch(clearAuthSettings());
+          store.dispatch(clearMapSettings());
+        })
+        .catch((error) => {
+          store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case DELETE_ACCOUNT_SUCCESS:
+      next(action);
+      action.navigate('/');
       break;
     default:
       return next(action);

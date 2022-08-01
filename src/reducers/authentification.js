@@ -12,6 +12,10 @@ import {
   REGISTER_USER_SUCCESS,
   OPEN_CLOSE_ACCOUNT_UPDATE_MODAL,
   OPEN_CLOSE_ACCOUNT_UPDATE_ALERT,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT,
+  CLEAR_AUTH_SETTINGS,
+  DELETE_ACCOUNT_FAIL,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -56,6 +60,13 @@ export const initialState = {
       message: undefined,
     },
     isDeleteAlert: false,
+  },
+  accountDeleteAction: {
+    error: {
+      isError: false,
+      message: undefined,
+    },
+    isDeleting: false,
   },
   initialUserAccount: {
     userName: undefined,
@@ -175,26 +186,46 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     case GET_PROFIL_SUCCESS:
-      return {
-        ...state,
-        initialUserAccount: {
-          ...state.initialUserAccount,
-          userName: action.data.username,
-          email: action.data.email,
-          id: action.data.id,
-          car: action.data.car,
-          location: action.data.location,
-          categories: [
-            ...action.data.categories,
-          ],
-        },
-        accountUpdateModal: {
-          ...state.accountUpdateModal,
-          userNameValue: action.data.username,
-          emailValue: action.data.email,
-        },
-        isConnected: true,
-      };
+      if (!action.data.car || !action.data.location || !action.data.categories) {
+        return {
+          ...state,
+          initialUserAccount: {
+            ...state.initialUserAccount,
+            userName: action.data.username,
+            email: action.data.email,
+            id: action.data.id,
+          },
+          accountUpdateModal: {
+            ...state.accountUpdateModal,
+            userNameValue: action.data.username,
+            emailValue: action.data.email,
+          },
+          isConnected: true,
+        };
+      }
+      if (action.data.car || action.data.location || action.data.categories) {
+        return {
+          ...state,
+          initialUserAccount: {
+            ...state.initialUserAccount,
+            userName: action.data.username,
+            email: action.data.email,
+            id: action.data.id,
+            car: action.data.car,
+            location: action.data.location,
+            categories: [
+              ...action.data.categories,
+            ],
+          },
+          accountUpdateModal: {
+            ...state.accountUpdateModal,
+            userNameValue: action.data.username,
+            emailValue: action.data.email,
+          },
+          isConnected: true,
+        };
+      }
+      break;
     case REGISTER_USER:
       return {
         ...state,
@@ -241,6 +272,14 @@ const reducer = (state = initialState, action = {}) => {
           ...state.accountUpdateModal,
           isOpen: !state.accountUpdateModal.isOpen,
         },
+        accountDeleteAction: {
+          ...state.accountDeleteAction,
+          error: {
+            isError: false,
+            message: undefined,
+          },
+          isDeleting: false,
+        },
       };
     case OPEN_CLOSE_ACCOUNT_UPDATE_ALERT:
       return {
@@ -248,6 +287,34 @@ const reducer = (state = initialState, action = {}) => {
         accountDeleteAlert: {
           ...state.accountDeleteAlert,
           isDeleteAlert: !state.accountDeleteAlert.isDeleteAlert,
+        },
+      };
+    case DELETE_ACCOUNT:
+      return {
+        ...state,
+        accountDeleteAction: {
+          ...state.accountDeleteAction,
+          error: {
+            isError: false,
+            message: undefined,
+          },
+          isDeleting: true,
+        },
+      };
+    case CLEAR_AUTH_SETTINGS:
+      return {
+        ...initialState,
+      };
+    case DELETE_ACCOUNT_FAIL:
+      return {
+        ...state,
+        accountDeleteAction: {
+          ...state.accountDeleteAction,
+          error: {
+            isError: true,
+            message: action.message,
+          },
+          isDeleting: false,
         },
       };
     default:

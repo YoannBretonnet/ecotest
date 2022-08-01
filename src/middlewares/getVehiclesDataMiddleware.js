@@ -5,9 +5,11 @@ import {
   GET_VEHICLES_DATA,
   getVehiclesDataSuccess,
   getVehiclesDataFail,
+  CLEAR_MAP_SETTINGS,
+  getVehiclesData,
 } from 'src/actions/mapSettings';
 
-const getVehiclesData = (store) => (next) => (action) => {
+const getVehiclesDataMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_VEHICLES_DATA:
       next(action);
@@ -24,9 +26,13 @@ const getVehiclesData = (store) => (next) => (action) => {
           store.dispatch(getVehiclesDataFail(Object.values(error.response.data)[0]));
         });
       break;
+    case CLEAR_MAP_SETTINGS:
+      next(action);
+      store.dispatch(getVehiclesData());
+      break;
     default:
       return next(action);
   }
 };
 
-export default getVehiclesData;
+export default getVehiclesDataMiddleware;

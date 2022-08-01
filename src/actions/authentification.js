@@ -12,6 +12,10 @@ export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const OPEN_CLOSE_ACCOUNT_UPDATE_MODAL = 'OPEN_CLOSE_ACCOUNT_UPDATE_MODAL';
 export const OPEN_CLOSE_ACCOUNT_UPDATE_ALERT = 'OPEN_CLOSE_ACCOUNT_UPDATE_ALERT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
+export const CLEAR_AUTH_SETTINGS = 'CLEAR_AUTH_SETTINGS';
+export const DELETE_ACCOUNT_FAIL = 'DELETE_ACCOUNT_FAIL';
 
 export const openCloseConnectionModal = () => ({
   type: OPEN_CLOSE_CONNECTION_MODAL,
@@ -74,4 +78,23 @@ export const openCloseAccountUpdateModal = () => ({
 
 export const openCloseAcountUpdateAlert = () => ({
   type: OPEN_CLOSE_ACCOUNT_UPDATE_ALERT,
+});
+
+export const deleteAccount = (navigate) => ({
+  type: DELETE_ACCOUNT,
+  navigate,
+});
+
+export const deleteAccountSuccess = (navigate) => ({
+  type: DELETE_ACCOUNT_SUCCESS,
+  navigate,
+});
+
+export const clearAuthSettings = () => ({
+  type: CLEAR_AUTH_SETTINGS,
+});
+
+export const deleteAccountFail = (message) => ({
+  type: DELETE_ACCOUNT_FAIL,
+  message,
 });

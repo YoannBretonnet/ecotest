@@ -16,6 +16,7 @@ import {
   GET_CATEGORIES_DATA,
   GET_CATEGORIES_DATA_SUCCESS,
   GET_CATEGORIES_DATA_FAIL,
+  CLEAR_MAP_SETTINGS,
 } from 'src/actions/mapSettings';
 
 export const initialState = {
@@ -248,6 +249,10 @@ const reducer = (state = initialState, action = {}) => {
             message: action.message,
           },
         },
+      };
+    case CLEAR_MAP_SETTINGS:
+      return {
+        ...initialState,
       };
     default:
       return state;
