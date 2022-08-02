@@ -48,8 +48,9 @@ export const connectUserFail = (message) => ({
   message,
 });
 
-export const connectUserSuccess = () => ({
+export const connectUserSuccess = (isLogin) => ({
   type: CONNECT_USER_SUCCESS,
+  isLogin,
 });
 
 export const getProfilSuccess = (data) => ({
