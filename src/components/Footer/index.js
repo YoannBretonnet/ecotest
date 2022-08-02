@@ -1,5 +1,6 @@
 // == Import
 import { NavLink } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 
 import { Box, Tooltip, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -11,6 +12,12 @@ import './styles.scss';
 function Footer() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const saveCGU = () => {
+    saveAs(
+      'https://eco-roads.herokuapp.com/pdf/CGU_E-CO_ROADS.pdf',
+      'CGU.pdf',
+    );
+  };
 
   return (
     <Box
@@ -47,7 +54,8 @@ function Footer() {
           <NavLink
             key="cgu"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
-            to="/cgu"
+            to="/"
+            onClick={saveCGU}
           >
             CGU
           </NavLink>
