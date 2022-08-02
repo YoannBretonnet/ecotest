@@ -56,10 +56,7 @@ function Main() {
               Contactez-nous
             </h2>
             <p className="main-accroche">
-              E-co Roads a été fondé en 2022 dans le but d'aider les proppriétaires de voitures électriques à partir en road trip. 
-              Notre équipe propose ainsi une application générant des trajets liant la localisation des stations de rechargement avec
-              une liste de sites à visiter. Régulièrement, nous proposons de nouveaux lieux éco-friendly qui partagent les valeurs
-              de nos utlisateurs.
+              <a href="mailto: hello@eco-roads.com">hello@eco-roads.com</a>
             </p>
           </Box>
        
