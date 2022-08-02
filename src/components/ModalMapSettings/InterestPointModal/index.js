@@ -24,7 +24,6 @@ import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
-const isTrue = (selected, option) => selected.includes(option);
 // == Composant
 function InterestPointModal({ reducerRoute, updatePage }) {
   const dispatch = useDispatch();
@@ -66,7 +65,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
                 sx={{ color: 'black' }}
                 control={(
                   <Checkbox
-                    checked={isTrue(selected, option)}
+                    checked={Boolean(selected.find((select) => select.id === option.id))}
                     onChange={(event) => dispatch(selectInterestPoint(event.target.checked, option))}
                     name={option.name}
                     sx={{

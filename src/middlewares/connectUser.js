@@ -47,7 +47,7 @@ const connectUser = (store) => (next) => (action) => {
         .then((response) => {
           if (response.accessToken) {
             localStorage.setItem('accessToken', response.accessToken);
-            store.dispatch(connectUserSuccess());
+            store.dispatch(connectUserSuccess(true));
           }
           else {
             store.dispatch(connectUserFail(Object.values(response)[0]));
@@ -65,7 +65,9 @@ const connectUser = (store) => (next) => (action) => {
       axios(configProfile)
         .then((response) => {
           store.dispatch(getProfilSuccess(response.data));
-          store.dispatch(openCloseConnectionModal());
+          if (action.isLogin) {
+            store.dispatch(openCloseConnectionModal());
+          }
         })
         .catch((error) => {
           switch (error.response.status) {
@@ -114,14 +116,12 @@ const connectUser = (store) => (next) => (action) => {
         },
       };
       axios(configRegister)
-        .then((response) => {
-          console.log('register received', response);
+        .then(() => {
           store.dispatch(registerUserSuccess());
           store.dispatch(openCloseAccountCreationModal());
           store.dispatch(openCloseConnectionModal());
         })
         .catch((error) => {
-          console.log('register failed', error);
           store.dispatch(registerUserFail(Object.values(error.response.data)[0]));
         });
       break;
