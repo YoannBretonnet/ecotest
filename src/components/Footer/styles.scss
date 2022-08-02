@@ -31,6 +31,39 @@
   }
 }
 
+#footer-decorations-desktop {
+  margin: 0 1.5vh 0;
+  height: 1.2vh;
+  width: fit-content;
+  position: absolute;
+  top: -0.9vh;
+  display: flex;
+  flex-direction: row;
+
+  &-first-element {
+    height: 100%;
+    width: 7.02vw;
+    background: linear-gradient(90deg, rgba(182,219,104,1) 0%, rgba(108,197,115,1) 100%);
+    border-radius: 5vh 5vh 5vh 5vh;
+  }
+
+  &-second-element {
+    height: 100%;
+    width: 3.16vw;
+    background: linear-gradient(90deg, rgba(108,197,115,1) 0%, rgba(48,180,94,1) 100%);
+    border-radius: 5vh 5vh 5vh 5vh;
+    margin-left: 0.702vw;
+  }
+
+  &-third-element {
+    height: 100%;
+    width: 1.23vw;
+    background: linear-gradient(90deg, rgba(48,180,94,1) 0%, rgba(0,167,78,1) 100%);
+    border-radius: 5vh 5vh 5vh 5vh;
+    margin-left: 0.702vw;
+  }
+}
+
 .menu-footer {
   color: #757575;
   font-family: 'Roboto';
@@ -40,4 +73,5 @@
   display: flex;
   flex-direction: row;
   gap: 1vw;
+  padding: 2vh 0;
 }

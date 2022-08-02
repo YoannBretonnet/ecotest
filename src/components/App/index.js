@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
 import './styles.scss';
+import { ThemeProvider } from '@mui/material';
+import theme from 'src/styles/styles';
 
 // == Component
 import HomePage from 'src/components/HomePage';
@@ -24,14 +26,16 @@ function App() {
     dispatch(getCategoriesData());
   }, []);
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      {
-        isConnected && (
-          <Route path="/profile" element={<ProfilePage />} />
-        )
-      }
-    </Routes>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {
+          isConnected && (
+            <Route path="/profile" element={<ProfilePage />} />
+          )
+        }
+      </Routes>
+    </ThemeProvider>
   );
 }
 

@@ -1,23 +1,22 @@
 /* eslint-disable max-len */
+import { NavLink } from 'react-router-dom';
 // == Style
 import './styles.scss';
 import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
 import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
 import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
-
-import { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
   openCloseCarModal,
   openCloseLocalisationModal,
   openCloseInterestPointModal,
-  // getVehiclesData,
-  // getCategoriesData,
 } from 'src/actions/mapSettings';
 
 import {
@@ -30,6 +29,8 @@ import styles from './IconSlider.module.scss';
 
 // == Composant
 function Header() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
   const dispatch = useDispatch();
   const { isOpen: isCarOpen } = useSelector((state) => state.mapSettings.carSettingsModal);
   const { isOpen: isLocalisationOpen } = useSelector((state) => state.mapSettings.localisationSettingsModal);
@@ -38,10 +39,6 @@ function Header() {
     size: '4vh',
   };
   const reducerRoute = 'mapSettings';
-  // useEffect(() => {
-  //   dispatch(getVehiclesData());
-  //   dispatch(getCategoriesData());
-  // }, []);
   return (
     <>
       <Box
@@ -50,6 +47,22 @@ function Header() {
           display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '2vh',
         }}
       >
+        {!matches && (
+        <Tooltip
+          title="Page d'acceuil"
+          sx={{ position: 'absolute', top: '0', left: '0' }}
+        >
+          <NavLink
+            key="homePage"
+            className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
+            to="/"
+          >
+            <h1 className="main-title profile-page-header-title">
+              E-co Roads
+            </h1>
+          </NavLink>
+        </Tooltip>
+        )}
         <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }} onClick={(() => dispatch(openCloseCarModal()))}>
           Véhicule | Localisation | Intérets
           <BiSearch size="3.1vh" />

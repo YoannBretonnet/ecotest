@@ -1,0 +1,22 @@
+.steps-content, .steps-step, .steps-title {
+  font-size: 2.5vh;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+.steps-step {
+  font-weight: bold;
+}
+
+.steps-content {
+  color: #757575;
+  position: relative;
+  bottom: 2vh;
+}
+
+.steps-title {
+  font-size: 3vh;
+  font-weight: bold;
+  margin-bottom: 2vh;
+}
+

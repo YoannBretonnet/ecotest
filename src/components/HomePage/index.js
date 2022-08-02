@@ -8,17 +8,23 @@ import Main from 'src/components/HomePage/Main';
 import ModalConnection from 'src/components/ModalAuthentification/ModalConnection';
 import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAccountCreation';
 
-import Box from '@mui/material/Box';
+import {
+  Box,
+  useMediaQuery,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // == Composant
 function HomePage() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
   const reducerRoute = 'auth';
   return (
     <Box
       component="div"
-      id="App"
+      id={matches ? 'App' : 'App-Desktop'}
       sx={{
-        height: 'fit-content', width: 'fit-content', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
+        height: 'fit-content', width: '100%', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
       }}
     >
       <Header />
