@@ -1,0 +1,30 @@
+@font-face {
+    font-family: "Roboto";
+    src: url(src/assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Noway";
+  src: url(src/assets/fonts/noway-regular.ttf);
+}
+
+.details {
+    color: #6cc573;
+    width: 70%;
+    margin: 0 auto 10px;
+    font-family: 'Roboto';
+    font-size: small;
+    border-radius: 4px;
+    text-align: center;
+    }
+
+.sauvegarde {
+    font-family: 'Roboto';
+   
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
