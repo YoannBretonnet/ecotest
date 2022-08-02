@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import {
   OPEN_CLOSE_CAR_MODAL,
   OPEN_CLOSE_LOCALISATION_MODAL,
@@ -18,6 +19,8 @@ import {
   GET_CATEGORIES_DATA_FAIL,
   CLEAR_MAP_SETTINGS,
 } from 'src/actions/mapSettings';
+
+import { GET_PROFIL_SUCCESS } from 'src/actions/authentification';
 
 export const initialState = {
   carSettingsModal: {
@@ -254,6 +257,37 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...initialState,
       };
+    case GET_PROFIL_SUCCESS:
+      if (action.data.car || action.data.location || action.data.categories) {
+        return {
+          ...state,
+          carSettingsModal: {
+            ...state.carSettingsModal,
+            brandsValue: action.data.car.brand_id,
+            carValue: action.data.car.car_id,
+          },
+          interestPointModal: {
+            ...state.interestPointModal,
+            selected: [
+              ...action.data.categories.map((option) => ({
+                id: option.id,
+                name: option.category,
+              })),
+            ],
+          },
+          localisationSettingsModal: {
+            ...state.localisationSettingsModal,
+            DepartSelected: {
+              ...action.data.location,
+            },
+          },
+        };
+      }
+      else {
+        return {
+          ...state,
+        };
+      }
     default:
       return state;
   }
