@@ -13,6 +13,7 @@ import HomePage from 'src/components/HomePage';
 import ProfilePage from 'src/components/ProfilePage';
 import NotFoundPage from 'src/components/NotFoundPage';
 import MapPage from 'src/components/MapPage';
+import AboutPage from 'src/components/AboutPage';
 
 import {
   getVehiclesData,
@@ -37,6 +38,7 @@ function App() {
           )
         }
         <Route path="/map" element={<MapPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
