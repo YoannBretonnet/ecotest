@@ -108,6 +108,7 @@ export default function Map() {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const image = e.features[0].properties.image;
       const title = e.features[0].properties.title;
+      const adresse = e.features[0].properties.adresse;
       const description = e.features[0].properties.description;
 
       new mapboxgl.Popup()
@@ -117,6 +118,8 @@ export default function Map() {
         <img src="${image}" />
         <h3>${title}</h3>
           <p>${description}</p>
+          <p></p>
+          <p>${adresse}</p>
         </div>`
         )
         .addTo(map.current);
@@ -152,7 +155,7 @@ export default function Map() {
                   'type': 'Feature',
                   'geometry': {
                     'type': 'Point',
-                    'coordinates': [-1.6609, 47.8144]
+                    'coordinates': [-1.61925, 47.49784],
                   }
                 }
               ]
@@ -164,6 +167,48 @@ export default function Map() {
             'id': 'bornes',
             'type': 'symbol',
             'source': 'bornes', // reference the data source
+            'layout': {
+              'icon-image': 'borne', // reference the image
+              'icon-size': 0.25
+            }
+          });
+        }
+      );
+    });
+
+
+    map.current.on('load', () => {
+      // Load an image from an external URL.
+      map.current.loadImage(
+        myImage,
+        (error, image) => {
+          if (error) throw error;
+
+          // Add the image to the map style.
+          map.current.addImage('borne', image);
+
+          // Add a data source containing one point feature.
+          map.current.addSource('bornes2', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-1.89116, 48.3828],
+                  }
+                }
+              ]
+            }
+          });
+
+          // Add a layer to use the image to represent the data.
+          map.current.addLayer({
+            'id': 'bornes2',
+            'type': 'symbol',
+            'source': 'bornes2', // reference the data source
             'layout': {
               'icon-image': 'borne', // reference the image
               'icon-size': 0.25
