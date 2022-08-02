@@ -11,6 +11,7 @@ import theme from 'src/styles/styles';
 // == Component
 import HomePage from 'src/components/HomePage';
 import ProfilePage from 'src/components/ProfilePage';
+import NotFoundPage from 'src/components/NotFoundPage';
 
 import {
   getVehiclesData,
@@ -34,6 +35,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
           )
         }
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
   );
