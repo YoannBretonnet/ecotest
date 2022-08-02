@@ -38,18 +38,27 @@ function Main() {
     dispatch(openCloseMenu(true));
     setinputMenu(event.currentTarget);
   };
+  // display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh'
   return (
     <Box component="main" id="main-HomePage">
-      <Box component="section" sx={{ margin: '32vh 1.5vh 0' }}>
-        {matches && (
-        <h1 className="main-title">
-          E-co Roads
-        </h1>
-        )}
-        <p className={matches ? 'main-accroche' : 'main-accroche-desktop'}>
-          Découvrez votre région en toute sérénité au volant de votre voiture électrique
-        </p>
-      </Box>
+      {
+        matches ? (
+          <Box component="section" sx={{ margin: '32vh 1.5vh 0' }}>
+            <h1 className="main-title">
+              E-co Roads
+            </h1>
+            <p className="main-accroche">
+              Découvrez votre région en toute sérénité au volant de votre voiture électrique
+            </p>
+          </Box>
+        ) : (
+          <Box component="section" sx={{ display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh' }}>
+            <p className="main-accroche-desktop">
+              Découvrez votre région en toute sérénité au volant de votre voiture électrique
+            </p>
+          </Box>
+        )
+      }
       {matches ? <CarouselComponent /> : <StepsComponent />}
       {matches ? (
         <Box
