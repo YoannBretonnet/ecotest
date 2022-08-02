@@ -41,21 +41,21 @@ function Main() {
   // display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh'
   return (
     <Box component="main" id="main-AboutPage">
-          <Box component="section" sx={{ margin: '4vh 1.5vh 0' }}>
-            <h1 className="main-title">
+          <Box component="section" sx={{ margin: '4vh 5.5vh 0' }}>
+            <h1 className="about-title">
               A propos d'E-co Roads
             </h1>
-            <p className="main-accroche">
+            <p className="about-accroche">
               E-co Roads a été fondé en 2022 dans le but d'aider les proppriétaires de voitures électriques à partir en road trip. 
               Notre équipe propose ainsi une application générant des trajets liant la localisation des stations de rechargement avec
               une liste de sites à visiter. Régulièrement, nous proposons de nouveaux lieux éco-friendly qui partagent les valeurs
               de nos utlisateurs.
             </p>
 
-            <h2 className="main-title">
+            <h2 className="about-title">
               Contactez-nous
             </h2>
-            <p className="main-accroche">
+            <p className="about-accroche">
               <a href="mailto: hello@eco-roads.com">hello@eco-roads.com</a>
             </p>
           </Box>
