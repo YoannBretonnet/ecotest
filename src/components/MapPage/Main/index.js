@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 // == Style
@@ -10,56 +11,50 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { openCloseConnectionModal } from 'src/actions/authentification';
-import { openCloseMenu } from 'src/actions/usability';
-
 import {
   BiUser,
   BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
-import CarouselComponent from 'src/components/Carousel';
-import StepsComponent from 'src/components/StepsComponent';
+import { openCloseConnectionModal } from 'src/actions/authentification';
+import { openCloseMenu } from 'src/actions/usability';
+
+
 import MenuIsConnnected from 'src/components/MenuIsConnnected';
+import Map from './Map';
+import Sidebar from './Sidebar';
 
 // == Composant
 function Main() {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-  const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
   const { isOpen } = useSelector((state) => state.usability.menu);
   const args = {
     size: 6,
   };
+
   const [inputMenu, setinputMenu] = useState(null);
   const handleClick = (event) => {
     dispatch(openCloseMenu(true));
     setinputMenu(event.currentTarget);
   };
-  // display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh'
+
   return (
     <Box component="main" id="main-HomePage">
+      <Map />
       {
-        matches ? (
-          <Box component="section" sx={{ margin: '32vh 1.5vh 0' }}>
-            <h1 className="main-title">
-              E-co Roads
-            </h1>
-            <p className="main-accroche">
-              Découvrez votre région en toute sérénité au volant de votre voiture électrique
-            </p>
-          </Box>
-        ) : (
-          <Box component="section" sx={{ display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh' }}>
-            <p className="main-accroche-desktop">
-              Découvrez votre région en toute sérénité au volant de votre voiture électrique
-            </p>
-          </Box>
-        )
-      }
-      {matches ? <CarouselComponent /> : <StepsComponent />}
+            !isConnected ? (
+              <Sidebar
+                text="Pour sauvegarder votre trajet, connectez-vous"
+              />
+            ) : (
+              <Sidebar
+                text="Sauvegardez ce trajet dans vos favoris"
+              />
+            )
+        }
       {matches ? (
         <Box
           component="section"
