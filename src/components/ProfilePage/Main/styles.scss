@@ -27,3 +27,15 @@
   gap: 1vh;
   flex-wrap: wrap;
 }
+
+.main-img {
+  max-height: 30vh;
+  width: auto;
+  object-fit: contain;
+}
+
+.main-desktop {
+  max-height: 44vh;
+  width: auto;
+  object-fit: contain;
+}

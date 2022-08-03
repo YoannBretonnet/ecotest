@@ -37,7 +37,7 @@ import MenuIsConnnected from 'src/components/MenuIsConnnected';
 // == Composant
 function Main() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('tablet'));
+  const matches = useMediaQuery(theme.breakpoints.up('laptop'));
   const dispatch = useDispatch();
   const {
     userName,
@@ -142,7 +142,7 @@ function Main() {
           </Tooltip>
         </article>
       </Box>
-      <img crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${car.image}`} alt="Owned Car" />
+      <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${car.image}`} alt="Owned Car" />
       {!matches ? (
         <Box
           component="section"
