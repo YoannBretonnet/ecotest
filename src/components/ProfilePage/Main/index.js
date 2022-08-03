@@ -63,21 +63,39 @@ function Main() {
           <p>
             Type de véhicule:
           </p>
-          <Chip label={car.name} />
-          <Chip label={car.model} />
+          {
+            car ? (
+              <>
+                <Chip label={car.name} />
+                <Chip label={car.model} />
+              </>
+            ) : (
+              <Chip label="Aucun véhicule enregistré" />
+            )
+          }
         </article>
         <article className="user-preferences-container-departureData user-preferences-container-element">
           <p>
             Point de départ:
           </p>
-          <Chip label={`${location.street_number} ${location.address}, ${location.city}`} />
+          {
+            location ? (
+              <Chip label={`${location.street_number} ${location.address}, ${location.city}`} />
+            ) : (
+              <Chip label="Aucune adresse enregistrée" />
+            )
+          }
         </article>
         <article className="user-preferences-container-departureData user-preferences-container-element">
           <p>
             Centres d'intérêts:
           </p>
           {
-            categories.map((categorie) => <Chip key={categorie.id} label={categorie.category} />)
+            categories[0] ? (
+              categories.map((categorie) => <Chip key={categorie.id} label={categorie.category} />)
+            ) : (
+              <Chip label="Aucune catégorie enregistreée" />
+            )
           }
         </article>
         <Tooltip title="Paramètre de préférence">

@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import {
   OPEN_CLOSE_CAR_MODAL,
   OPEN_CLOSE_LOCALISATION_MODAL,
@@ -16,21 +17,24 @@ import {
   GET_CATEGORIES_DATA,
   GET_CATEGORIES_DATA_SUCCESS,
   GET_CATEGORIES_DATA_FAIL,
+  CLEAR_MAP_SETTINGS,
 } from 'src/actions/mapSettings';
+
+import { GET_PROFIL_SUCCESS } from 'src/actions/authentification';
 
 export const initialState = {
   carSettingsModal: {
     isOpen: false,
     brandsValue: 5,
-    carValue: 27,
+    carValue: 11,
   },
   localisationSettingsModal: {
     isOpen: false,
     isDepartLoading: false,
     DepartSelected: {
       label: '',
-      streetNumber: undefined,
-      adress: undefined,
+      street_number: undefined,
+      address: undefined,
       zipcode: undefined,
       city: undefined,
       Lat: undefined,
@@ -40,8 +44,8 @@ export const initialState = {
     isArrivLoading: false,
     ArrivSelected: {
       label: '',
-      streetNumber: undefined,
-      adress: undefined,
+      street_number: undefined,
+      address: undefined,
       zipcode: undefined,
       city: undefined,
       Lat: undefined,
@@ -117,8 +121,8 @@ const reducer = (state = initialState, action = {}) => {
           [action.inputElement]: {
             ...state.localisationSettingsModal[action.inputElement],
             label: action.inputValue,
-            streetNumber: undefined,
-            adress: undefined,
+            street_number: undefined,
+            address: undefined,
             zipcode: undefined,
             city: undefined,
             Lat: undefined,
@@ -151,9 +155,9 @@ const reducer = (state = initialState, action = {}) => {
           ...state[action.modalElement],
           [action.inputElement]: {
             label: action.properties.label,
-            streetNumber: action.properties.housenumber,
-            adress: action.properties.street,
-            zipcode: action.properties.postcode,
+            street_number: parseInt(action.properties.housenumber, 10),
+            address: action.properties.street,
+            zipcode: parseInt(action.properties.postcode, 10),
             city: action.properties.city,
             Lat: action.geometry.coordinates[1],
             Long: action.geometry.coordinates[0],
@@ -249,6 +253,41 @@ const reducer = (state = initialState, action = {}) => {
           },
         },
       };
+    case CLEAR_MAP_SETTINGS:
+      return {
+        ...initialState,
+      };
+    case GET_PROFIL_SUCCESS:
+      if (action.data.car || action.data.location || action.data.categories) {
+        return {
+          ...state,
+          carSettingsModal: {
+            ...state.carSettingsModal,
+            brandsValue: action.data.car.brand_id,
+            carValue: action.data.car.car_id,
+          },
+          interestPointModal: {
+            ...state.interestPointModal,
+            selected: [
+              ...action.data.categories.map((option) => ({
+                id: option.id,
+                name: option.category,
+              })),
+            ],
+          },
+          localisationSettingsModal: {
+            ...state.localisationSettingsModal,
+            DepartSelected: {
+              ...action.data.location,
+            },
+          },
+        };
+      }
+      else {
+        return {
+          ...state,
+        };
+      }
     default:
       return state;
   }

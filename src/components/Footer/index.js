@@ -1,30 +1,44 @@
 // == Import
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-// import {  } from 'src/store/action';
+import { saveAs } from 'file-saver';
 
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // == Style
 import './styles.scss';
 
 // == Composant
 function Footer() {
-  const dispatch = useDispatch();
-  // const  = useSelector((state) => state.);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const saveCGU = () => {
+    saveAs(
+      'https://eco-roads.herokuapp.com/pdf/CGU_E-CO_ROADS.pdf',
+      'CGU.pdf',
+    );
+  };
 
   return (
     <Box
       component="footer"
       sx={{
-        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'relative', flexGrow: '1',
+        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'absolute', bottom: '0', maxHeight: '7vh',
       }}
     >
-      <div id="footer-decorations">
-        <div id="footer-decorations-first-element" />
-        <div id="footer-decorations-second-element" />
-        <div id="footer-decorations-third-element" />
-      </div>
+      {matches ? (
+        <div id="footer-decorations">
+          <div id="footer-decorations-first-element" />
+          <div id="footer-decorations-second-element" />
+          <div id="footer-decorations-third-element" />
+        </div>
+      ) : (
+        <div id="footer-decorations">
+          <div id="footer-decorations-desktop-first-element" />
+          <div id="footer-decorations-desktop-second-element" />
+          <div id="footer-decorations-desktop-third-element" />
+        </div>
+      )}
       <nav className="menu-footer">
         <Tooltip title="À propos">
           <NavLink
@@ -40,7 +54,8 @@ function Footer() {
           <NavLink
             key="cgu"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
-            to="/cgu"
+            to="/"
+            onClick={saveCGU}
           >
             CGU
           </NavLink>

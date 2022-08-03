@@ -2,6 +2,7 @@
 // == Import
 import PropTypes from 'prop-types';
 import { openCloseInterestPointModal, selectInterestPoint, openCloseLocalisationModal } from 'src/actions/mapSettings';
+import { updateUserTravelParam } from 'src/actions/authentification';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
@@ -23,13 +24,13 @@ import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
-const isTrue = (selected, option) => selected.includes(option);
 // == Composant
 function InterestPointModal({ reducerRoute, updatePage }) {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.mapSettings.interestPointModal.selected);
   const { error, list } = useSelector((state) => state.mapSettings.categoriesData);
-  const isError = selected.length > 3;
+  const isErrorMax = selected.length > 3;
+  const isErrorMin = selected.length < 1;
   const modalElement = 'interestPointModal';
   return (
     <ModalElement
@@ -42,16 +43,21 @@ function InterestPointModal({ reducerRoute, updatePage }) {
         className="modal-form-connection"
         onSubmit={((event) => {
           event.preventDefault();
-          dispatch(openCloseInterestPointModal());
+          if (!isErrorMax && !isErrorMin) {
+            if (updatePage) {
+              dispatch(updateUserTravelParam());
+            }
+            // dispatch(openCloseInterestPointModal());
+          }
         })}
       >
         <FormControl
           required
-          error={isError}
+          error={isErrorMax || isErrorMin}
           component="fieldset"
           variant="standard"
         >
-          <FormLabel component="legend">3 Max</FormLabel>
+          <FormLabel component="legend">3 Max et 1 Min</FormLabel>
           <FormGroup>
             {list.map((option) => (
               <FormControlLabel
@@ -59,7 +65,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
                 sx={{ color: 'black' }}
                 control={(
                   <Checkbox
-                    checked={isTrue(selected, option)}
+                    checked={Boolean(selected.find((select) => select.id === option.id))}
                     onChange={(event) => dispatch(selectInterestPoint(event.target.checked, option))}
                     name={option.name}
                     sx={{
@@ -73,8 +79,11 @@ function InterestPointModal({ reducerRoute, updatePage }) {
               />
             ))}
           </FormGroup>
-          {isError && (
+          {isErrorMax && (
             <FormHelperText>Veuillez retirer des points d'intérets</FormHelperText>
+          )}
+          {isErrorMin && (
+            <FormHelperText>Veuillez ajouter des points d'intérets</FormHelperText>
           )}
         </FormControl>
         {error.isError && (

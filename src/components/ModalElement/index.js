@@ -7,13 +7,18 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 import {
-  Box, Modal, Paper,
+  Box, Modal, Paper, useMediaQuery,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Composant
-function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
+function ModalElement({
+  children, dispatchCall, modalElement, reducerRoute,
+}) {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state) => state[reducerRoute][modalElement]);
   return (
@@ -26,20 +31,39 @@ function ModalElement({ children, dispatchCall, modalElement, reducerRoute }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
-      <Box
-        component="section"
-        sx={{
-          width: '80%', height: 'fit-content', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}
-      >
-        <Paper
-          sx={{
-            width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh', position: 'relative',
-          }}
-        >
-          {children}
-        </Paper>
-      </Box>
+      {
+        matches ? (
+          <Box
+            component="section"
+            sx={{
+              width: '80%', height: 'fit-content', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <Paper
+              sx={{
+                width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh', position: 'relative',
+              }}
+            >
+              {children}
+            </Paper>
+          </Box>
+        ) : (
+          <Box
+            component="section"
+            sx={{
+              width: '30vw', height: 'fit-content', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <Paper
+              sx={{
+                width: '100%', height: 'fit-content', borderRadius: '5vh', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4vh 0', gap: '2vh', position: 'relative',
+              }}
+            >
+              {children}
+            </Paper>
+          </Box>
+        )
+      }
     </Modal>
   );
 }

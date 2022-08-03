@@ -57,6 +57,7 @@
     "@mapbox/polyline": "^1.1.1",
     "@mui/material": "^5.9.1",
     "axios": "^0.27.2",
+    "file-saver": "^2.0.5",
     "ky": "^0.31.1",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
