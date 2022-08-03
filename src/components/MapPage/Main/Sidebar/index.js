@@ -16,7 +16,7 @@ export default function sidebar({ text }) {
     return (
         <Box component="main">
             <Box>
-                <div className="details">2 Bornes de recharge | {pointCoords.data.features.length} Points d'intéret</div>
+                <div className="details">{pointCoords.data.features.filter((option) => option.properties.title === "SuperChargeur").length} Bornes de recharge | {pointCoords.data.features.filter((option) => option.properties.title !== "SuperChargeur").length} Points d'intéret</div>
             </Box>
             <Box sx={{ margin: 'auto' }}>
                 <Button onClick={() => dispatch(openCloseConnectionModal())} sx={{ fontSize: '10px', backgroundColor: '#6cc573', color: 'white' }}>{text}</Button>

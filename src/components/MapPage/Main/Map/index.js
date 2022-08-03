@@ -26,6 +26,15 @@ export default function Map() {
   const lng = (stLong + arLong) / 2;
   const lat = (stLat + arLat) / 2;
 
+  const InterestsPoint = {
+    ...pointCoords,
+    data: {
+      ...pointCoords.data,
+      features: pointCoords.data.features.filter((option) => option.properties.title !== "SuperChargeur")
+    }
+  }
+  const bornesArray = pointCoords.data.features.filter((option) => option.properties.title === "SuperChargeur");
+
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée
     if (map.current) return;
@@ -33,7 +42,8 @@ export default function Map() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lng, lat],
-      zoom: 6
+      zoom: 6,
+      logoPosition: 'bottom-left',
     });
 
     // On récupère les points de départ et d'arrivée
@@ -85,7 +95,7 @@ export default function Map() {
 
       // On ajoute les points d'intérêt
       map.current.addSource('interestPoints',
-        pointCoords
+        InterestsPoint
       );
 
       map.current.addLayer({
@@ -134,28 +144,17 @@ export default function Map() {
 
     // On ajoute les bornes
     map.current.on('load', () => {
-      [
-        {
-          name: 'borne1',
-          id: 'bornes1',
-          coord: [-1.61925, 47.49784]
-        },
-        {
-          name: 'borne2',
-          id: 'bornes2',
-          coord: [-1.89116, 48.3828]
-        }
-      ].forEach(element => {
+      bornesArray.forEach((borne, index) => {
         map.current.loadImage(
           myImage,
           (error, image) => {
             if (error) throw error;
   
             // Add the image to the map style.
-            map.current.addImage(element.name, image);
+            map.current.addImage(`${borne.properties.title} ${index + 1}`, image);
   
             // Add a data source containing one point feature.
-            map.current.addSource(element.id, {
+            map.current.addSource(`${borne.properties.title} ${index + 1} ${index + 1}`, {
               'type': 'geojson',
               'data': {
                 'type': 'FeatureCollection',
@@ -164,7 +163,7 @@ export default function Map() {
                     'type': 'Feature',
                     'geometry': {
                       'type': 'Point',
-                      'coordinates': element.coord,
+                      'coordinates': borne.geometry.coordinates,
                     }
                   }
                 ]
@@ -173,11 +172,11 @@ export default function Map() {
   
             // Add a layer to use the image to represent the data.
             map.current.addLayer({
-              'id': element.id,
+              'id': `${borne.properties.title} ${index + 1} ${index + 1}`,
               'type': 'symbol',
-              'source': element.id, // reference the data source
+              'source': `${borne.properties.title} ${index + 1} ${index + 1}`, // reference the data source
               'layout': {
-                'icon-image': element.name, // reference the image
+                'icon-image': `${borne.properties.title} ${index + 1}`, // reference the image
                 'icon-size': 0.25
               }
             });
@@ -185,6 +184,7 @@ export default function Map() {
         );
       });
       // Load a local image 
+
     });
   });
 

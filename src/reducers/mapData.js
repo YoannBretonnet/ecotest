@@ -34,6 +34,19 @@ import {
             {
               type: "Feature",
               properties: {
+                // image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
+                title: "SuperChargeur",
+                // description: "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.",
+                // icon: "museum-15"
+                },
+              geometry: {
+              type: "Point",
+              coordinates: [-1.61925, 47.49784]
+              }
+              },
+            {
+              type: "Feature",
+              properties: {
                 image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
                 title: "Musée Agri-Rétro",
                 description: "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.",
@@ -61,7 +74,20 @@ import {
                 -1.78609, 47.97144
               ]
               }
-              }
+              },
+              {
+                type: "Feature",
+                properties: {
+                  // image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Brela%27s_small_harbour.jpeg",
+                  title: "SuperChargeur",
+                  // description: "Près de 300 tracteurs et autres engins agricoles nous retracent une belle évolution de la technique.",
+                  icon: "museum-15"
+                  },
+                geometry: {
+                type: "Point",
+                coordinates: [-1.89116, 48.3828]
+                }
+                },
             ]
         }
     }  
