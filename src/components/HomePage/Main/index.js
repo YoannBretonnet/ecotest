@@ -26,7 +26,7 @@ import MenuIsConnnected from 'src/components/MenuIsConnnected';
 // == Composant
 function Main() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
   const { isOpen } = useSelector((state) => state.usability.menu);

@@ -22,7 +22,7 @@ function AboutPage() {
   return (
     <Box
       component="div"
-      id={matches ? 'App' : 'App-Desktop'}
+      id={matches ? 'App-AboutPage' : 'App-AboutPage-Desktop'}
       sx={{
         height: 'fit-content', width: '100%', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
       }}

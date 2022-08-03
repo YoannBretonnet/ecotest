@@ -8,7 +8,6 @@ import './styles.scss';
 import myImage from 'src/assets/images/borne.png';
 
 // import data
-import interestPointsData from '../data/interestPointsData.json';
 import { accessToken } from 'mapbox-gl';
 
 // import mapBox token
@@ -17,13 +16,15 @@ accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM2hlMG41cX
 export default function Map() {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const departureLongitude = useSelector((state) => state.mapData.departureLongitude);
-  const departureLatitude = useSelector((state) => state.mapData.departureLatitude);
-  const arrivalLongitude = useSelector((state) => state.mapData.arrivalLongitude);
-  const arrivalLatitude = useSelector((state) => state.mapData.arrivalLatitude);
-  const lng = (departureLongitude + arrivalLongitude) / 2;
-  const lat = (departureLatitude + arrivalLatitude) / 2;
-
+  const pointCoords = useSelector((state) => state.mapData.pointCoords);
+  const {
+    stLong,
+    stLat,
+    arLong,
+    arLat,
+   } = useSelector((state) => state.mapData.startEndCoords);
+  const lng = (stLong + arLong) / 2;
+  const lat = (stLat + arLat) / 2;
 
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée
@@ -36,15 +37,12 @@ export default function Map() {
     });
 
     // On récupère les points de départ et d'arrivée
-    const start = [departureLongitude, departureLatitude];
-    const end = [arrivalLongitude, arrivalLatitude];
+    const start = [stLong, stLat];
+    const end = [arLong, arLat];
 
     // On récupère les coordonnées des points d'intérêt
-    const coords = interestPointsData.data.features.map(feature => feature.geometry.coordinates);
+    const coords = pointCoords.data.features.map(feature => feature.geometry.coordinates);
     const coordsReplace = JSON.stringify(coords).replaceAll("],[", ";").replace("[[", "").replace("]]", "");
-
-    // On récupère les coordonnées des balises de recharge
-    // * TO DO *
 
     // On trace le trajet
     map.current.on('load', () => {
@@ -83,12 +81,11 @@ export default function Map() {
           'circle-color': '#6cc573'
         }
       });
-    });
 
-    // On ajoute les points d'intérêt
-    map.current.on('load', () => {
+
+      // On ajoute les points d'intérêt
       map.current.addSource('interestPoints',
-        interestPointsData
+        pointCoords
       );
 
       map.current.addLayer({
@@ -97,19 +94,20 @@ export default function Map() {
         'source': 'interestPoints',
         'layout': {
           'icon-image': '{icon}',
-          'icon-allow-overlap': true
         }
       });
-    }
-    );
+    });
 
     // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
     map.current.on('click', 'interestPoints', (e) => {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const image = e.features[0].properties.image;
-      const title = e.features[0].properties.title;
-      const adresse = e.features[0].properties.adresse;
-      const description = e.features[0].properties.description;
+      // const coordinates = e.features[0].geometry.coordinates.slice();
+      const coordinates = e.features[0].geometry.coordinates;
+      const {
+        description,
+        adresse,
+        title,
+        image,
+       } = e.features[0].properties
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
@@ -136,88 +134,58 @@ export default function Map() {
 
     // On ajoute les bornes
     map.current.on('load', () => {
-      // Load an image from an external URL.
-      map.current.loadImage(
-        myImage,
-        (error, image) => {
-          if (error) throw error;
-
-          // Add the image to the map style.
-          map.current.addImage('borne', image);
-
-          // Add a data source containing one point feature.
-          map.current.addSource('bornes', {
-            'type': 'geojson',
-            'data': {
-              'type': 'FeatureCollection',
-              'features': [
-                {
-                  'type': 'Feature',
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-1.61925, 47.49784],
-                  }
-                }
-              ]
-            }
-          });
-
-          // Add a layer to use the image to represent the data.
-          map.current.addLayer({
-            'id': 'bornes',
-            'type': 'symbol',
-            'source': 'bornes', // reference the data source
-            'layout': {
-              'icon-image': 'borne', // reference the image
-              'icon-size': 0.25
-            }
-          });
+      [
+        {
+          name: 'borne1',
+          id: 'bornes1',
+          coord: [-1.61925, 47.49784]
+        },
+        {
+          name: 'borne2',
+          id: 'bornes2',
+          coord: [-1.89116, 48.3828]
         }
-      );
-    });
-
-
-    map.current.on('load', () => {
-      // Load an image from an external URL.
-      map.current.loadImage(
-        myImage,
-        (error, image) => {
-          if (error) throw error;
-
-          // Add the image to the map style.
-          map.current.addImage('borne', image);
-
-          // Add a data source containing one point feature.
-          map.current.addSource('bornes2', {
-            'type': 'geojson',
-            'data': {
-              'type': 'FeatureCollection',
-              'features': [
-                {
-                  'type': 'Feature',
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-1.89116, 48.3828],
+      ].forEach(element => {
+        map.current.loadImage(
+          myImage,
+          (error, image) => {
+            if (error) throw error;
+  
+            // Add the image to the map style.
+            map.current.addImage(element.name, image);
+  
+            // Add a data source containing one point feature.
+            map.current.addSource(element.id, {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': element.coord,
+                    }
                   }
-                }
-              ]
-            }
-          });
-
-          // Add a layer to use the image to represent the data.
-          map.current.addLayer({
-            'id': 'bornes2',
-            'type': 'symbol',
-            'source': 'bornes2', // reference the data source
-            'layout': {
-              'icon-image': 'borne', // reference the image
-              'icon-size': 0.25
-            }
-          });
-        }
-      );
+                ]
+              }
+            });
+  
+            // Add a layer to use the image to represent the data.
+            map.current.addLayer({
+              'id': element.id,
+              'type': 'symbol',
+              'source': element.id, // reference the data source
+              'layout': {
+                'icon-image': element.name, // reference the image
+                'icon-size': 0.25
+              }
+            });
+          }
+        );
+      });
+      // Load a local image 
     });
-
   });
 
 
