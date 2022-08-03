@@ -30,7 +30,7 @@ import styles from './IconSlider.module.scss';
 // == Composant
 function Header() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const dispatch = useDispatch();
   const { isOpen: isCarOpen } = useSelector((state) => state.mapSettings.carSettingsModal);
   const { isOpen: isLocalisationOpen } = useSelector((state) => state.mapSettings.localisationSettingsModal);
