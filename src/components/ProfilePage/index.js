@@ -1,6 +1,7 @@
 // == Import
 
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 import ModalAccountUpdate from 'src/components/ModalAuthentification/ModalAccountUpdate';
 import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
@@ -15,6 +16,8 @@ import './styles.scss';
 
 // == Composant
 function ProfilePage() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('tablet'));
   const reducerAuth = 'auth';
   const reducerMap = 'mapSettings';
   const updatePage = true;
@@ -22,7 +25,7 @@ function ProfilePage() {
   return (
     <Box
       component="div"
-      id="App-ProfilePage"
+      id={matches ? 'App-ProfilePage-desktop' : 'App-ProfilePage'}
       sx={{
         height: 'fit-content', width: 'fit-content', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
       }}
