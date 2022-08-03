@@ -11,7 +11,7 @@ import './styles.scss';
 // == Composant
 function Footer() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const saveCGU = () => {
     saveAs(
       'https://eco-roads.herokuapp.com/pdf/CGU_E-CO_ROADS.pdf',
