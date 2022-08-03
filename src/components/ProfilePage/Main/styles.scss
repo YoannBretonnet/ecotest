@@ -8,11 +8,12 @@
 }
 
 .user-preferences-container {
-  margin: 4vh 1.5vh 0;
+  margin: 4vh auto 0;
   font-family: 'Roboto';
   display: flex;
   flex-direction: column;
   gap: 2vh;
+  width: fit-content;
 }
 
 .user-preferences-container-element {

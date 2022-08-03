@@ -12,8 +12,9 @@ import {
 
 // == Style
 import {
-  Box, Tooltip, IconButton, Chip, Button,
+  Box, Tooltip, IconButton, Chip, Button, useMediaQuery,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import './styles.scss';
 
 import {
@@ -24,6 +25,8 @@ import {
 
 // == Composant
 function Main() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('tablet'));
   const dispatch = useDispatch();
   const {
     userName,

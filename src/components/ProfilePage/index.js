@@ -6,6 +6,7 @@ import ModalAccountUpdate from 'src/components/ModalAuthentification/ModalAccoun
 import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
 import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
 import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
+import Footer from 'src/components/Footer';
 import Header from './Header';
 import Main from './Main';
 
@@ -28,6 +29,7 @@ function ProfilePage() {
     >
       <Header />
       <Main />
+      <Footer />
       <ModalAccountUpdate
         reducerRoute={reducerAuth}
       />
