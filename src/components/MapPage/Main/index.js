@@ -1,6 +1,5 @@
-import { useSelector } from 'react-redux';
-
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 // == Style
 import './styles.scss';
@@ -13,41 +12,50 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 import {
-    BiUser,
-    BiDotsVerticalRounded,
+  BiUser,
+  BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
 import { openCloseConnectionModal } from 'src/actions/authentification';
+import { openCloseMenu } from 'src/actions/usability';
 
+
+import MenuIsConnnected from 'src/components/MenuIsConnnected';
 import Map from './Map';
 import Sidebar from './Sidebar';
-import MenuIsConnnected from 'src/components/MenuIsConnnected';
 
 // == Composant
 function Main() {
-    const dispatch = useDispatch();
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-    const isConnected = useSelector((state) => state.auth.isConnected);
-    const args = {
-        size: 6,
-      };
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const isConnected = useSelector((state) => state.auth.isConnected);
+  const { isOpen } = useSelector((state) => state.usability.menu);
+  const args = {
+    size: 6,
+  };
+
+  const [inputMenu, setinputMenu] = useState(null);
+  const handleClick = (event) => {
+    dispatch(openCloseMenu(true));
+    setinputMenu(event.currentTarget);
+  };
 
   return (
     <Box component="main" id="main-HomePage">
-        <Map />
-        {
+      <Map />
+      {
             !isConnected ? (
-        <Sidebar 
-            text = "Pour sauvegarder votre trajet, connectez-vous"
-        />
-        ) : (
-            <Sidebar 
-            text = "Sauvegardez ce trajet dans vos favoris"
-        />
+              <Sidebar
+                text="Pour sauvegarder votre trajet, connectez-vous"
+              />
+            ) : (
+              <Sidebar
+                text="Sauvegardez ce trajet dans vos favoris"
+              />
             )
         }
-        {matches ? (
+      {matches ? (
         <Box
           component="section"
           sx={{
