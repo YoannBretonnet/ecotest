@@ -4,8 +4,7 @@ import './styles.scss';
 
 // == Component
 import Header from 'src/components/Header';
-import Map from './Map';
-import Sidebar from './Sidebar';
+import Main from 'src/components/MapPage/Main';
 import ModalConnection from 'src/components/ModalAuthentification/ModalConnection';
 import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAccountCreation';
 import { useSelector } from 'react-redux';
@@ -23,18 +22,7 @@ function MapPage() {
   return (
     <>
       <Header />
-      <Map />
-      {
-        !isConnected ? (
-      <Sidebar 
-        text = "Pour sauvegarder votre trajet, connectez-vous"
-      />
-      ) : (
-        <Sidebar 
-        text = "Sauvegardez ce trajet dans vos favoris"
-      />
-        )
-      }
+      <Main />
       <ModalConnection
         reducerRoute={reducerRoute}
       />
