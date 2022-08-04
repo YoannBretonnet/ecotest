@@ -20,7 +20,7 @@ import {
 } from 'react-icons/bi';
 
 import CarouselComponent from './CarouselAbout';
-import StepsComponent from 'src/components/StepsComponent';
+import StepsComponent from './StepsComponentAbout';
 import MenuIsConnnected from 'src/components/MenuIsConnnected';
 
 // == Composant
@@ -56,7 +56,7 @@ function Main() {
               L'équipe E-co Roads
             </h1>
 
-            <CarouselComponent></CarouselComponent>
+            {matches ? <CarouselComponent /> : <StepsComponent />}
 
             <h2 className="about-title">
               Contactez-nous

@@ -75,7 +75,7 @@ function CarouselComponent() {
             <Paper
               key={i}
               sx={{
-                width: args.widthSize, height: args.heightSize, background: 'transparent', border: '0.2vh solid grey', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
+                width: args.widthSize, height: args.heightSize, background: 'transparent', border: '0.4vh solid black', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
               }}
             >
             
