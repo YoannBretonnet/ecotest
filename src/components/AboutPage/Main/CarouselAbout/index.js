@@ -18,15 +18,18 @@ import {
 function CarouselComponent() {
   const items = [
     {
+      name: 'Gaetan',
       image: {gaetan},
       description: 'Product Owner',
     },
     {
+      name: 'Oceane',
       image: {oceane},
       description: 'Scrum Master',
     },
     {
-      image: 'Etape 3',
+      name: 'Alex',
+      image: {alex},
       description: 'Back end',
     },
   ];
@@ -64,7 +67,12 @@ function CarouselComponent() {
                 width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.4vh solid black', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
               }}
             >
-              <img className="carouselAbout-image" scr='{item.image}'/>
+              <img 
+              className="carouselAbout-image" 
+              scr={item.image}
+              alt={item.name}
+              width="100px"
+              />
               <p className="carouselAbout-content">{item.description}</p>
             </Paper>
           ))

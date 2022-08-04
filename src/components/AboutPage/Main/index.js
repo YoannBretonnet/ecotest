@@ -56,7 +56,7 @@ function Main() {
               L'équipe E-co Roads
             </h1>
 
-            
+            <CarouselComponent></CarouselComponent>
 
             <h2 className="about-title">
               Contactez-nous
