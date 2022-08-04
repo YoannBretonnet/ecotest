@@ -19,7 +19,7 @@ import {
   BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
-import CarouselComponent from 'src/components/Carousel';
+import CarouselComponent from './CarouselAbout';
 import StepsComponent from 'src/components/StepsComponent';
 import MenuIsConnnected from 'src/components/MenuIsConnnected';
 
@@ -42,7 +42,7 @@ function Main() {
   return (
     <Box component="main" id="main-AboutPage">
           <Box component="section" sx={{ margin: '4vh 5.5vh 0' }}>
-            <h1 className="about-title">
+            {/* <h1 className="about-title">
               A propos d'E-co Roads
             </h1>
             <p className="about-accroche">
@@ -50,7 +50,13 @@ function Main() {
               Notre équipe propose ainsi une application générant des trajets liant la localisation des stations de rechargement avec
               une liste de sites à visiter. Régulièrement, nous proposons de nouveaux lieux éco-friendly qui partagent les valeurs
               de nos utlisateurs.
-            </p>
+            </p> */}
+
+            <h1 className="about-title">
+              L'équipe E-co Roads
+            </h1>
+
+            
 
             <h2 className="about-title">
               Contactez-nous
