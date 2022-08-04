@@ -142,7 +142,13 @@ function Main() {
           </Tooltip>
         </article>
       </Box>
-      <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${car.image}`} alt="Owned Car" />
+      {
+        car ? (
+          <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${car.image}`} alt="Owned Car" />
+        ) : (
+          <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src="https://eco-roads.herokuapp.com/images/tesla_model_s.png" alt="Owned Car" />
+        )
+      }
       {!matches ? (
         <Box
           component="section"
