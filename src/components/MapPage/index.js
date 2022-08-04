@@ -5,9 +5,9 @@ import './styles.scss';
 // == Component
 import Header from 'src/components/Header';
 import Main from 'src/components/MapPage/Main';
+import Footer from 'src/components/Footer';
 import ModalConnection from 'src/components/ModalAuthentification/ModalConnection';
 import ModalAccountCreation from 'src/components/ModalAuthentification/ModalAccountCreation';
-import { useSelector } from 'react-redux';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,12 +17,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function MapPage() {
   const reducerRoute = 'auth';
-  const isConnected = useSelector((state) => state.auth.isConnected);
 
   return (
     <>
       <Header />
       <Main />
+      <Footer />
       <ModalConnection
         reducerRoute={reducerRoute}
       />

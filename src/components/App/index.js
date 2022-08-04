@@ -31,15 +31,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route key="homePage" path="/" element={<HomePage />} />
         {
           isConnected && (
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route key="profile" path="/profile" element={<ProfilePage />} />
           )
         }
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route key="map" path="/map" element={<MapPage />} />
+        <Route key="about" path="/about" element={<AboutPage />} />
+        <Route key="*" path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
   );
