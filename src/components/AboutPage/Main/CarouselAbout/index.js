@@ -16,19 +16,29 @@ import {
 function CarouselComponent() {
   const items = [
     {
-      name: 'Gaetan',
-      image: 'Audi_E-tron_GT_Quattro_remove.png',
+      name: 'Gaëtan Santucci',
+      image: 'gaetan.png',
       description: 'Product Owner',
     },
     {
-      name: 'Oceane',
-      image: 'Tesla_Model_Y2_remove.png',
-      description: 'Scrum Master',
+      name: 'Océane Vignot',
+      image: 'oceane.png',
+      description: 'Scrum Master, Git Master',
     },
     {
-      name: 'Alex',
-      image: 'peugeot-e-208-1.png',
-      description: 'Back end',
+      name: 'Alexandre Humbert',
+      image: 'alex.png',
+      description: 'Lead Dev Back',
+    },
+      {
+      name: 'Aymen El Bakkaly',
+      image: 'aymen.png',
+      description: 'Lead Dev Front',
+    },
+    {
+      name: 'Yoann Bretonnet',
+      image: 'yoann.png',
+      description: 'Dev Front',
     },
   ];
   const args = {
@@ -53,7 +63,7 @@ function CarouselComponent() {
         navButtonsProps={{
           style: {
             backgroundColor: 'transparent',
-            color: 'none',
+            color: 'black',
             height: 'fit-content',
             margin: '0',
             padding: '0',
@@ -69,7 +79,7 @@ function CarouselComponent() {
               }}
             >
             
-            <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${item.image}`}  alt={item.name}
+            <img className={matches ? 'mainAbout-img-desktop' : 'mainAbout-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${item.image}`}  alt={item.name}
               width="100px" />
               <p className="carouselAbout-name">{item.name}</p>
               <p className="carouselAbout-content">{item.description}</p>
