@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import getRoute from './getRoute'
+import getRoute from './getRoute';
+import Sidebar from '../Sidebar';
 
 // import styles and icons
 import './styles.scss';
@@ -16,15 +18,25 @@ accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM2hlMG41cX
 export default function Map() {
   const mapContainer = useRef(null);
   const map = useRef(null);
+  const isConnected = useSelector((state) => state.auth.isConnected);
   const pointCoords = useSelector((state) => state.mapData.pointCoords);
   const {
     stLong,
     stLat,
     arLong,
     arLat,
-   } = useSelector((state) => state.mapData.startEndCoords);
+  } = useSelector((state) => state.mapData.startEndCoords);
   const lng = (stLong + arLong) / 2;
   const lat = (stLat + arLat) / 2;
+
+  const InterestsPoint = {
+    ...pointCoords,
+    data: {
+      ...pointCoords.data,
+      features: pointCoords.data.features.filter((option) => option.borne === false),
+    },
+  };
+  const bornesArray = pointCoords.data.features.filter((option) => option.borne === true);
 
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée
@@ -33,7 +45,8 @@ export default function Map() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
       center: [lng, lat],
-      zoom: 6
+      zoom: 6,
+      logoPosition: 'bottom-left',
     });
 
     // On récupère les points de départ et d'arrivée
@@ -41,8 +54,8 @@ export default function Map() {
     const end = [arLong, arLat];
 
     // On récupère les coordonnées des points d'intérêt
-    const coords = pointCoords.data.features.map(feature => feature.geometry.coordinates);
-    const coordsReplace = JSON.stringify(coords).replaceAll("],[", ";").replace("[[", "").replace("]]", "");
+    const coords = pointCoords.data.features.map((feature) => feature.geometry.coordinates);
+    const coordsReplace = JSON.stringify(coords).replaceAll('],[', ';').replace('[[', '').replace(']]', '');
 
     // On trace le trajet
     map.current.on('load', () => {
@@ -62,52 +75,52 @@ export default function Map() {
                 properties: {},
                 geometry: {
                   type: 'Point',
-                  coordinates: start
-                }
+                  coordinates: start,
+                },
               },
               {
                 type: 'Feature',
                 properties: {},
                 geometry: {
                   type: 'Point',
-                  coordinates: end
-                }
+                  coordinates: end,
+                },
               },
-            ]
-          }
+            ],
+          },
         },
         paint: {
           'circle-radius': 5,
-          'circle-color': '#6cc573'
-        }
+          'circle-color': '#6cc573',
+        },
       });
 
-
       // On ajoute les points d'intérêt
-      map.current.addSource('interestPoints',
-        pointCoords
+      map.current.addSource(
+        'interestPoints',
+        InterestsPoint,
       );
 
       map.current.addLayer({
-        'id': 'interestPoints',
-        'type': 'symbol',
-        'source': 'interestPoints',
-        'layout': {
+        id: 'interestPoints',
+        type: 'symbol',
+        source: 'interestPoints',
+        layout: {
           'icon-image': '{icon}',
-        }
+        },
       });
     });
 
     // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
     map.current.on('click', 'interestPoints', (e) => {
       // const coordinates = e.features[0].geometry.coordinates.slice();
-      const coordinates = e.features[0].geometry.coordinates;
+      const { coordinates } = e.features[0].geometry;
       const {
         description,
         adresse,
         title,
         image,
-       } = e.features[0].properties
+      } = e.features[0].properties;
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
@@ -118,7 +131,7 @@ export default function Map() {
           <p>${description}</p>
           <p></p>
           <p>${adresse}</p>
-        </div>`
+        </div>`,
         )
         .addTo(map.current);
     });
@@ -134,67 +147,63 @@ export default function Map() {
 
     // On ajoute les bornes
     map.current.on('load', () => {
-      [
-        {
-          name: 'borne1',
-          id: 'bornes1',
-          coord: [-1.61925, 47.49784]
-        },
-        {
-          name: 'borne2',
-          id: 'bornes2',
-          coord: [-1.89116, 48.3828]
-        }
-      ].forEach(element => {
+      bornesArray.forEach((borne, index) => {
         map.current.loadImage(
           myImage,
           (error, image) => {
             if (error) throw error;
-  
+
             // Add the image to the map style.
-            map.current.addImage(element.name, image);
-  
+            map.current.addImage(`${borne.properties.title} ${index + 1}`, image);
+
             // Add a data source containing one point feature.
-            map.current.addSource(element.id, {
-              'type': 'geojson',
-              'data': {
-                'type': 'FeatureCollection',
-                'features': [
+            map.current.addSource(`${borne.properties.title} ${index + 1} ${index + 1}`, {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [
                   {
-                    'type': 'Feature',
-                    'geometry': {
-                      'type': 'Point',
-                      'coordinates': element.coord,
-                    }
-                  }
-                ]
-              }
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: borne.geometry.coordinates,
+                    },
+                  },
+                ],
+              },
             });
-  
+
             // Add a layer to use the image to represent the data.
             map.current.addLayer({
-              'id': element.id,
-              'type': 'symbol',
-              'source': element.id, // reference the data source
-              'layout': {
-                'icon-image': element.name, // reference the image
-                'icon-size': 0.25
-              }
+              id: `${borne.properties.title} ${index + 1} ${index + 1}`,
+              type: 'symbol',
+              source: `${borne.properties.title} ${index + 1} ${index + 1}`, // reference the data source
+              layout: {
+                'icon-image': `${borne.properties.title} ${index + 1}`, // reference the image
+                'icon-size': 0.25,
+              },
             });
-          }
+          },
         );
       });
-      // Load a local image 
+      // Load a local image
     });
   });
 
-
-
-
-
   return (
-    <div>
-      <div ref={mapContainer} className="map-container" />
-    </div>
+    <section className="map">
+      <aside ref={mapContainer} className="map-container" />
+      {
+            !isConnected ? (
+              <Sidebar
+                text="Pour sauvegarder votre trajet, connectez-vous"
+              />
+            ) : (
+              <Sidebar
+                text="Sauvegardez ce trajet dans vos favoris"
+              />
+            )
+        }
+    </section>
   );
 }

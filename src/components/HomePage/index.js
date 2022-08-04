@@ -18,11 +18,23 @@ import { useTheme } from '@mui/material/styles';
 function HomePage() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('mobile'));
   const reducerRoute = 'auth';
+  const AppId = () => {
+    if (matchesMobile) {
+      return 'App';
+    }
+    if (matches) {
+      return 'App-Tablet';
+    }
+    if (!matches || !matchesMobile) {
+      return 'App-Desktop';
+    }
+  };
   return (
     <Box
       component="div"
-      id={matches ? 'App' : 'App-Desktop'}
+      id={AppId()}
       sx={{
         height: 'fit-content', width: '100%', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
       }}
