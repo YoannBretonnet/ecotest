@@ -37,7 +37,6 @@ export default function Map() {
     },
   };
   const bornesArray = pointCoords.data.features.filter((option) => option.borne === true);
-  console.log(bornesArray);
 
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée
