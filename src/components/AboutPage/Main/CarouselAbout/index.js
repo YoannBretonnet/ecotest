@@ -67,8 +67,10 @@ function CarouselComponent() {
                 width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.2vh solid grey', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
               }}
             >
+            
             <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${item.image}`}  alt={item.name}
               width="100px" />
+              <p className="carouselAbout-name">{item.name}</p>
               <p className="carouselAbout-content">{item.description}</p>
             </Paper>
           ))
