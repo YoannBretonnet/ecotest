@@ -2,13 +2,10 @@
 // == Style
 import './styles.scss';
 
-import Alex from 'src/assets/images/Alex.png';
-import Oceane from 'src/assets/images/Oceane.png';
-import Gaetan from 'src/assets/images/Gaetan.png';
-
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Box } from '@mui/material';
+import { Paper, Box, useMediaQuery,} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 import {
   BiChevronLeft,
@@ -20,23 +17,25 @@ function CarouselComponent() {
   const items = [
     {
       name: 'Gaetan',
-      image: {Gaetan},
+      image: 'Audi_E-tron_GT_Quattro_remove.png',
       description: 'Product Owner',
     },
     {
       name: 'Oceane',
-      image: {Oceane},
+      image: 'Tesla_Model_Y2_remove.png',
       description: 'Scrum Master',
     },
     {
       name: 'Alex',
-      image: {Alex},
+      image: 'peugeot-e-208-1.png',
       description: 'Back end',
     },
   ];
   const args = {
-    squareSize: '25vh',
+    squareSize: '80vw',
   };
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('laptop'));
   return (
     <Box component="section" sx={{ margin: '2vh auto 0 auto', width: 'fit-content', height: 'fit-content' }}>
       <Carousel
@@ -53,7 +52,7 @@ function CarouselComponent() {
         navButtonsProps={{
           style: {
             backgroundColor: 'transparent',
-            color: 'black',
+            color: 'none',
             height: 'fit-content',
             margin: '0',
             padding: '0',
@@ -65,15 +64,11 @@ function CarouselComponent() {
             <Paper
               key={i}
               sx={{
-                width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.4vh solid black', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
+                width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.2vh solid grey', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
               }}
             >
-              <img 
-              className="carouselAbout-image" 
-              scr={item.image}
-              alt={item.name}
-              width="100px"
-              />
+            <img className={matches ? 'main-img-desktop' : 'main-img'} crossOrigin="anonymous" src={`https://eco-roads.herokuapp.com/images/${item.image}`}  alt={item.name}
+              width="100px" />
               <p className="carouselAbout-content">{item.description}</p>
             </Paper>
           ))

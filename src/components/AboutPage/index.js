@@ -17,7 +17,7 @@ import { useTheme } from '@mui/material/styles';
 // == Composant
 function AboutPage() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('mobile'));
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const reducerRoute = 'auth';
   return (
     <Box

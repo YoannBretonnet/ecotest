@@ -50,14 +50,13 @@ function Main() {
             <p className="main-accroche">
               Découvrez votre région en toute sérénité au volant de votre voiture électrique
             </p>
-            <img scr= {Image} alt='test'/>
           </Box>
         ) : (
           <Box component="section" sx={{ display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh' }}>
             <p className="main-accroche-desktop">
               Découvrez votre région en toute sérénité au volant de votre voiture électrique
-              </p>     
-          </Box>
+              </p>   
+            </Box>
         )
       }
       {matches ? <CarouselComponent /> : <StepsComponent />}
