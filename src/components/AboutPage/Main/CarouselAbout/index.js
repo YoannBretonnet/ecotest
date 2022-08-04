@@ -2,10 +2,11 @@
 // == Style
 import './styles.scss';
 
-import alex from 'src/assets/images/Alex.png';
-import oceane from 'src/assets/images/Oceane.png';
-import gaetan from 'src/assets/images/Gaetan.png'
+import Alex from 'src/assets/images/Alex.png';
+import Oceane from 'src/assets/images/Oceane.png';
+import Gaetan from 'src/assets/images/Gaetan.png';
 
+import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Paper, Box } from '@mui/material';
 
@@ -19,17 +20,17 @@ function CarouselComponent() {
   const items = [
     {
       name: 'Gaetan',
-      image: {gaetan},
+      image: {Gaetan},
       description: 'Product Owner',
     },
     {
       name: 'Oceane',
-      image: {oceane},
+      image: {Oceane},
       description: 'Scrum Master',
     },
     {
       name: 'Alex',
-      image: {alex},
+      image: {Alex},
       description: 'Back end',
     },
   ];
