@@ -55,8 +55,17 @@ function Main() {
             <h1 className="about-title">
               L'équipe E-co Roads
             </h1>
+            
+          <ul className="about-accroche">
+            <li>Gaëtan Santucci : Product Owner et développeur backend</li>
+            <li>Océane Vignot : Scrum Master, Git Master et développeuse backend</li>
+            <li>Alexandre Humbert : Lead développeur backend</li>
+            <li>Aymen El Bakkaly : lead développeur frontend</li>
+            <li>Yoann Bretonnet : Développeur frontend</li>
+          </ul>
+          
 
-            <CarouselComponent></CarouselComponent>
+            {/* <CarouselComponent></CarouselComponent> */}
 
             <h2 className="about-title">
               Contactez-nous
