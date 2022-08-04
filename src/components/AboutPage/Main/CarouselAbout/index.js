@@ -32,7 +32,8 @@ function CarouselComponent() {
     },
   ];
   const args = {
-    squareSize: '80vw',
+    widthSize: '80vw',
+    heightSize: '40vh'
   };
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('laptop'));
@@ -46,7 +47,7 @@ function CarouselComponent() {
         animation="slide"
         autoPlay={false}
         indicators={false}
-        sx={{ width: args.squareSize, height: args.squareSize, margin: 'auto' }}
+        sx={{ width: args.widthSize, height: args.heightSize, margin: 'auto' }}
         NextIcon={<BiChevronRight size="8vh" />}
         PrevIcon={<BiChevronLeft size="8vh" />}
         navButtonsProps={{
@@ -64,7 +65,7 @@ function CarouselComponent() {
             <Paper
               key={i}
               sx={{
-                width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.2vh solid grey', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
+                width: args.widthSize, height: args.heightSize, background: 'transparent', border: '0.2vh solid grey', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
               }}
             >
             
