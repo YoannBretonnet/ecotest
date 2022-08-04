@@ -22,7 +22,7 @@ import { openCloseMenu } from 'src/actions/usability';
 
 import MenuIsConnnected from 'src/components/MenuIsConnnected';
 import Map from './Map';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 
 // == Composant
 function Main() {
@@ -44,7 +44,7 @@ function Main() {
   return (
     <Box component="main" id="main-HomePage">
       <Map />
-      {
+      {/* {
             !isConnected ? (
               <Sidebar
                 text="Pour sauvegarder votre trajet, connectez-vous"
@@ -54,7 +54,7 @@ function Main() {
                 text="Sauvegardez ce trajet dans vos favoris"
               />
             )
-        }
+        } */}
       {matches ? (
         <Box
           component="section"
