@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
@@ -32,10 +33,11 @@ export default function Map() {
     ...pointCoords,
     data: {
       ...pointCoords.data,
-      features: pointCoords.data.features.filter((option) => option.properties.title !== 'SuperChargeur'),
+      features: pointCoords.data.features.filter((option) => option.borne === false),
     },
   };
-  const bornesArray = pointCoords.data.features.filter((option) => option.properties.title === 'SuperChargeur');
+  const bornesArray = pointCoords.data.features.filter((option) => option.borne === true);
+  console.log(bornesArray);
 
   useEffect(() => {
     // on inititalise la map, centrée entre le point de départ et d'arrivée

@@ -18,7 +18,7 @@ export default function sidebar({ text }) {
       component="aside"
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'fit-content', marginTop: '2vh'}}
     >
-      <p className="details">{pointCoords.data.features.filter((option) => option.properties.title === 'SuperChargeur').length} Bornes de recharge | {pointCoords.data.features.filter((option) => option.properties.title !== 'SuperChargeur').length} Points d'intéret</p>
+      <p className="details">{pointCoords.data.features.filter((option) => option.borne === true).length} Bornes de recharge | {pointCoords.data.features.filter((option) => option.borne === false).length} Points d'intéret</p>
       <Box sx={{ width: 'fit-content' }}>
         <Button onClick={() => dispatch(openCloseConnectionModal())} sx={{ fontSize: '10px', backgroundColor: '#6cc573', color: 'white' }}>{text}</Button>
       </Box>
