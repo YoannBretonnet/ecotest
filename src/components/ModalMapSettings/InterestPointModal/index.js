@@ -44,7 +44,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
       modalElement={modalElement}
       reducerRoute={reducerRoute}
     >
-      <h1 className="modal-title">Point d'intérets</h1>
+      <h1 className="modal-title">Point d'intérêts</h1>
       <form
         className="modal-form-connection"
         onSubmit={((event) => {
@@ -100,7 +100,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
         >{error.message}
         </FormHelperText>
         )}
-        {!isLocalisation && (
+        {(!isLocalisation && !updatePage) && (
         <FormHelperText error>
           Veuillez sélectionner le départ / arrivée
         </FormHelperText>

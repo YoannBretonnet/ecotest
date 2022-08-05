@@ -133,7 +133,7 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
         />
           )
         }
-        {(updatePage && !DepartSelected.address) && (
+        {(updatePage && !DepartSelected.city) && (
         <FormHelperText
           error
         >Veuillez selectionner une adresse !

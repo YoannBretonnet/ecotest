@@ -84,7 +84,7 @@ function Header() {
               <BiMap size={args.size} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Point d'intérets">
+          <Tooltip title="Point d'Intérêts">
             <IconButton
               className={isInterestPointOpen ? styles.icon : ''}
               onClick={(() => dispatch(openCloseInterestPointModal()))}

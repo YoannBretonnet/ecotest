@@ -183,7 +183,9 @@ const reducer = (state = initialState, action = {}) => {
             email: action.data.email,
             id: action.data.id,
             car: action.data.car,
-            location: action.data.location,
+            location: {
+              ...action.data.location,
+            },
             categories: [
               ...action.data.categories,
             ],
