@@ -51,7 +51,7 @@ function ModalElement({
           <Box
             component="section"
             sx={{
-              width: '30vw', height: 'fit-content', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: '35vh', height: 'fit-content', display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >
             <Paper
