@@ -189,10 +189,8 @@ const connectUser = (store) => (next) => (action) => {
           car_id: stateUpdateTravelParams.mapSettings.carSettingsModal.carValue,
         },
       };
-      console.log(configProfileTravelUpdate);
       axios(configProfileTravelUpdate)
         .then((response) => {
-          console.log(response);
           store.dispatch(connectUserSuccess());
           store.dispatch(openCloseInterestPointModal());
         })
