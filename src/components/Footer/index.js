@@ -46,7 +46,7 @@ function Footer() {
             style={({ isActive }) => ({ display: isActive ? 'none' : 'flex', gap: '1vw' })}
             to="/"
           >
-            Page d'acceuil
+            Acceuil
             <p className="menu-separator">-</p>
           </NavLink>
         </Tooltip>
