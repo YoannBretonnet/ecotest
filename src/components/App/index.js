@@ -20,11 +20,17 @@ import {
   getCategoriesData,
 } from 'src/actions/mapSettings';
 
+import {
+  getProfilFail,
+} from 'src/actions/authentification';
+
 // == Composant
 function App() {
   const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
+  const isMapGenerated = useSelector((state) => state.mapData.status.isMapGenerated);
   useEffect(() => {
+    dispatch(getProfilFail());
     dispatch(getVehiclesData());
     dispatch(getCategoriesData());
   }, []);
@@ -37,7 +43,11 @@ function App() {
             <Route key="profile" path="/profile" element={<ProfilePage />} />
           )
         }
-        <Route key="map" path="/map" element={<MapPage />} />
+        {
+          isMapGenerated && (
+            <Route key="map" path="/map" element={<MapPage />} />
+          )
+        }
         <Route key="about" path="/about" element={<AboutPage />} />
         <Route key="*" path="*" element={<NotFoundPage />} />
       </Routes>
