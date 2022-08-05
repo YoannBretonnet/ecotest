@@ -65,8 +65,13 @@
 
   .carouselAbout-name {
     margin: 0 auto 0;
-    color: #757575;
+    color: black;
     font-weight: bold;
     font-size: large;
+  }
 
+  .carouselAbout-content {
+    font-family: 'Roboto';
+    font-size: 2vh;
+    color: #757575;
   }
