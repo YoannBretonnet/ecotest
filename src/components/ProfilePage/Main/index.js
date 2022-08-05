@@ -109,7 +109,7 @@ function Main() {
             </p>
             {
             location ? (
-              <Chip label={`${location.street_number} ${location.address}, ${location.city}`} />
+              <Chip label={location.label} />
             ) : (
               <Chip label="Aucune adresse enregistrée" />
             )

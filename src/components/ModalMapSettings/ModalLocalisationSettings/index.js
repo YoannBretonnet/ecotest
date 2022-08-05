@@ -62,7 +62,7 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
           event.preventDefault();
           // dispatch(openCloseLocalisationModal());
           // dispatch(openCloseInterestPointModal());
-          if (updatePage && DepartSelected.address) {
+          if (updatePage && DepartSelected.Lat && DepartSelected.Long) {
             dispatch(openCloseLocalisationModal());
             dispatch(openCloseInterestPointModal());
           }
@@ -103,37 +103,37 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
         />
         {
           !updatePage && (
-        <Autocomplete
-          inputValue={ArrivSelected.label}
-          onChange={(_event, value) => dispatch(changeMapSettingAutocompleteValue(value, arriv.inputElement, modalElement))}
-          noOptionsText="Aucune proposition"
-          disablePortal
-          disableClearable
-          id="modal-form-departure"
-          options={ArrivProposition}
-          loading={isArrivLoading}
-          getOptionLabel={(option) => option.properties.label}
-          sx={{ width: '100%' }}
-          renderInput={(params) => (
-            <TextField
-              onChange={(event) => dispatch(updateListOfLocalisation(event.target.value, arriv.inputElement, arriv.loading, arriv.proposition))}
-              {...params}
-              label="Point de d'arrivée"
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isArrivLoading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
-          )}
-        />
+          <Autocomplete
+            inputValue={ArrivSelected.label}
+            onChange={(_event, value) => dispatch(changeMapSettingAutocompleteValue(value, arriv.inputElement, modalElement))}
+            noOptionsText="Aucune proposition"
+            disablePortal
+            disableClearable
+            id="modal-form-departure"
+            options={ArrivProposition}
+            loading={isArrivLoading}
+            getOptionLabel={(option) => option.properties.label}
+            sx={{ width: '100%' }}
+            renderInput={(params) => (
+              <TextField
+                onChange={(event) => dispatch(updateListOfLocalisation(event.target.value, arriv.inputElement, arriv.loading, arriv.proposition))}
+                {...params}
+                label="Point de d'arrivée"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {isArrivLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+              />
+            )}
+          />
           )
         }
-        {(updatePage && !DepartSelected.city) && (
+        {(updatePage && !DepartSelected.Lat && !DepartSelected.Long) && (
         <FormHelperText
           error
         >Veuillez selectionner une adresse !

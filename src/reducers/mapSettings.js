@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-else-return */
 import {
   OPEN_CLOSE_CAR_MODAL,
@@ -155,8 +156,8 @@ const reducer = (state = initialState, action = {}) => {
           ...state[action.modalElement],
           [action.inputElement]: {
             label: action.properties.label,
-            street_number: parseInt(action.properties.housenumber, 10),
-            address: action.properties.street,
+            street_number: (parseInt(action.properties.housenumber, 10) ? parseInt(action.properties.housenumber, 10) : undefined),
+            address: (action.properties.street ? action.properties.street : action.properties.label),
             zipcode: parseInt(action.properties.postcode, 10),
             city: action.properties.city,
             Lat: action.geometry.coordinates[1],
