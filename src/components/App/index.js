@@ -20,6 +20,10 @@ import {
   getCategoriesData,
 } from 'src/actions/mapSettings';
 
+import {
+  getTeamData,
+} from 'src/actions/usability';
+
 // == Composant
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +31,7 @@ function App() {
   useEffect(() => {
     dispatch(getVehiclesData());
     dispatch(getCategoriesData());
+    dispatch(getTeamData());
   }, []);
   return (
     <ThemeProvider theme={theme}>

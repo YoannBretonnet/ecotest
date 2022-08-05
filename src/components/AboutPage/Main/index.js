@@ -19,14 +19,15 @@ import {
   BiDotsVerticalRounded,
 } from 'react-icons/bi';
 
+import MenuIsConnnected from 'src/components/MenuIsConnnected';
 import CarouselComponent from './CarouselAbout';
 import StepsComponent from './StepsComponentAbout';
-import MenuIsConnnected from 'src/components/MenuIsConnnected';
 
 // == Composant
 function Main() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const matches = useMediaQuery(theme.breakpoints.down('laptop'));
+  const matchesTablet = useMediaQuery(theme.breakpoints.down('tablet'));
   const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
   const { isOpen } = useSelector((state) => state.usability.menu);
@@ -41,32 +42,22 @@ function Main() {
   // display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh'
   return (
     <Box component="main" id="main-AboutPage">
-          <Box component="section" sx={{ margin: '4vh 5.5vh 0' }}>
-            {/* <h1 className="about-title">
-              A propos d'E-co Roads
-            </h1>
-            <p className="about-accroche">
-              E-co Roads a été fondé en 2022 dans le but d'aider les proppriétaires de voitures électriques à partir en road trip. 
-              Notre équipe propose ainsi une application générant des trajets liant la localisation des stations de rechargement avec
-              une liste de sites à visiter. Régulièrement, nous proposons de nouveaux lieux éco-friendly qui partagent les valeurs
-              de nos utlisateurs.
-            </p> */}
+      <Box component="section" sx={{ margin: '4vh 0 0' }}>
 
-            <h1 className="about-title">
-              L'équipe E-co Roads
-            </h1>
+        <h1 className="about-title">
+          L'équipe E-co Roads
+        </h1>
 
-            {matches ? <CarouselComponent /> : <StepsComponent />}
+        {matches ? <CarouselComponent /> : <StepsComponent />}
 
-            <h2 className="about-title">
-              Contactez-nous
-            </h2>
-            <p className="about-accroche">
-              <a href="mailto: hello@eco-roads.com">hello@eco-roads.com</a>
-            </p>
-          </Box>
-       
-      {matches ? (
+        <h2 className="about-title">
+          Contactez-nous
+        </h2>
+        <p className="about-accroche">
+          <a href="mailto: hello@eco-roads.com">hello@eco-roads.com</a>
+        </p>
+      </Box>
+      {matchesTablet ? (
         <Box
           component="section"
           sx={{
