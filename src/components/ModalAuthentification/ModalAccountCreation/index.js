@@ -84,7 +84,7 @@ function ModalAccountCreation({ reducerRoute }) {
         )}
         {
           !isLoading ? (
-            <IconButton sx={{ color: 'black' }} type="submit">
+            <IconButton sx={{ color: 'black', width: 'fit-content', margin: 'auto' }} type="submit">
               <BiChevronRight size="8vh" />
             </IconButton>
           ) : (

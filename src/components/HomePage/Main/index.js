@@ -109,7 +109,7 @@ function Main() {
           </IconButton>
         ) : (
           <>
-            <Tooltip title="Settings">
+            <Tooltip title="Paramètre">
               <IconButton
                 onClick={handleClick}
                 aria-controls={isOpen ? 'account-menu' : undefined}

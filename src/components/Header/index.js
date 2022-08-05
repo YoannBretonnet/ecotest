@@ -76,7 +76,7 @@ function Header() {
               <BiCar size={args.size} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Choix véhicule">
+          <Tooltip title="Adresse">
             <IconButton
               className={isLocalisationOpen ? styles.icon : ''}
               onClick={(() => dispatch(openCloseLocalisationModal()))}
