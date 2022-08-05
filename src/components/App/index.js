@@ -21,8 +21,9 @@ import {
 } from 'src/actions/mapSettings';
 
 import {
-  getProfilFail,
-} from 'src/actions/authentification';
+  getTeamData,
+} from 'src/actions/usability';
+
 
 // == Composant
 function App() {
@@ -30,9 +31,9 @@ function App() {
   const isConnected = useSelector((state) => state.auth.isConnected);
   const isMapGenerated = useSelector((state) => state.mapData.status.isMapGenerated);
   useEffect(() => {
-    dispatch(getProfilFail());
     dispatch(getVehiclesData());
     dispatch(getCategoriesData());
+    dispatch(getTeamData());
   }, []);
   return (
     <ThemeProvider theme={theme}>

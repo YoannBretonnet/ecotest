@@ -8,12 +8,6 @@
   src: url(src/assets/fonts/noway-regular.ttf);
 }
 
-#main-HomePage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .about-title {
   color: #6cc573;
   font-size: 3vh;
@@ -21,18 +15,29 @@
   font-family: 'Noway';
   margin-bottom: 1vh;
   margin-top: 2vh;
+  margin-left: 1.5vh;
 }
 
 .about-accroche {
   font-size: 1.7vh;
   font-family: 'Roboto';
   color: #757575;
+  margin-left: 1.5vh;
 }
 
-.main-accroche-desktop {
+.mainAbout-img-desktop {
   width: 40%;
   font-family: 'Roboto';
   color: #757575;
   font-size: 4vh;
   margin-right: 12vh;
+}
+
+.mainAbout-img {
+  height: 70%;
+  width: auto;
+  font-family: 'Roboto';
+  color: #757575;
+  font-size: 4vh;
+  margin: 0 auto 2vh;
 }
