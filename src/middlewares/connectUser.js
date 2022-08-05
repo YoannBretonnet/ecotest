@@ -24,6 +24,7 @@ import {
   UPDATE_SECURITY_PARAM,
   openCloseAccountUpdateModal,
   UPDATE_USER_TRAVEL_PARAM,
+  LOGOUT,
 } from 'src/actions/authentification';
 
 import {
@@ -175,7 +176,6 @@ const connectUser = (store) => (next) => (action) => {
     case UPDATE_USER_TRAVEL_PARAM:
       next(action);
       const stateUpdateTravelParams = store.getState();
-      console.log(stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected);
       const configProfileTravelUpdate = {
         method: 'patch',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
@@ -189,6 +189,7 @@ const connectUser = (store) => (next) => (action) => {
           car_id: stateUpdateTravelParams.mapSettings.carSettingsModal.carValue,
         },
       };
+      console.log(configProfileTravelUpdate);
       axios(configProfileTravelUpdate)
         .then((response) => {
           console.log(response);
@@ -198,6 +199,22 @@ const connectUser = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error);
           // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+        });
+      break;
+    case LOGOUT:
+      next(action);
+      const configLogout = {
+        method: 'get',
+        url: 'https://eco-roads.herokuapp.com/api/v1/user/logout',
+        withCredentials: true,
+      };
+      axios(configLogout)
+        .then((response) => {
+          localStorage.removeItem('accessToken');
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
       break;
     default:
