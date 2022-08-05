@@ -37,8 +37,8 @@ export default function Map() {
     },
   };
   const bornesArray = pointCoords.data.features.filter((option) => option.borne === true);
-
   useEffect(() => {
+    map.current = null;
     // on inititalise la map, centrée entre le point de départ et d'arrivée
     if (map.current) return;
     map.current = new mapboxgl.Map({
@@ -116,7 +116,6 @@ export default function Map() {
       // const coordinates = e.features[0].geometry.coordinates.slice();
       const { coordinates } = e.features[0].geometry;
       const {
-        description,
         adresse,
         title,
         image,
@@ -126,10 +125,8 @@ export default function Map() {
         .setLngLat(coordinates)
         .setHTML(
           `<div>
-        <img src="${image}" />
+        <img crossOrigin="anonymous" src="${image}" />
         <h3>${title}</h3>
-          <p>${description}</p>
-          <p></p>
           <p>${adresse}</p>
         </div>`,
         )
@@ -188,7 +185,7 @@ export default function Map() {
       });
       // Load a local image
     });
-  });
+  }, [InterestsPoint]);
 
   return (
     <section className="map">
@@ -197,10 +194,14 @@ export default function Map() {
             !isConnected ? (
               <Sidebar
                 text="Pour sauvegarder votre trajet, connectez-vous"
+                intLength={InterestsPoint.data.features.length}
+                bornLength={bornesArray.length}
               />
             ) : (
               <Sidebar
                 text="Sauvegardez ce trajet dans vos favoris"
+                intLength={InterestsPoint.data.features.length}
+                bornLength={bornesArray.length}
               />
             )
         }

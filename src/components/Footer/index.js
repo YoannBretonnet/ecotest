@@ -23,7 +23,7 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'absolute', bottom: '0', maxHeight: '7vh',
+        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'fixed', bottom: '0', maxHeight: '7vh',
       }}
     >
       {matches ? (
@@ -40,16 +40,26 @@ function Footer() {
         </div>
       )}
       <nav className="menu-footer">
+        <Tooltip title="Page d'acceuil">
+          <NavLink
+            key="homePage"
+            style={({ isActive }) => ({ display: isActive ? 'none' : 'flex', gap: '1vw' })}
+            to="/"
+          >
+            Page d'acceuil
+            <p className="menu-separator">-</p>
+          </NavLink>
+        </Tooltip>
         <Tooltip title="À propos">
           <NavLink
             key="about"
-            className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
+            style={({ isActive }) => ({ display: isActive ? 'none' : 'flex', gap: '1vw' })}
             to="/about"
           >
             À propos
+            <p className="menu-separator">-</p>
           </NavLink>
         </Tooltip>
-        <p className="menu-separator">-</p>
         <Tooltip title="CGU">
           <NavLink
             key="cgu"

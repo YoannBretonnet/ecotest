@@ -8,6 +8,7 @@ import connectUser from 'src/middlewares/connectUser';
 import getVehiclesDataMiddleware from 'src/middlewares/getVehiclesDataMiddleware';
 import getCategoriesDataMiddleware from 'src/middlewares/getCategoriesDataMiddleware';
 import getTeamDataModdleware from 'src/middlewares/getTeamDataModdleware';
+import getRouteMiddleware from 'src/middlewares/getRouteMiddleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,6 +20,7 @@ const enhancers = composeEnhancers(
     getVehiclesDataMiddleware,
     getCategoriesDataMiddleware,
     getTeamDataModdleware,
+    getRouteMiddleware,
   ),
 );
 

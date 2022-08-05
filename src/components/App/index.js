@@ -24,10 +24,12 @@ import {
   getTeamData,
 } from 'src/actions/usability';
 
+
 // == Composant
 function App() {
   const dispatch = useDispatch();
   const isConnected = useSelector((state) => state.auth.isConnected);
+  const isMapGenerated = useSelector((state) => state.mapData.status.isMapGenerated);
   useEffect(() => {
     dispatch(getVehiclesData());
     dispatch(getCategoriesData());
@@ -36,15 +38,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route key="homePage" path="/" element={<HomePage />} />
         {
           isConnected && (
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route key="profile" path="/profile" element={<ProfilePage />} />
           )
         }
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        {
+          isMapGenerated && (
+            <Route key="map" path="/map" element={<MapPage />} />
+          )
+        }
+        <Route key="about" path="/about" element={<AboutPage />} />
+        <Route key="*" path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
   );
