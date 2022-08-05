@@ -2,7 +2,7 @@
 // == Style
 import './styles.scss';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import {
   Menu,
@@ -13,6 +13,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { openCloseMenu } from 'src/actions/usability';
+import { logout } from 'src/actions/authentification';
 
 import {
   BiCog,
@@ -21,6 +22,8 @@ import {
 
 // == Composant
 function MenuIsConnnected({ inputMenu, setinputMenu }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const dispatch = useDispatch();
@@ -90,7 +93,8 @@ function MenuIsConnnected({ inputMenu, setinputMenu }) {
               <NavLink
                 key="logout"
                 className={({ isActive }) => (isActive ? 'menu-is-connected-link menu-is-connected-link--active' : 'menu-is-connected-link')}
-                to="/logout"
+                to={`${location.pathname}`}
+                // onClick={() => dispatch(logout(navigate))}
               >
                 <BiExit size={`${args.littleSize}vh`} /> Se déconnecter
               </NavLink>
@@ -149,7 +153,8 @@ function MenuIsConnnected({ inputMenu, setinputMenu }) {
               <NavLink
                 key="logout"
                 className={({ isActive }) => (isActive ? 'menu-is-connected-link menu-is-connected-link--active' : 'menu-is-connected-link')}
-                to="/logout"
+                to={`${location.pathname}`}
+                // onClick={() => dispatch(logout(navigate))}
               >
                 <BiExit size={`${args.littleSize}vh`} /> Se déconnecter
               </NavLink>

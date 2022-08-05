@@ -1,5 +1,5 @@
 // == Import
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { saveAs } from 'file-saver';
 
 import { Box, Tooltip, useMediaQuery } from '@mui/material';
@@ -10,6 +10,7 @@ import './styles.scss';
 
 // == Composant
 function Footer() {
+  const location = useLocation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const saveCGU = () => {
@@ -18,7 +19,6 @@ function Footer() {
       'CGU.pdf',
     );
   };
-
   return (
     <Box
       component="footer"
@@ -40,7 +40,7 @@ function Footer() {
         </div>
       )}
       <nav className="menu-footer">
-        <Tooltip title="Acceuil">
+        <Tooltip title="Acceuil ">
           <NavLink
             key="homePage"
             style={({ isActive }) => ({ display: isActive ? 'none' : 'flex', gap: '1vw' })}
@@ -64,7 +64,7 @@ function Footer() {
           <NavLink
             key="cgu"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
-            to="/"
+            to={`${location.pathname}`}
             onClick={saveCGU}
           >
             CGU
