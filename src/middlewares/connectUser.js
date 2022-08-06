@@ -103,6 +103,7 @@ const connectUser = (store) => (next) => (action) => {
     case REGISTER_USER:
       next(action);
       const stateRegister = store.getState();
+      const { isMapGenerated } = stateRegister.mapData.status;
       const configRegister = {
         method: 'post',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/register',
@@ -110,12 +111,20 @@ const connectUser = (store) => (next) => (action) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        data: {
+        data: !isMapGenerated ? {
           username: stateRegister.auth.accountCreationModal.userNameValue,
           email: stateRegister.auth.accountCreationModal.emailValue,
           password: stateRegister.auth.accountCreationModal.passwordValue,
+        } : {
+          username: stateRegister.auth.accountCreationModal.userNameValue,
+          email: stateRegister.auth.accountCreationModal.emailValue,
+          password: stateRegister.auth.accountCreationModal.passwordValue,
+          location: stateRegister.mapData.userInfo.departureAddress,
+          categories: stateRegister.mapData.userInfo.categories.map((option) => option.id),
+          car_id: stateRegister.mapData.userInfo.car.id,
         },
       };
+      console.log(configRegister);
       axios(configRegister)
         .then(() => {
           store.dispatch(registerUserSuccess());
