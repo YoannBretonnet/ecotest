@@ -1,7 +1,7 @@
 // == Import
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-// import {  } from 'src/store/action';
+import DOMPurify from 'dompurify';
 
 import {
   openCloseAccountUpdateModal,
@@ -55,6 +55,7 @@ function Main() {
     dispatch(openCloseMenu(true));
     setinputMenu(event.currentTarget);
   };
+  const userNameClear = DOMPurify.sanitize(userName, { USE_PROFILES: { html: false } });
 
   return (
     <Box
@@ -76,7 +77,7 @@ function Main() {
           }}
         >
           <h2 className="main-message">
-            {`Bienvenue ${userName}`}
+            {`Bienvenue ${userNameClear}`}
           </h2>
           <Tooltip title="Paramètre de sécurité">
             <IconButton
