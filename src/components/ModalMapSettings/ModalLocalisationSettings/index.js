@@ -27,6 +27,25 @@ import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
+function getGoodOptions(arrayProposition) {
+  if (!arrayProposition[0]) {
+    return [];
+  }
+  return arrayProposition.map((option) => {
+    const arrayTested = arrayProposition.find((arrayTest) => arrayTest.properties.label === option.properties.label);
+    if (arrayTested) {
+      return {
+        ...option,
+        properties: {
+          ...option.properties,
+          label: `${option.properties.label} ${option.properties.postcode}`,
+        },
+      };
+    }
+    return option;
+  });
+}
+
 // == Composant
 function ModalLocalisationSettings({ reducerRoute, updatePage }) {
   const dispatch = useDispatch();
@@ -79,7 +98,7 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
           disablePortal
           disableClearable
           id="modal-form-departure"
-          options={DepartProposition}
+          options={getGoodOptions(DepartProposition)}
           isOptionEqualToValue={(option, value) => option.properties.id === value.properties.id}
           loading={isDepartLoading}
           getOptionLabel={(option) => option.properties.label}
@@ -110,7 +129,8 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
             disablePortal
             disableClearable
             id="modal-form-departure"
-            options={ArrivProposition}
+            options={getGoodOptions(ArrivProposition)}
+            isOptionEqualToValue={(option, value) => option.properties.id === value.properties.id}
             loading={isArrivLoading}
             getOptionLabel={(option) => option.properties.label}
             sx={{ width: '100%' }}
