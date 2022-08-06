@@ -32,8 +32,8 @@ function getGoodOptions(arrayProposition) {
     return [];
   }
   return arrayProposition.map((option) => {
-    const arrayTested = arrayProposition.find((arrayTest) => arrayTest.properties.label === option.properties.label);
-    if (arrayTested) {
+    const arrayTested = arrayProposition.filter((arrayTest) => arrayTest.properties.label === option.properties.label);
+    if (arrayTested.length > 1) {
       return {
         ...option,
         properties: {

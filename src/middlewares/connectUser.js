@@ -182,8 +182,6 @@ const connectUser = (store) => (next) => (action) => {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
         data: {
-          username: stateUpdateTravelParams.auth.initialUserAccount.userName,
-          email: stateUpdateTravelParams.auth.initialUserAccount.email,
           location: stateUpdateTravelParams.mapSettings.localisationSettingsModal.DepartSelected,
           categories: stateUpdateTravelParams.mapSettings.interestPointModal.selected.map((option) => option.id),
           car_id: stateUpdateTravelParams.mapSettings.carSettingsModal.carValue,
