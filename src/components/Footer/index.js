@@ -23,7 +23,7 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'fixed', bottom: '0', maxHeight: '7vh',
+        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'absolute', bottom: '0', maxHeight: '7vh',
       }}
     >
       {matches ? (
