@@ -36,7 +36,7 @@ function HomePage() {
       component="div"
       id={AppId()}
       sx={{
-        height: 'fit-content', width: '100vw', margin: '0', padding: '0', display: 'table-cell', flexDirection: 'column', minHeight: '100vh',
+        height: 'fit-content', width: '100%', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
       }}
     >
       <Header />
