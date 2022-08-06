@@ -15,7 +15,7 @@ function Main() {
       <p
         className="not-found-page-title"
       >
-        Adresse incorect !
+        Adresse incorrecte !
       </p>
       <p
         className="not-found-page-content"

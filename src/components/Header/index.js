@@ -49,7 +49,7 @@ function Header() {
       >
         {!matches && (
         <Tooltip
-          title="Page d'acceuil"
+          title="Page d'accueil"
           sx={{ position: 'absolute', top: '0', left: '0' }}
         >
           <NavLink
@@ -64,7 +64,7 @@ function Header() {
         </Tooltip>
         )}
         <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }} onClick={(() => dispatch(openCloseCarModal()))}>
-          Véhicule | Localisation | Intérets
+          Véhicule | Localisation | Intérêts
           <BiSearch size="3.1vh" />
         </Fab>
         <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '1vh' }}>
