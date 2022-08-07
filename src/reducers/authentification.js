@@ -16,6 +16,7 @@ import {
   DELETE_ACCOUNT,
   CLEAR_AUTH_SETTINGS,
   DELETE_ACCOUNT_FAIL,
+  MAKE_PASSWORD_UPDATABLE_OR_NOT,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -48,6 +49,7 @@ export const initialState = {
     userNameValue: '',
     emailValue: '',
     passwordValue: '',
+    passwordUpdate: false,
     error: {
       isError: false,
       message: undefined,
@@ -289,6 +291,14 @@ const reducer = (state = initialState, action = {}) => {
             message: action.message,
           },
           isDeleting: false,
+        },
+      };
+    case MAKE_PASSWORD_UPDATABLE_OR_NOT:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          passwordUpdate: !state.accountUpdateModal.passwordUpdate,
         },
       };
     default:

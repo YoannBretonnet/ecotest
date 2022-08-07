@@ -25,6 +25,7 @@ import {
   openCloseAccountUpdateModal,
   UPDATE_USER_TRAVEL_PARAM,
   LOGOUT,
+  makePasswordUpdatableOrNot,
 } from 'src/actions/authentification';
 
 import {
@@ -124,7 +125,6 @@ const connectUser = (store) => (next) => (action) => {
           car_id: stateRegister.mapData.userInfo.car.id,
         },
       };
-      console.log(configRegister);
       axios(configRegister)
         .then(() => {
           store.dispatch(registerUserSuccess());
@@ -160,12 +160,16 @@ const connectUser = (store) => (next) => (action) => {
     case UPDATE_SECURITY_PARAM:
       next(action);
       const stateUpdateSecurityParams = store.getState();
+      const { passwordUpdate } = stateUpdateSecurityParams.auth.accountUpdateModal;
       const configProfileSecurityUpdate = {
         method: 'patch',
         url: 'https://eco-roads.herokuapp.com/api/v1/user/profile',
         withCredentials: true,
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-        data: {
+        data: !passwordUpdate ? {
+          username: stateUpdateSecurityParams.auth.accountUpdateModal.userNameValue,
+          email: stateUpdateSecurityParams.auth.accountUpdateModal.emailValue,
+        } : {
           username: stateUpdateSecurityParams.auth.accountUpdateModal.userNameValue,
           email: stateUpdateSecurityParams.auth.accountUpdateModal.emailValue,
           password: stateUpdateSecurityParams.auth.accountUpdateModal.passwordValue,
@@ -173,9 +177,9 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configProfileSecurityUpdate)
         .then((response) => {
-          console.log(response);
           store.dispatch(connectUserSuccess());
           store.dispatch(openCloseAccountUpdateModal());
+          store.dispatch(makePasswordUpdatableOrNot());
         })
         .catch((error) => {
           console.log(error);

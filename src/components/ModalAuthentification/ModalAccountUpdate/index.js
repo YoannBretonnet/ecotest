@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-closing-tag-location */
 // == Import
 import PropTypes from 'prop-types';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 // == Style
 import './styles.scss';
@@ -93,6 +93,7 @@ function ModalAccountUpdate({ reducerRoute }) {
         />
         <InputPassword
           modalElement={modalElement}
+          updatePage
         />
         <Button
           variant="outlined"

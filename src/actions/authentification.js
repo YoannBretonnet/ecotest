@@ -19,6 +19,7 @@ export const DELETE_ACCOUNT_FAIL = 'DELETE_ACCOUNT_FAIL';
 export const UPDATE_SECURITY_PARAM = 'UPDATE_SECURITY_PARAM';
 export const UPDATE_USER_TRAVEL_PARAM = 'UPDATE_USER_TRAVEL_PARAM';
 export const LOGOUT = 'LOGOUT';
+export const MAKE_PASSWORD_UPDATABLE_OR_NOT = 'MAKE_PASSWORD_UPDATABLE_OR_NOT';
 
 export const openCloseConnectionModal = () => ({
   type: OPEN_CLOSE_CONNECTION_MODAL,
@@ -114,4 +115,9 @@ export const updateUserTravelParam = () => ({
 export const logout = (navigate) => ({
   type: LOGOUT,
   navigate,
+});
+
+export const makePasswordUpdatableOrNot = (content) => ({
+  type: MAKE_PASSWORD_UPDATABLE_OR_NOT,
+  content,
 });
