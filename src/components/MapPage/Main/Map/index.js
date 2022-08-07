@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import DOMPurify from 'dompurify';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import getRoute from './getRoute';
 import Sidebar from '../Sidebar';
@@ -126,8 +127,8 @@ export default function Map() {
         .setHTML(
           `<div>
         <img crossOrigin="anonymous" src="${image}" />
-        <h3>${title}</h3>
-          <p>${adresse}</p>
+        <h3>${DOMPurify.sanitize(title, { USE_PROFILES: { html: false } })}</h3>
+          <p>${DOMPurify.sanitize(adresse, { USE_PROFILES: { html: false } })}</p>
         </div>`,
         )
         .addTo(map.current);
