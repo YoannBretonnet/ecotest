@@ -179,7 +179,6 @@ const connectUser = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(connectUserSuccess());
           store.dispatch(openCloseAccountUpdateModal());
-          store.dispatch(makePasswordUpdatableOrNot());
         })
         .catch((error) => {
           console.log(error);

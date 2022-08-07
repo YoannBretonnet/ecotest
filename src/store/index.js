@@ -9,6 +9,7 @@ import getVehiclesDataMiddleware from 'src/middlewares/getVehiclesDataMiddleware
 import getCategoriesDataMiddleware from 'src/middlewares/getCategoriesDataMiddleware';
 import getTeamDataModdleware from 'src/middlewares/getTeamDataModdleware';
 import getRouteMiddleware from 'src/middlewares/getRouteMiddleware';
+import usability from 'src/middlewares/usability';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,6 +22,7 @@ const enhancers = composeEnhancers(
     getCategoriesDataMiddleware,
     getTeamDataModdleware,
     getRouteMiddleware,
+    usability,
   ),
 );
 

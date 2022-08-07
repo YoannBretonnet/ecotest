@@ -62,8 +62,11 @@ function InputPassword({ modalElement, updatePage }) {
                   '&.MuiButton-root': {
                     margin: 'auto', color: '#6cc573', border: '1px solid #6cc573',
                   },
+                  '&.MuiButton-root:hover': {
+                    backgroundColor: 'white',
+                  },
                 }}
-                onClick={() => dispatch(makePasswordUpdatableOrNot())}
+                onClick={() => dispatch(makePasswordUpdatableOrNot(true))}
               >
                 Changer Mot de passe
               </Button>

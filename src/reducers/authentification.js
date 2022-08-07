@@ -298,7 +298,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         accountUpdateModal: {
           ...state.accountUpdateModal,
-          passwordUpdate: !state.accountUpdateModal.passwordUpdate,
+          passwordUpdate: action.boolean,
         },
       };
     default:

@@ -117,7 +117,7 @@ export const logout = (navigate) => ({
   navigate,
 });
 
-export const makePasswordUpdatableOrNot = (content) => ({
+export const makePasswordUpdatableOrNot = (boolean) => ({
   type: MAKE_PASSWORD_UPDATABLE_OR_NOT,
-  content,
+  boolean,
 });
