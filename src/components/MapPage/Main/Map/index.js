@@ -194,7 +194,7 @@ export default function Map() {
       {
             !isConnected ? (
               <Sidebar
-                text="Pour sauvegarder votre trajet, connectez-vous"
+                text="Pour sauvegarder votre prochain trajet, connectez-vous"
                 intLength={InterestsPoint.data.features.length}
                 bornLength={bornesArray.length}
               />
