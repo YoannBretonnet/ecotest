@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 // == Style
+import DOMPurify from 'dompurify';
 import './styles.scss';
 
 import { Paper, Box } from '@mui/material';
@@ -43,8 +44,8 @@ function StepsComponent() {
               }}
             >
               <Icon iconSelector={item.icon} />
-              <h3 className="steps-step">{item.step}</h3>
-              <p className="steps-content">{item.description}</p>
+              <h3 className="steps-step">{DOMPurify.sanitize(item.step, { USE_PROFILES: { html: false } })}</h3>
+              <p className="steps-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
             </Paper>
           ))
         }

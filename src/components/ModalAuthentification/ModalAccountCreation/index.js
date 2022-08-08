@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-tag-location */
+import DOMPurify from 'dompurify';
 // == Import
 import PropTypes from 'prop-types';
 
@@ -80,7 +81,7 @@ function ModalAccountCreation({ reducerRoute }) {
         {error.isError && (
         <FormHelperText
           error={error.isError}
-        >{error.message}</FormHelperText>
+        >{DOMPurify.sanitize(error.message, { USE_PROFILES: { html: false } })}</FormHelperText>
         )}
         {
           !isLoading ? (

@@ -55,7 +55,6 @@ function Main() {
     dispatch(openCloseMenu(true));
     setinputMenu(event.currentTarget);
   };
-  const userNameClear = DOMPurify.sanitize(userName, { USE_PROFILES: { html: false } });
 
   return (
     <Box
@@ -77,7 +76,7 @@ function Main() {
           }}
         >
           <h2 className="main-message">
-            {`Bienvenue ${userNameClear}`}
+            {`Bienvenue ${DOMPurify.sanitize(userName, { USE_PROFILES: { html: false } })}`}
           </h2>
           <Tooltip title="Paramètre de sécurité">
             <IconButton

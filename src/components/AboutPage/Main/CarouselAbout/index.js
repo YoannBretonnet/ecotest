@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { useSelector, useDispatch } from 'react-redux';
+import DOMPurify from 'dompurify';
 // == Style
 import './styles.scss';
 
@@ -56,12 +57,12 @@ function CarouselComponent() {
               <img
                 className={matches ? 'mainAbout-img-desktop' : 'mainAbout-img'}
                 crossOrigin="anonymous"
-                src={item.image}
-                alt={item.name}
+                src={DOMPurify.sanitize(item.image, { USE_PROFILES: { html: false } })}
+                alt={DOMPurify.sanitize(item.name, { USE_PROFILES: { html: false } })}
                 width="100px"
               />
-              <p className="carouselAbout-name">{item.name}</p>
-              <p className="carouselAbout-content">{item.description}</p>
+              <p className="carouselAbout-name">{DOMPurify.sanitize(item.name, { USE_PROFILES: { html: false } })}</p>
+              <p className="carouselAbout-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
             </Paper>
           ))
         }

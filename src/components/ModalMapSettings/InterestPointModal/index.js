@@ -6,6 +6,7 @@ import { updateUserTravelParam } from 'src/actions/authentification';
 import { getRoute } from 'src/actions/mapData';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 // == Style
 import './styles.scss';
@@ -83,7 +84,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
                     }}
                   />
               )}
-                label={option.name}
+                label={DOMPurify.sanitize(option.name, { USE_PROFILES: { html: false } })}
               />
             ))}
           </FormGroup>
@@ -97,7 +98,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
         {error.isError && (
         <FormHelperText
           error={error.isError}
-        >{error.message}
+        >{DOMPurify.sanitize(error.message, { USE_PROFILES: { html: false } })}
         </FormHelperText>
         )}
         {(!isLocalisation && !updatePage) && (
@@ -108,7 +109,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
         {statusError.isError && (
         <FormHelperText
           error={statusError.isError}
-        >{statusError.message}
+        >{DOMPurify.sanitize(statusError.message, { USE_PROFILES: { html: false } })}
         </FormHelperText>
         )}
         <Box

@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 // == Style
 import './styles.scss';
+import DOMPurify from 'dompurify';
 
-import Icon from './Icon';
 
 import Carousel from 'react-material-ui-carousel';
 import { Paper, Box } from '@mui/material';
@@ -10,8 +10,8 @@ import { Paper, Box } from '@mui/material';
 import {
   BiChevronLeft,
   BiChevronRight,
-  BiEditAlt,
 } from 'react-icons/bi';
+import Icon from './Icon';
 
 // == Composant
 function CarouselComponent() {
@@ -70,8 +70,8 @@ function CarouselComponent() {
               }}
             >
               <Icon iconSelector={item.icon} />
-              <h3 className="carousel-step">{item.step}</h3>
-              <p className="carousel-content">{item.description}</p>
+              <h3 className="carousel-step">{DOMPurify.sanitize(item.step, { USE_PROFILES: { html: false } })}</h3>
+              <p className="carousel-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
             </Paper>
           ))
         }

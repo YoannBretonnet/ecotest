@@ -79,8 +79,6 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
         className="modal-form-localisation"
         onSubmit={((event) => {
           event.preventDefault();
-          // dispatch(openCloseLocalisationModal());
-          // dispatch(openCloseInterestPointModal());
           if (updatePage && DepartSelected.Lat && DepartSelected.Long) {
             dispatch(openCloseLocalisationModal());
             dispatch(openCloseInterestPointModal());

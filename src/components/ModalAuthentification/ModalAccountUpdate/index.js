@@ -3,6 +3,7 @@
 // == Import
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 // == Style
 import './styles.scss';
@@ -105,12 +106,12 @@ function ModalAccountUpdate({ reducerRoute }) {
         {error.isError && (
         <FormHelperText
           error={error.isError}
-        >{error.message}</FormHelperText>
+        >{DOMPurify.sanitize(error.message, { USE_PROFILES: { html: false } })}</FormHelperText>
         )}
         {deleteError.isError && (
         <FormHelperText
           error={deleteError.isError}
-        >{deleteError.message}</FormHelperText>
+        >{DOMPurify.sanitize(deleteError.message, { USE_PROFILES: { html: false } })}</FormHelperText>
         )}
         {
           !isLoading ? (

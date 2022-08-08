@@ -126,7 +126,7 @@ export default function Map() {
         .setLngLat(coordinates)
         .setHTML(
           `<div>
-        <img crossOrigin="anonymous" src="${image}" />
+        <img crossOrigin="anonymous" src="${DOMPurify.sanitize(image, { USE_PROFILES: { html: false } })}" />
         <h3>${DOMPurify.sanitize(title, { USE_PROFILES: { html: false } })}</h3>
           <p>${DOMPurify.sanitize(adresse, { USE_PROFILES: { html: false } })}</p>
         </div>`,

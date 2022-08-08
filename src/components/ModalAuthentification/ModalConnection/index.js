@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-closing-tag-location */
 // == Import
 import PropTypes from 'prop-types';
+import DOMPurify from 'dompurify';
 
 // == Style
 import './styles.scss';
@@ -74,7 +75,7 @@ function ModalConnection({ reducerRoute }) {
         {error.isError && (
         <FormHelperText
           error={error.isError}
-        >{error.message}</FormHelperText>
+        >{DOMPurify.sanitize(error.message, { USE_PROFILES: { html: false } })}</FormHelperText>
         )}
         {
           !isLoading ? (

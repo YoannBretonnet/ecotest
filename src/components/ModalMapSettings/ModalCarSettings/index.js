@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import { openCloseCarModal, changeMapSettingInputValue, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import { useSelector, useDispatch } from 'react-redux';
+import DOMPurify from 'dompurify';
 
 // == Style
 import './styles.scss';
@@ -64,7 +65,7 @@ function ModalCarSettings({ reducerRoute, updatePage }) {
         >
           {brands.map((option) => (
             <option key={option.id} value={option.id}>
-              {option.name}
+              {DOMPurify.sanitize(option.name, { USE_PROFILES: { html: false } })}
             </option>
           ))}
         </TextField>

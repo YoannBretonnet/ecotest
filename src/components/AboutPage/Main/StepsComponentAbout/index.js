@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { useSelector, useDispatch } from 'react-redux';
+import DOMPurify from 'dompurify';
 // == Style
 import './styles.scss';
 
@@ -35,12 +36,12 @@ function StepsComponent() {
                       <img
                         className="StepsAboutImage"
                         crossOrigin="anonymous"
-                        src={item.image}
-                        alt={item.name}
+                        src={DOMPurify.sanitize(item.image, { USE_PROFILES: { html: false } })}
+                        alt={DOMPurify.sanitize(item.name, { USE_PROFILES: { html: false } })}
                         width="100px"
                       />
-                      <h3 className="stepsAbout-name">{item.name}</h3>
-                      <p className="stepsAbout-content">{item.description}</p>
+                      <h3 className="stepsAbout-name">{DOMPurify.sanitize(item.name, { USE_PROFILES: { html: false } })}</h3>
+                      <p className="stepsAbout-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
                     </Paper>
                   ))
         }
