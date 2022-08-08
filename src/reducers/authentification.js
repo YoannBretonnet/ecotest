@@ -58,7 +58,7 @@ export const initialState = {
       message: undefined,
     },
     isUpdatedAlert: false,
-    isLoading: true,
+    isLoading: false,
   },
   accountDeleteAlert: {
     error: {
