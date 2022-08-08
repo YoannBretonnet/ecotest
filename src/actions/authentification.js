@@ -17,6 +17,8 @@ export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
 export const CLEAR_AUTH_SETTINGS = 'CLEAR_AUTH_SETTINGS';
 export const DELETE_ACCOUNT_FAIL = 'DELETE_ACCOUNT_FAIL';
 export const UPDATE_SECURITY_PARAM = 'UPDATE_SECURITY_PARAM';
+export const UPDATE_SECURITY_PARAM_SUCCESS = 'UPDATE_SECURITY_PARAM_SUCCESS';
+export const UPDATE_SECURITY_PARAM_FAIL = 'UPDATE_SECURITY_PARAM_FAIL';
 export const UPDATE_USER_TRAVEL_PARAM = 'UPDATE_USER_TRAVEL_PARAM';
 export const LOGOUT = 'LOGOUT';
 export const MAKE_PASSWORD_UPDATABLE_OR_NOT = 'MAKE_PASSWORD_UPDATABLE_OR_NOT';
@@ -106,6 +108,15 @@ export const deleteAccountFail = (message) => ({
 
 export const updateUserSecurityParam = () => ({
   type: UPDATE_SECURITY_PARAM,
+});
+
+export const updateUserSecurityParamSuccess = () => ({
+  type: UPDATE_SECURITY_PARAM_SUCCESS,
+});
+
+export const updateUserSecurityParamFail = (message) => ({
+  type: UPDATE_SECURITY_PARAM_FAIL,
+  message,
 });
 
 export const updateUserTravelParam = () => ({

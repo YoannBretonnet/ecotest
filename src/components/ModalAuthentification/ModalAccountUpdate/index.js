@@ -48,7 +48,7 @@ function ModalAccountUpdate({ reducerRoute }) {
   const {
     userNameValue,
     emailValue,
-    error,
+    errorParam,
     isLoading,
   } = useSelector((state) => state.auth[modalElement]);
   const {
@@ -103,10 +103,10 @@ function ModalAccountUpdate({ reducerRoute }) {
         >
           Supprimer votre&nbsp;compte&nbsp;?
         </Button>
-        {error.isError && (
+        {errorParam.isError && (
         <FormHelperText
-          error={error.isError}
-        >{DOMPurify.sanitize(error.message, { USE_PROFILES: { html: false } })}</FormHelperText>
+          error={errorParam.isError}
+        >{DOMPurify.sanitize(errorParam.message, { USE_PROFILES: { html: false } })}</FormHelperText>
         )}
         {deleteError.isError && (
         <FormHelperText

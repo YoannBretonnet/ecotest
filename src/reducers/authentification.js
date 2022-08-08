@@ -17,6 +17,9 @@ import {
   CLEAR_AUTH_SETTINGS,
   DELETE_ACCOUNT_FAIL,
   MAKE_PASSWORD_UPDATABLE_OR_NOT,
+  UPDATE_SECURITY_PARAM_FAIL,
+  UPDATE_SECURITY_PARAM,
+  UPDATE_SECURITY_PARAM_SUCCESS,
 } from 'src/actions/authentification';
 
 export const initialState = {
@@ -50,11 +53,12 @@ export const initialState = {
     emailValue: '',
     passwordValue: '',
     passwordUpdate: false,
-    error: {
+    errorParam: {
       isError: false,
       message: undefined,
     },
     isUpdatedAlert: false,
+    isLoading: true,
   },
   accountDeleteAlert: {
     error: {
@@ -299,6 +303,38 @@ const reducer = (state = initialState, action = {}) => {
         accountUpdateModal: {
           ...state.accountUpdateModal,
           passwordUpdate: action.boolean,
+        },
+      };
+    case UPDATE_SECURITY_PARAM:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          errorParam: {
+            isError: false,
+            message: undefined,
+          },
+          isLoading: true,
+        },
+      };
+    case UPDATE_SECURITY_PARAM_SUCCESS:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          isLoading: false,
+        },
+      };
+    case UPDATE_SECURITY_PARAM_FAIL:
+      return {
+        ...state,
+        accountUpdateModal: {
+          ...state.accountUpdateModal,
+          errorParam: {
+            isError: true,
+            message: action.message,
+          },
+          isLoading: false,
         },
       };
     default:

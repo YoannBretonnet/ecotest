@@ -26,6 +26,8 @@ import {
   UPDATE_USER_TRAVEL_PARAM,
   LOGOUT,
   makePasswordUpdatableOrNot,
+  updateUserSecurityParamFail,
+  updateUserSecurityParamSuccess,
 } from 'src/actions/authentification';
 
 import {
@@ -177,12 +179,13 @@ const connectUser = (store) => (next) => (action) => {
       };
       axios(configProfileSecurityUpdate)
         .then((response) => {
+          store.dispatch(updateUserSecurityParamSuccess());
           store.dispatch(connectUserSuccess());
           store.dispatch(openCloseAccountUpdateModal());
         })
         .catch((error) => {
           console.log(error);
-          // store.dispatch(deleteAccountFail(Object.values(error.response.data)[0]));
+          store.dispatch(updateUserSecurityParamFail(Object.values(error.response.data)[0]));
         });
       break;
     case UPDATE_USER_TRAVEL_PARAM:
