@@ -2,6 +2,7 @@
 import {
   GET_ROUTE,
   GET_ROUTE_SUCCESS,
+  GET_DISTANCE,
 } from 'src/actions/mapData';
 
 // == State
@@ -20,6 +21,7 @@ export const initialState = {
       isError: false,
       message: undefined,
     },
+  distance: 0
   },
 };
 
@@ -54,6 +56,11 @@ const reducer = (state = initialState, action = {}) => {
           isLoading: false,
           isMapGenerated: true,
         },
+      };
+      case GET_DISTANCE:
+      return {
+        ...state,
+        distance: action.data
       };
     default:
       return state;

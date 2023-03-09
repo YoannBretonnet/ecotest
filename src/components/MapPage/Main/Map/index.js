@@ -15,6 +15,7 @@ accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM2hlMG41cX
 
 export default function Map() {
   const mapContainer = useRef(null);
+  const informations = useRef(null);
   const map = useRef(null);
   const adressesCoordinate = useSelector((state) => state.mapData.pointCoords);
   const startLong = useSelector((state) => state.mapSettings.localisationSettingsModal.DepartSelected.Long);
@@ -147,6 +148,7 @@ export default function Map() {
   return (
     <section className="map">
       <aside ref={mapContainer} className="map-container" />
+      <div id="informations"></div>
     </section>
   );
 }

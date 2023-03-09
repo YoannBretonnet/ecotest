@@ -1,3 +1,4 @@
+
 async function getMapRoute(map, start, coordsReplace, end, accessToken) {
   // On fait une requête de trajet à mapBox avec l'option "driving"
   const query = await fetch(
@@ -39,6 +40,11 @@ async function getMapRoute(map, start, coordsReplace, end, accessToken) {
       }
     }, 'point');
   }
+  // get the sidebar and add the instructions
+  const informations = document.getElementById('informations');
+
+    informations.innerHTML = `<p><strong>Distance du trajet: ${Math.floor(
+      data.duration)/100} kilomètres </strong></p>`;
 }
 
 export default getMapRoute;

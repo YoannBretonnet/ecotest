@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-closing-tag-location */
 // == Initialisation
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
 import './styles.scss';
@@ -16,7 +17,6 @@ import { BiChevronRight, BiCheck } from 'react-icons/bi';
 import {
   openCloseConnectionModal, changeInputValue, submitLogin,
 } from 'src/actions/authentification';
-import { useSelector, useDispatch } from 'react-redux';
 
 // ==Components
 import ModalElement from 'src/components/ModalElement';

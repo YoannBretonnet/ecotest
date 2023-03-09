@@ -43,7 +43,7 @@ function InterestPointModal({ reducerRoute, updatePage }) {
       modalElement={modalElement}
       reducerRoute={reducerRoute}
     >
-      <h1 className="modal-title">Choisissez vos point d'intérêts :</h1>
+      <h1 className="modal-title">Choisissez vos points d'intérêts :</h1>
       <form
         className="modal-form-connection"
         onSubmit={((event) => {

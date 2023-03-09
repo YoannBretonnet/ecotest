@@ -1,3 +1,4 @@
+@use 'src/styles/vars';
 @font-face {
     font-family: "Noway";
     src: url(src/assets/fonts/noway-regular.ttf);
@@ -14,7 +15,7 @@
 .map-container {
   height: 65vh;
   // width: 50vw;
-  width: 98%;
+  width: 95%;
   margin: auto;
 }
      
@@ -37,9 +38,15 @@
 }
 
 .mapboxgl-canvas {
-  padding: 15px;;
+  padding: 15px;
 }
 
 .choices {
   font-size: small;
+}
+
+#informations {
+  font-size: 1rem;
+  font-weight: bold;
+  color: vars.$darkGrey;
 }
