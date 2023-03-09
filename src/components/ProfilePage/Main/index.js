@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 
-function ProfilePage() {
+function Main() {
     const nickname = useSelector ((state) => state.auth.connectionModal.nickname)
     return (
         <div className='mainProfile'>
@@ -10,4 +10,4 @@ function ProfilePage() {
     );
 }
 
-export default ProfilePage;
+export default Main;
