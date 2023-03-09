@@ -71,3 +71,11 @@ gap: 1vh;
   transform: rotateY(180deg);
   padding: 1rem;
 }
+
+.carousel-title-desktop {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 3vh;
+  text-align: center;
+  color: vars.$darkGrey;
+}
