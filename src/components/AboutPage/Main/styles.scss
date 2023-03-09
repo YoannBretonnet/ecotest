@@ -8,6 +8,15 @@
   src: url(src/assets/fonts/noway-regular.ttf);
 }
 
+#main-AboutPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5vh;
+  margin-left: 2vh;
+  margin-right: 2vh;
+}
+
 .about-title {
   color: #6cc573;
   font-size: 3vh;
@@ -43,11 +52,18 @@
   margin: 0 auto 2vh;
 }
 
-.aboutMobile--image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
+.aboutMobile{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &--image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+  }
 }
 
 .aboutDesktop{

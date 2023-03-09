@@ -12,12 +12,6 @@ function Footer() {
   const location = useLocation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-  const saveCGU = () => {
-    saveAs(
-      'https://eco-roads.uapp.com/pdf/CGU_E-CO_ROADS.pdf',
-      'CGU.pdf',
-    );
-  };
   return (
     <Box
       component="footer"
@@ -63,17 +57,6 @@ function Footer() {
             to="/about"
           >
             À propos
-          </NavLink>
-        </Tooltip>
-        <p className={location.pathname !== '/about' ? 'menu-separator' : 'menu-separator-none'}>-</p>
-        <Tooltip title="CGU">
-          <NavLink
-            key="cgu"
-            className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
-            to={`${location.pathname}`}
-            onClick={saveCGU}
-          >
-            CGU
           </NavLink>
         </Tooltip>
       </nav>
