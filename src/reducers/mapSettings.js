@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-else-return */
+// == Actions
 import {
   OPEN_CLOSE_CAR_MODAL,
   OPEN_CLOSE_LOCALISATION_MODAL,
@@ -12,17 +13,10 @@ import {
   OPEN_CLOSE_INTEREST_POINT_MODAL,
   SELECT_INTEREST_POINT_ADD,
   SELECT_INTEREST_POINT_DELETE,
-  GET_VEHICLES_DATA,
-  GET_VEHICLES_DATA_SUCCESS,
-  GET_VEHICLES_DATA_FAIL,
-  GET_CATEGORIES_DATA,
-  GET_CATEGORIES_DATA_SUCCESS,
-  GET_CATEGORIES_DATA_FAIL,
   CLEAR_MAP_SETTINGS,
 } from 'src/actions/mapSettings';
 
-import { GET_PROFIL_SUCCESS } from 'src/actions/authentification';
-
+// == State
 export const initialState = {
   carSettingsModal: {
     isOpen: false,
@@ -77,6 +71,7 @@ export const initialState = {
   },
 };
 
+// == Composant
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case OPEN_CLOSE_CAR_MODAL:
@@ -191,104 +186,14 @@ const reducer = (state = initialState, action = {}) => {
           ...state.interestPointModal,
           selected: [
             // eslint-disable-next-line max-len
-            ...state.interestPointModal.selected.filter((option) => option.id !== action.selectedOption.id),
+            ...state.interestPointModal.selected.filter((option) => option.name !== action.selectedOption.name),
           ],
-        },
-      };
-    case GET_VEHICLES_DATA:
-      return {
-        ...state,
-        vehiclesData: {
-          ...state.vehiclesData,
-          isLoading: true,
-        },
-      };
-    case GET_VEHICLES_DATA_SUCCESS:
-      return {
-        ...state,
-        vehiclesData: {
-          ...state.vehiclesData,
-          brands: action.brands,
-          cars: action.cars,
-          isLoading: false,
-        },
-      };
-    case GET_VEHICLES_DATA_FAIL:
-      return {
-        ...state,
-        vehiclesData: {
-          ...state.vehiclesData,
-          isLoading: false,
-          error: {
-            isError: true,
-            message: action.message,
-          },
-        },
-      };
-    case GET_CATEGORIES_DATA:
-      return {
-        ...state,
-        categoriesData: {
-          ...state.categoriesData,
-          isLoading: true,
-        },
-      };
-    case GET_CATEGORIES_DATA_SUCCESS:
-      return {
-        ...state,
-        categoriesData: {
-          ...state.categoriesData,
-          list: action.list,
-          isLoading: false,
-        },
-      };
-    case GET_CATEGORIES_DATA_FAIL:
-      return {
-        ...state,
-        categoriesData: {
-          ...state.categoriesData,
-          isLoading: false,
-          error: {
-            isError: true,
-            message: action.message,
-          },
         },
       };
     case CLEAR_MAP_SETTINGS:
       return {
         ...initialState,
       };
-    case GET_PROFIL_SUCCESS:
-      if (action.data.car || action.data.location || action.data.categories) {
-        return {
-          ...state,
-          carSettingsModal: {
-            ...state.carSettingsModal,
-            brandsValue: action.data.car.brand_id,
-            carValue: action.data.car.car_id,
-          },
-          interestPointModal: {
-            ...state.interestPointModal,
-            selected: [
-              ...action.data.categories.map((option) => ({
-                id: option.id,
-                name: option.category,
-              })),
-            ],
-          },
-          localisationSettingsModal: {
-            ...state.localisationSettingsModal,
-            DepartSelected: {
-              ...action.data.location,
-            },
-          },
-        };
-      }
-      else {
-        return {
-          ...state,
-        };
-      }
     default:
       return state;
   }

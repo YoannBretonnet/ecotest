@@ -1,5 +1,8 @@
 /* eslint-disable max-len */
+// == Initialisation
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 // == Style
 import './styles.scss';
 import Fab from '@mui/material/Fab';
@@ -8,24 +11,30 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import {
+  BiUser,
+  BiCar,
+  BiMap,
+  BiBookmark,
+} from 'react-icons/bi';
+
+// == Components
 import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
 import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
 import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
+import ModalConnection from '/src/components/ModalConnexion';
+import FloatingMenu from './FloatingMenu'
 
-import { useSelector, useDispatch } from 'react-redux';
+// == Actions
 import {
   openCloseCarModal,
   openCloseLocalisationModal,
   openCloseInterestPointModal,
 } from 'src/actions/mapSettings';
-
 import {
-  BiSearch,
-  BiCar,
-  BiMap,
-  BiBookmark,
-} from 'react-icons/bi';
-import styles from './IconSlider.module.scss';
+  openCloseConnectionModal,
+  submitDeconnexion,
+} from 'src/actions/authentification';
 
 // == Composant
 function Header() {
@@ -35,8 +44,15 @@ function Header() {
   const { isOpen: isCarOpen } = useSelector((state) => state.mapSettings.carSettingsModal);
   const { isOpen: isLocalisationOpen } = useSelector((state) => state.mapSettings.localisationSettingsModal);
   const { isOpen: isInterestPointOpen } = useSelector((state) => state.mapSettings.interestPointModal);
+  const { isConnected: isConnected } = useSelector((state) => state.auth.connectionModal);
+  const handleDeconnexion = () => {
+    dispatch(submitDeconnexion())
+  };
+  const handleClick = (event) => {
+    dispatch(openCloseConnectionModal());
+  };
   const args = {
-    size: '4vh',
+    size: '2rem',
   };
   const reducerRoute = 'mapSettings';
   return (
@@ -44,55 +60,165 @@ function Header() {
       <Box
         component="header"
         sx={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '2vh',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginTop: '0.5vh',
         }}
       >
-        {!matches && (
-        <Tooltip
-          title="Page d'accueil"
-          sx={{ position: 'absolute', top: '0', left: '0' }}
+      <Box component="section" sx={{ 
+        margin: '2vh 1.5vh 0', 
+        position: 'fixed', 
+        left: '0', 
+        bottom: 'unset', 
+        top: '0', 
+        width: 'fit-content', 
+        }}
+      >
+        <NavLink
+          key="homePage"
+          className="main-title"
+          to="/"
         >
-          <NavLink
-            key="homePage"
-            className={({ isActive }) => (isActive ? 'menu-link menu-link--active' : 'menu-link')}
-            to="/"
-          >
-            <h1 className="main-title profile-page-header-title">
-              E-co Roads
-            </h1>
-          </NavLink>
-        </Tooltip>
-        )}
-        <Fab variant="extended" aria-label="add" sx={{ margin: 'auto', gap: '1vh', fontWeight: 'bold' }} onClick={(() => dispatch(openCloseCarModal()))}>
-          Véhicule | Localisation | Intérêts
-          <BiSearch size="3.1vh" />
-        </Fab>
-        <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '1vh' }}>
-          <Tooltip title="Choix véhicule">
-            <IconButton
-              className={isCarOpen ? styles.icon : ''}
-              onClick={(() => dispatch(openCloseCarModal()))}
-            >
-              <BiCar size={args.size} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Adresse">
-            <IconButton
-              className={isLocalisationOpen ? styles.icon : ''}
-              onClick={(() => dispatch(openCloseLocalisationModal()))}
-            >
-              <BiMap size={args.size} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Point d'Intérêts">
-            <IconButton
-              className={isInterestPointOpen ? styles.icon : ''}
-              onClick={(() => dispatch(openCloseInterestPointModal()))}
-            >
-              <BiBookmark size={args.size} />
-            </IconButton>
-          </Tooltip>
+          E-co Roads
+        </NavLink>
+      </Box>
+      {matches ? (
+        // for Mobile
+        <Box component="section" sx={{
+          position: 'fixed',
+          right: '0',
+          bottom: 'unset',
+          top: '0',
+          width: 'fit-content',
+          }}
+        >
+        {
+          <>
+            {!isConnected ? (
+              <Tooltip title="Connexion">
+                <IconButton
+                  onClick={handleClick}
+                  aria-haspopup="true"
+                  >
+                  <BiUser size={`6vh`} />
+                  </IconButton>
+              </Tooltip>
+                ) : (
+                  <FloatingMenu />
+                )}
+            </>
+          }
         </Box>
+        ) : (
+        // for Desktop
+        <Box component="section" sx={{
+          position: 'fixed',
+          right: '0',
+          bottom: 'unset',
+          top: '0',
+          width: 'fit-content',
+          }}
+          >
+          {
+            <>
+              {!isConnected ? (
+                <nav
+                  className='connexion'
+                  onClick={handleClick}>
+                  <span>Connexion</span>
+                </nav>
+              ) : (
+                <nav className='connexion connexion--menu'>
+                  <NavLink
+                    key="profilePage"
+                    to="/profile"
+                  >
+                  Profile
+                  </NavLink>
+                    <span onClick={handleDeconnexion}
+                    >Déconnexion</span>
+                </nav>
+                )}
+              </>
+            }
+        </Box>
+        )}
+        {matches ? (
+        // for Mobile
+        <Box component="section" sx={{ margin: '8vh 1.5vh 0' }}>
+          <Fab variant="extended" aria-label="add" sx={{ display: 'inline', ml: 'auto', mr: 'auto', mt: '2vh', gap: '1vh', fontWeight: 'bold', zindex: '3' }} onClick={(() => dispatch(openCloseCarModal()))}>
+          Créez votre trajet personnalisé !
+          </Fab>
+          <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '0.5vh' }}>
+              <Tooltip title="Choix véhicule">
+                <IconButton
+                  className={isCarOpen ? "icon" : ''}
+                  onClick={(() => dispatch(openCloseCarModal()))}
+                >
+                  <BiCar size={args.size} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Adresses">
+                <IconButton
+                  className={isLocalisationOpen ? "icon" : ''}
+                  onClick={(() => dispatch(openCloseLocalisationModal()))}
+              >
+                <BiMap size={args.size} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Points d'Intérêt">
+                <IconButton
+                  className={isInterestPointOpen ? "icon" : ''}
+                  onClick={(() => dispatch(openCloseInterestPointModal()))}
+                >
+                  <BiBookmark size={args.size} />
+                </IconButton>
+              </Tooltip>
+          </Box>
+          </Box>
+          ) : (
+          // for Desktop
+          <Box component="section" sx={{ margin: '2vh 1.5vh 0' }}>
+            <Fab variant="extended" aria-label="add" sx={{ 
+              display: 'inline', 
+              ml: 'auto', 
+              mr: 'auto', 
+              mt: '2vh', 
+              fontWeight: 'bold', 
+              fontSize: '1rem' 
+              }} 
+              onClick={(() => dispatch(openCloseCarModal()))}>
+            Créez votre trajet personnalisé !
+            </Fab>
+            <Box component="nav" sx={{ display: 'flex', justifyContent: 'center', marginTop: '2vh' }}>
+              <Tooltip title="Choix véhicule">
+                <IconButton
+                  className={isCarOpen ? "icon" : ''}
+                  onClick={(() => dispatch(openCloseCarModal()))}
+              >
+                <BiCar size={args.size} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Adresses">
+                <IconButton
+                  className={isLocalisationOpen ? "icon" : ''}
+                  onClick={(() => dispatch(openCloseLocalisationModal()))}
+                >
+                <BiMap size={args.size} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Points d'Intérêt">
+                <IconButton
+                  className={isInterestPointOpen ? "icon" : ''}
+                    onClick={(() => dispatch(openCloseInterestPointModal()))}
+                >
+                  <BiBookmark size={args.size} />
+                </IconButton>
+              </Tooltip>
+            </Box>
+        </Box>
+          )}
       </Box>
       <ModalCarSettings
         reducerRoute={reducerRoute}
@@ -102,6 +228,9 @@ function Header() {
       />
       <InterestPointModal
         reducerRoute={reducerRoute}
+      />
+      <ModalConnection
+        reducerRoute='auth'
       />
     </>
   );

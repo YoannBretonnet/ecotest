@@ -1,55 +1,39 @@
-import { useState } from 'react';
-
 // == Style
 import './styles.scss';
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
-  IconButton,
-  Tooltip,
   useMediaQuery,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { openCloseConnectionModal } from 'src/actions/authentification';
-import { openCloseMenu } from 'src/actions/usability';
-
-import {
-  BiUser,
-  BiDotsVerticalRounded,
-} from 'react-icons/bi';
-
-import MenuIsConnnected from 'src/components/MenuIsConnnected';
-import CarouselComponent from './CarouselAbout';
-import StepsComponent from './StepsComponentAbout';
+import pic from 'src/assets/images/about.jpg';
 
 // == Composant
 function Main() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('laptop'));
-  const matchesTablet = useMediaQuery(theme.breakpoints.down('tablet'));
-  const dispatch = useDispatch();
-  const isConnected = useSelector((state) => state.auth.isConnected);
-  const { isOpen } = useSelector((state) => state.usability.menu);
-  const args = {
-    size: 6,
-  };
-  const [inputMenu, setinputMenu] = useState(null);
-  const handleClick = (event) => {
-    dispatch(openCloseMenu(true));
-    setinputMenu(event.currentTarget);
-  };
-  // display: 'flex', flexDirection: 'row-reverse', margin: '10vh 0 15vh'
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   return (
     <Box component="main" id="main-AboutPage">
-      <Box component="section" sx={{ margin: '4vh 0 0' }}>
-
-        <h1 className="about-title">
-          L'équipe E-co Roads
-        </h1>
-
-        {matches ? <CarouselComponent /> : <StepsComponent />}
-
+      <Box component="section" sx={{ margin: '4vh 18vh 0' }}>
+        {matches ? (
+          <>
+            <p className="about-accroche">
+              E-co Roads est un générateur de trajet pour véhicule électrique. Choisissez le point de départ de votre séjour et le modèle de votre véhicule.
+              Ensuite laissez vous guider par notre proposition qui établira un itinéraire basé sur vos centres d’intérêts,
+              que vous aurez au préalable renseignés, prenant en compte la localisation des points de recharges et les lieux à visiter.
+            </p>
+            <img src={pic} alt='application e-co roads' className='aboutMobile--image'/>
+          </>
+        ) : (
+          <div className='aboutDesktop' >
+            <p className="about-accroche">
+              E-co Roads est un générateur de trajet pour véhicule électrique. Choisissez le point de départ de votre séjour et le modèle de votre véhicule.
+              Ensuite laissez vous guider par notre proposition qui établira un itinéraire basé sur vos centres d’intérêts,
+              que vous aurez au préalable renseignés, prenant en compte la localisation des points de recharges et les lieux à visiter.
+            </p>
+            <img src={pic} alt='application e-co roads' className='aboutDesktop--image'/>
+          </div>
+        )}
         <h2 className="about-title">
           Contactez-nous
         </h2>
@@ -57,73 +41,6 @@ function Main() {
           <a href="mailto: hello@eco-roads.com">hello@eco-roads.com</a>
         </p>
       </Box>
-      {matchesTablet ? (
-        <Box
-          component="section"
-          sx={{
-            position: 'fixed', right: '0', bottom: '0', top: 'unset', width: 'fit-content',
-          }}
-        >
-          {
-        !isConnected ? (
-          <IconButton
-            onClick={() => dispatch(openCloseConnectionModal())}
-          >
-            <BiUser size={`${args.size}vh`} />
-          </IconButton>
-        ) : (
-          <>
-            <Tooltip title="Settings">
-              <IconButton
-                onClick={handleClick}
-                aria-controls={isOpen ? 'account-menu' : undefined}
-                aria-haspopup="true"
-              >
-                <BiDotsVerticalRounded size={`${args.size}vh`} />
-              </IconButton>
-            </Tooltip>
-            <MenuIsConnnected
-              inputMenu={inputMenu}
-              setinputMenu={setinputMenu}
-            />
-          </>
-        )
-      }
-        </Box>
-      ) : (
-        <Box
-          component="section"
-          sx={{
-            position: 'fixed', right: '0', bottom: 'unset', top: '0', width: 'fit-content',
-          }}
-        >
-          {
-        !isConnected ? (
-          <IconButton
-            onClick={() => dispatch(openCloseConnectionModal())}
-          >
-            <BiUser size={`${args.size}vh`} />
-          </IconButton>
-        ) : (
-          <>
-            <Tooltip title="Paramètre">
-              <IconButton
-                onClick={handleClick}
-                aria-controls={isOpen ? 'account-menu' : undefined}
-                aria-haspopup="true"
-              >
-                <BiDotsVerticalRounded size={`${args.size}vh`} />
-              </IconButton>
-            </Tooltip>
-            <MenuIsConnnected
-              inputMenu={inputMenu}
-              setinputMenu={setinputMenu}
-            />
-          </>
-        )
-      }
-        </Box>
-      )}
     </Box>
   );
 }

@@ -1,43 +1,37 @@
 /* eslint-disable max-len */
+// == Initialisation
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import getRoute from './getRoute';
-import Sidebar from '../Sidebar';
+import getMapRoute from './getMapRoute';
 
-// import styles and icons
+// Styles
 import './styles.scss';
-import myImage from 'src/assets/images/borne.png';
 
-// import data
+// mapBox token
 import { accessToken } from 'mapbox-gl';
-
-// import mapBox token
 accessToken = 'pk.eyJ1IjoieWJyZXRvbm5ldCIsImEiOiJjbDVxdXliOHQweHV3M2tvM2hlMG41cXFwIn0.K1s56VTf9EAsagytjhRKSw';
 
 export default function Map() {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const isConnected = useSelector((state) => state.auth.isConnected);
-  const pointCoords = useSelector((state) => state.mapData.pointCoords);
-  const {
-    stLong,
-    stLat,
-    arLong,
-    arLat,
-  } = useSelector((state) => state.mapData.startEndCoords);
-  const lng = (stLong + arLong) / 2;
-  const lat = (stLat + arLat) / 2;
+  const adressesCoordinate = useSelector((state) => state.mapData.pointCoords);
+  const startLong = useSelector((state) => state.mapSettings.localisationSettingsModal.DepartSelected.Long);
+  const startLat = useSelector((state) => state.mapSettings.localisationSettingsModal.DepartSelected.Lat);
+  const arrivalLong = useSelector((state) => state.mapSettings.localisationSettingsModal.ArrivSelected.Long);
+  const arrivalLat = useSelector((state) => state.mapSettings.localisationSettingsModal.ArrivSelected.Lat);
+  const lng = (startLong + arrivalLong) / 2;
+  const lat = (startLat + arrivalLat) / 2;
+  const InterestPoints = adressesCoordinate.data.features.map((category) => category.features);
+  const InterestPointsReplace = JSON.stringify(InterestPoints).replaceAll('[[', '[').replaceAll(']]', ']').replaceAll('}}', '}').replaceAll('],[', ',').replaceAll(']}', ']}}');
+  const InterestPointsObject = JSON.parse(InterestPointsReplace);
 
-  const InterestsPoint = {
-    ...pointCoords,
-    data: {
-      ...pointCoords.data,
-      features: pointCoords.data.features.filter((option) => option.borne === false),
-    },
-  };
-  const bornesArray = pointCoords.data.features.filter((option) => option.borne === true);
+  // On récupère les coordonnées des points d'intérêt 
+  const interestCoordinateRaw= adressesCoordinate.data.features.map((category) => category.features.map((feature) => feature.geometry.coordinates));
+  // On stringify les coordonnées et remplace certains élements pour que la string corresponde à ce que demande mapBox
+  const interestCoordinate = JSON.stringify(interestCoordinateRaw).replaceAll('],[', ';').replace('[[', '').replace(']]', '').replace(']', '').replace('[', '').replace('];', ';').replaceAll(';[', ';').replace('];[', ';').replace('];', ';').replace(']', '');
+
   useEffect(() => {
     map.current = null;
     // on inititalise la map, centrée entre le point de départ et d'arrivée
@@ -50,20 +44,16 @@ export default function Map() {
       logoPosition: 'bottom-left',
     });
 
-    // On récupère les points de départ et d'arrivée
-    const start = [stLong, stLat];
-    const end = [arLong, arLat];
+  // On récupère les points de départ et d'arrivée
+  const start = [startLong, startLat];
+  const end = [arrivalLong, arrivalLat];
 
-    // On récupère les coordonnées des points d'intérêt
-    const coords = pointCoords.data.features.map((feature) => feature.geometry.coordinates);
-    const coordsReplace = JSON.stringify(coords).replaceAll('],[', ';').replace('[[', '').replace(']]', '');
+  // On trace le trajet
+  map.current.on('load', () => {
+    getMapRoute(map, start, interestCoordinate, end, accessToken);
 
-    // On trace le trajet
-    map.current.on('load', () => {
-      getRoute(map, start, coordsReplace, end, accessToken);
-
-      // On ajoute les points de départs de d'arrivée
-      map.current.addLayer({
+  // On ajoute les points de départs de d'arrivée
+   map.current.addLayer({
         id: 'point',
         type: 'circle',
         source: {
@@ -96,13 +86,19 @@ export default function Map() {
         },
       });
 
-      // On ajoute les points d'intérêt
-      map.current.addSource(
-        'interestPoints',
-        InterestsPoint,
+  // On ajoute les points d'intérêt
+   map.current.addSource('interestPoints',
+        {
+          type: 'geojson',
+          data:
+          {
+            "type": "FeatureCollection",
+            "features": InterestPointsObject
+          }
+        },
       );
 
-      map.current.addLayer({
+  map.current.addLayer({
         id: 'interestPoints',
         type: 'symbol',
         source: 'interestPoints',
@@ -110,25 +106,27 @@ export default function Map() {
           'icon-image': '{icon}',
         },
       });
+
     });
 
-    // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
-    map.current.on('click', 'interestPoints', (e) => {
-      // const coordinates = e.features[0].geometry.coordinates.slice();
-      const { coordinates } = e.features[0].geometry;
-      const {
+  // Quand on clique, ça ouvre une pop-up au niveau des coordonnées du point d'intérêt
+  map.current.on('click', 'interestPoints', (e) => {
+    const { coordinates } = e.features[0].geometry;
+    const {
         adresse,
         title,
         image,
-      } = e.features[0].properties;
+        description,
+     } = e.features[0].properties;
 
-      new mapboxgl.Popup()
+    new mapboxgl.Popup()
         .setLngLat(coordinates)
         .setHTML(
           `<div>
         <img crossOrigin="anonymous" src="${DOMPurify.sanitize(image, { USE_PROFILES: { html: false } })}" />
         <h3>${DOMPurify.sanitize(title, { USE_PROFILES: { html: false } })}</h3>
-          <p>${DOMPurify.sanitize(adresse, { USE_PROFILES: { html: false } })}</p>
+          <h4>${DOMPurify.sanitize(adresse, { USE_PROFILES: { html: false } })}</h4>
+          <p>${DOMPurify.sanitize(description, { USE_PROFILES: { html: false } })}</p>
         </div>`,
         )
         .addTo(map.current);
@@ -143,69 +141,12 @@ export default function Map() {
       map.current.getCanvas().style.cursor = '';
     });
 
-    // On ajoute les bornes
-    map.current.on('load', () => {
-      bornesArray.forEach((borne, index) => {
-        map.current.loadImage(
-          myImage,
-          (error, image) => {
-            if (error) throw error;
 
-            // Add the image to the map style.
-            map.current.addImage(`${borne.properties.title} ${index + 1}`, image);
-
-            // Add a data source containing one point feature.
-            map.current.addSource(`${borne.properties.title} ${index + 1} ${index + 1}`, {
-              type: 'geojson',
-              data: {
-                type: 'FeatureCollection',
-                features: [
-                  {
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: borne.geometry.coordinates,
-                    },
-                  },
-                ],
-              },
-            });
-
-            // Add a layer to use the image to represent the data.
-            map.current.addLayer({
-              id: `${borne.properties.title} ${index + 1} ${index + 1}`,
-              type: 'symbol',
-              source: `${borne.properties.title} ${index + 1} ${index + 1}`, // reference the data source
-              layout: {
-                'icon-image': `${borne.properties.title} ${index + 1}`, // reference the image
-                'icon-size': 0.25,
-              },
-            });
-          },
-        );
-      });
-      // Load a local image
-    });
-  }, [InterestsPoint]);
+  }, [InterestPoints]);
 
   return (
     <section className="map">
       <aside ref={mapContainer} className="map-container" />
-      {
-            !isConnected ? (
-              <Sidebar
-                text="Pour sauvegarder votre prochain trajet, connectez-vous"
-                intLength={InterestsPoint.data.features.length}
-                bornLength={bornesArray.length}
-              />
-            ) : (
-              <Sidebar
-                text="Sauvegardez ce trajet dans vos favoris"
-                intLength={InterestsPoint.data.features.length}
-                bornLength={bornesArray.length}
-              />
-            )
-        }
     </section>
   );
 }

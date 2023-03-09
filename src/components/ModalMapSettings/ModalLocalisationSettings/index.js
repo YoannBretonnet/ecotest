@@ -1,18 +1,10 @@
 /* eslint-disable max-len */
-// == Import
+// == Initialisation
 import PropTypes from 'prop-types';
-import {
-  openCloseLocalisationModal,
-  changeMapSettingAutocompleteValue,
-  updateListOfLocalisation,
-  openCloseInterestPointModal,
-  openCloseCarModal,
-} from 'src/actions/mapSettings';
 import { useSelector, useDispatch } from 'react-redux';
 
 // == Style
 import './styles.scss';
-
 import {
   TextField,
   IconButton,
@@ -21,12 +13,21 @@ import {
   Box,
   FormHelperText,
 } from '@mui/material';
-
 import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
+
+// == Actions
+import {
+  openCloseLocalisationModal,
+  changeMapSettingAutocompleteValue,
+  updateListOfLocalisation,
+  openCloseInterestPointModal,
+  openCloseCarModal,
+} from 'src/actions/mapSettings';
 
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
+// == Callbacks
 function getGoodOptions(arrayProposition) {
   if (!arrayProposition[0]) {
     return [];
@@ -74,7 +75,7 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
       modalElement={modalElement}
       reducerRoute={reducerRoute}
     >
-      <h1 className="modal-title">Définissez votre trajet</h1>
+      <h1 className="modal-title">Définissez votre trajet :</h1>
       <form
         className="modal-form-localisation"
         onSubmit={((event) => {
@@ -91,7 +92,8 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
       >
         <Autocomplete
           inputValue={DepartSelected.label}
-          onChange={(_event, value) => dispatch(changeMapSettingAutocompleteValue(value, depart.inputElement, modalElement))}
+          onChange={(_event, value) => 
+          dispatch(changeMapSettingAutocompleteValue(value, depart.inputElement, modalElement))}
           noOptionsText="Aucune proposition"
           disablePortal
           disableClearable
@@ -178,6 +180,15 @@ function ModalLocalisationSettings({ reducerRoute, updatePage }) {
           </IconButton>
         </Box>
       </form>
+      <Box
+          sx={{
+            color: 'black', display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: 'auto', padding: '0 2vh', fontSize: '0.9rem',
+          }}
+        >
+      <p> Pour la démo, utilisez ces adresses :</p>
+      <p>Départ: 11 Rue Gambetta 44000 Nantes</p>
+      <p>Arrivée: 1 Rue Viguier 35400 Saint-Malo</p>
+    </Box>
     </ModalElement>
   );
 }

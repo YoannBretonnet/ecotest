@@ -1,12 +1,11 @@
 /* eslint-disable max-len */
-// == Style
-import './styles.scss';
+// == Initialisation
 import DOMPurify from 'dompurify';
 
-
+// == Style
+import './styles.scss';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Box } from '@mui/material';
-
+import { Box } from '@mui/material';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -18,27 +17,30 @@ function CarouselComponent() {
   const items = [
     {
       step: 'Etape 1',
-      description: 'Renseignez vos information',
+      description: 'Renseignez vos informations',
       icon: 'BiEditAlt',
+      content: 'Sélectionnez votre véhicule afin que nous indiquions les bornes électriques adaptées'
     },
     {
       step: 'Etape 2',
       description: 'Générez votre trajet',
-      icon: 'BiBot',
+      icon: 'BiWrench',
+      content: `Renseignez vos points de départ et d'arrivée, ainsi que les points d'intérêt où vous aimeriez vous arrêter`
     },
     {
       step: 'Etape 3',
-      description: 'Laissez vous porter',
+      description: 'Laissez vous guider',
       icon: 'BiMapAlt',
+      content: `E-co road vous propose des points d'intérêt recommandés et les bornes électriques sur le chemin. Bon voyage!`
     },
   ];
-  const args = {
-    squareSize: '25vh',
-  };
+
   return (
-    <Box component="section" sx={{ margin: '2vh auto 0 auto', width: 'fit-content', height: 'fit-content' }}>
+    <Box component="section" sx={{ margin: '4vh auto 0 auto', width: 'fit-content', height: '45vh' }}>
       <h2 className='carousel-title'>
-        Comment ça marche ?
+        Partez à la découverte de votre région
+        <br />
+        au volant de votre voiture électrique
       </h2>
       <Carousel
         navButtonsAlwaysVisible
@@ -48,31 +50,35 @@ function CarouselComponent() {
         animation="slide"
         autoPlay={false}
         indicators={false}
-        sx={{ width: args.squareSize, height: args.squareSize, margin: 'auto' }}
+        sx={{ width: '45vh', height: '27vh', margin: 'auto', marginTop: '3.5vh' }}
         NextIcon={<BiChevronRight size="8vh" />}
         PrevIcon={<BiChevronLeft size="8vh" />}
         navButtonsProps={{
           style: {
             backgroundColor: 'transparent',
-            color: 'black',
+            color: '#757575',
             height: 'fit-content',
-            margin: '0',
+            margin: '-10px',
             padding: '0',
           },
         }}
       >
         {
           items.map((item, i) => (
-            <Paper
-              key={i}
-              sx={{
-                width: args.squareSize, height: args.squareSize, background: 'transparent', border: '0.4vh solid black', borderRadius: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10% 0 0',
-              }}
-            >
-              <Icon iconSelector={item.icon} />
-              <h3 className="carousel-step">{DOMPurify.sanitize(item.step, { USE_PROFILES: { html: false } })}</h3>
-              <p className="carousel-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
-            </Paper>
+            <div className="flip-card-carousel" key={i}>
+              <div className="flip-card-inner-carousel">
+                <div className="flip-card-front-carousel">
+                  <Icon iconSelector={item.icon} />
+                  <h3 className="steps-step">{DOMPurify.sanitize(item.step, { USE_PROFILES: { html: false } })}</h3>
+                  <p className="steps-content">{DOMPurify.sanitize(item.description, { USE_PROFILES: { html: false } })}</p>
+                </div>
+                <div className="flip-card-back-carousel">
+                  <>
+                    <p>{DOMPurify.sanitize(item.content, { USE_PROFILES: { html: false } })}</p>
+                  </>
+                </div>
+              </div>
+            </div>
           ))
         }
       </Carousel>

@@ -1,56 +1,49 @@
-// == Import
-
-import { Box, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-
-import ModalAccountUpdate from 'src/components/ModalAuthentification/ModalAccountUpdate';
-import ModalCarSettings from 'src/components/ModalMapSettings/ModalCarSettings';
-import ModalLocalisationSettings from 'src/components/ModalMapSettings/ModalLocalisationSettings';
-import InterestPointModal from 'src/components/ModalMapSettings/InterestPointModal';
-import Footer from 'src/components/Footer';
-import Header from './Header';
-import Main from './Main';
 
 // == Style
 import './styles.scss';
+import {
+  Box,
+  useMediaQuery,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
+
+// == Components
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
+import Main from 'src/components/ProfilePage/main';
+
 
 // == Composant
-function ProfilePage() {
+function HomePage() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('tablet'));
-  const reducerAuth = 'auth';
-  const reducerMap = 'mapSettings';
-  const updatePage = true;
-
+  const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('mobile'));
+  const AppId = () => {
+    if (matchesMobile) {
+      return 'App';
+    }
+    if (matches) {
+      return 'App-Tablet';
+    }
+    if (!matches || !matchesMobile) {
+      return 'App-Desktop';
+    }
+  };
   return (
     <Box
       component="div"
-      id={matches ? 'App-ProfilePage-desktop' : 'App-ProfilePage'}
+      id={AppId()}
       sx={{
-        height: 'fit-content', width: 'fit-content', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh',
+        height: 'fit-content', width: '100%', margin: '0', padding: '0', display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative'
       }}
     >
-      <Header />
-      <Main />
-      <Footer />
-      <ModalAccountUpdate
-        reducerRoute={reducerAuth}
-      />
-      <ModalCarSettings
-        updatePage={updatePage}
-        reducerRoute={reducerMap}
-      />
-      <ModalLocalisationSettings
-        updatePage={updatePage}
-        reducerRoute={reducerMap}
-      />
-      <InterestPointModal
-        updatePage={updatePage}
-        reducerRoute={reducerMap}
-      />
+        <Header />
+        <Main />
+        <Footer />
     </Box>
   );
 }
 
 // == Export
-export default ProfilePage;
+export default HomePage;

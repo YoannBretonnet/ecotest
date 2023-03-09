@@ -1,0 +1,15 @@
+[
+     {
+        "name": "Culture",
+        "icon": "museum-15"
+    },
+    {
+        "name": "Gastronomie",
+        "icon": "restaurant-15"
+    },
+    {
+        "name": "Nature",
+        "icon": "park-15"
+    }
+  
+]

@@ -1,24 +1,28 @@
 /* eslint-disable max-len */
-// == Import
+// == Initialisation
 import PropTypes from 'prop-types';
 import { openCloseCarModal, changeMapSettingInputValue, openCloseLocalisationModal } from 'src/actions/mapSettings';
 import { useSelector, useDispatch } from 'react-redux';
 import DOMPurify from 'dompurify';
 
+
 // == Style
 import './styles.scss';
-
 import {
   TextField,
   IconButton,
   FormHelperText,
 } from '@mui/material';
-
 import { BiChevronRight } from 'react-icons/bi';
+
+// == Data
+import brands from 'src/data/brands.json'
+import cars from 'src/data/cars.json'
 
 // ==Component
 import ModalElement from 'src/components/ModalElement';
 
+// == Callbacks
 function getFilteredCars(cars, brandInput) {
   return cars.filter((option) => option.brand_id === parseInt(brandInput, 10));
 }
@@ -31,7 +35,8 @@ function getFirstFilteredCars(cars, brandInput) {
 function ModalCarSettings({ reducerRoute, updatePage }) {
   const dispatch = useDispatch();
   const { brandsValue, carValue } = useSelector((state) => state.mapSettings.carSettingsModal);
-  const { error, brands, cars } = useSelector((state) => state.mapSettings.vehiclesData);
+  // const { error, brands, cars } = useSelector((state) => state.mapSettings.vehiclesData);
+  const { error} = useSelector((state) => state.mapSettings.vehiclesData);
   const modalElement = 'carSettingsModal';
   const inputBrandElement = 'brandsValue';
   const inputCarElement = 'carValue';
@@ -41,9 +46,9 @@ function ModalCarSettings({ reducerRoute, updatePage }) {
       modalElement={modalElement}
       reducerRoute={reducerRoute}
     >
-      <h1 className="modal-title">Quel est votre véhicule&nbsp;?</h1>
+      <h1 className="modal-title">Sélectionnez votre véhicule :</h1>
       <form
-        className="modal-form-connection"
+        className="modal-form-cars"
         onSubmit={((event) => {
           event.preventDefault();
           dispatch(openCloseCarModal());
@@ -70,7 +75,7 @@ function ModalCarSettings({ reducerRoute, updatePage }) {
           ))}
         </TextField>
         <TextField
-          id="outlined-select-brands"
+          id="outlined-selected-modeles"
           select
           label="Modèle"
           value={carValue}
@@ -80,7 +85,7 @@ function ModalCarSettings({ reducerRoute, updatePage }) {
           }}
         >
           {getFilteredCars(cars, brandsValue).map((option) => (
-            <option key={option.id} value={option.id}>
+            <option key={option.model} value={option.model}>
               {option.model}
             </option>
           ))}
@@ -95,6 +100,7 @@ function ModalCarSettings({ reducerRoute, updatePage }) {
           <BiChevronRight size="8vh" />
         </IconButton>
       </form>
+      
     </ModalElement>
   );
 }

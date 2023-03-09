@@ -1,12 +1,11 @@
-// == Import
+// == Initialisation
 import { NavLink, useLocation } from 'react-router-dom';
 import { saveAs } from 'file-saver';
 
-import { Box, Tooltip, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-
 // == Style
 import './styles.scss';
+import { Box, Tooltip, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // == Composant
 function Footer() {
@@ -15,7 +14,7 @@ function Footer() {
   const matches = useMediaQuery(theme.breakpoints.down('tablet'));
   const saveCGU = () => {
     saveAs(
-      'https://eco-roads.herokuapp.com/pdf/CGU_E-CO_ROADS.pdf',
+      'https://eco-roads.uapp.com/pdf/CGU_E-CO_ROADS.pdf',
       'CGU.pdf',
     );
   };
@@ -23,7 +22,14 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '4.5vh', width: '80vw', position: 'fixed', bottom: '0', maxHeight: '7vh',
+        display: 'flex', 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        marginTop: '4.5vh', 
+        width: '80vw', 
+        position: 'fixed', 
+        bottom: '0', 
+        maxHeight: '7vh',
       }}
     >
       {matches ? (

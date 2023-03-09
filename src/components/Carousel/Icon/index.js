@@ -3,13 +3,10 @@
 // == Import
 import PropTypes from 'prop-types';
 
-
 // == Style
-import './styles.scss';
-
 import {
   BiEditAlt,
-  BiBot,
+  BiWrench,
   BiMapAlt,
 } from 'react-icons/bi';
 
@@ -24,9 +21,9 @@ function Icon({ iconSelector }) {
     );
   }
 
-  if (iconSelector === 'BiBot') {
+  if (iconSelector === 'BiWrench') {
     return (
-      <BiBot size={args.size} />
+      <BiWrench size={args.size} />
     );
   }
 

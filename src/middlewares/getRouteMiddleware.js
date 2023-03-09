@@ -1,52 +1,52 @@
 /* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
+// == Initialisation
 import axios from 'axios';
+import history from '../history.js'
 
+// == Actions
 import {
   GET_ROUTE,
   GET_ROUTE_SUCCESS,
   getRouteSuccess,
-  getRouteFail,
 } from 'src/actions/mapData';
-
 import {
   openCloseInterestPointModal,
 } from 'src/actions/mapSettings';
 
-const connectUser = (store) => (next) => (action) => {
+// == Composant
+const getRoute = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_ROUTE:
       next(action);
-      const accessToken = localStorage.getItem('accessToken');
-      const stateGetRoute = store.getState();
-      const configGetRoute = {
+      const state = store.getState();
+      const configGetInterestPoints = {
         method: 'post',
-        url: 'https://eco-roads.herokuapp.com/api/v1/map',
-        withCredentials: true,
-        headers: accessToken ? ({ 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('accessToken')}` }) : ({ 'Content-Type': 'application/json' }),
+        url: 'https://server-yb.netlify.app/.netlify/functions/api/map',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
         data: {
-          location: stateGetRoute.mapSettings.localisationSettingsModal.DepartSelected,
-          arrival: stateGetRoute.mapSettings.localisationSettingsModal.ArrivSelected,
-          categories: stateGetRoute.mapSettings.interestPointModal.selected.map((option) => option.id),
-          car_id: stateGetRoute.mapSettings.carSettingsModal.carValue,
+          "categories": state.mapSettings.interestPointModal.selected.map((category) => category.name)
         },
       };
-      axios(configGetRoute)
-        .then(({ data }) => {
-          store.dispatch(getRouteSuccess(data, action.navigate));
+      axios(configGetInterestPoints)
+        .then(({data} ) => {
+          store.dispatch(getRouteSuccess(data));
+          console.log (data);
         })
         .catch((error) => {
-          store.dispatch(getRouteFail(Object.values(error.response.data)[0]));
+          console.log('route failed', error);
         });
       break;
     case GET_ROUTE_SUCCESS:
       next(action);
       store.dispatch(openCloseInterestPointModal());
-      action.navigate('/map');
+      history.replace('/map');
       break;
     default:
       return next(action);
   }
 };
 
-export default connectUser;
+export default getRoute;
