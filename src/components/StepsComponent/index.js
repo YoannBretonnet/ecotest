@@ -26,7 +26,7 @@ function StepsComponent() {
       step: 'Etape 3',
       description: 'Laissez vous guider',
       icon: 'BiMapAlt',
-      content: `E-co road vous propose des points d'intérêt recommandés et les bornes électriques sur le chemin. Bon voyage!`
+      content: `E-co roads vous propose des points d'intérêt recommandés et les bornes électriques sur le chemin. Bon voyage!`
     },
   ];
 
