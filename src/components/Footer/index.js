@@ -49,7 +49,7 @@ function Footer() {
             Accueil
           </NavLink>
         </Tooltip>
-        <p className={location.pathname !== '/' ? 'menu-separator' : 'menu-separator-none'}>-</p>
+       
         <Tooltip title="À propos">
           <NavLink
             key="about"
